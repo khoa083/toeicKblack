@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/asld_home"
+        android:enabled="true"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/testfull"
+        android:title="Test"
+        android:icon="@drawable/asld_test"
+        android:enabled="true"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/vocab"
+        android:title="Vocabulary"
+        android:icon="@drawable/asld_vocab"
+        android:enabled="true"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/favor"
+        android:title="Favorite"
+        android:icon="@drawable/asld_favor"
+        android:enabled="true"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/setting"
+        android:title="Setting"
+        android:icon="@drawable/asld_setting"
+        android:enabled="true"
+        app:showAsAction="always"/>
+</menu>

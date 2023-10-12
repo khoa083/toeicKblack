@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.khoa.demotoeictest.screen.splash.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
+
+        <action
+            android:id="@+id/action_splashFragment_to_introFragment"
+            app:destination="@id/introFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/introFragment"
+        android:name="com.khoa.demotoeictest.screen.intro.IntroFragment"
+        android:label="fragment_intro"
+        tools:layout="@layout/fragment_intro">
+
+        <action
+            android:id="@+id/action_introFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.khoa.demotoeictest.screen.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_partsFragment"
+            app:destination="@id/partsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/partsFragment"
+        android:name="com.khoa.demotoeictest.screen.parts.PartsFragment"
+        android:label="fragment_parts"
+        tools:layout="@layout/fragment_parts">
+        <action
+            android:id="@+id/action_partsFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            />
+<!--        <argument-->
+<!--            android:name="partName"-->
+<!--            app:argType="string" />-->
+<!--        <argument-->
+<!--            android:name="partDescription"-->
+<!--            app:argType="string" />-->
+
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.khoa.demotoeictest.screen.favorite.FavoriteFragment"
+        android:label="FavoriteFragment"
+        tools:layout="@layout/fragment_favorite"/>
+    <fragment
+        android:id="@+id/vocabFragment"
+        android:name="com.khoa.demotoeictest.screen.vocab.VocabFragment"
+        android:label="VocabFragment"
+        tools:layout="@layout/fragment_vocab"/>
+    <fragment
+        android:id="@+id/fulltestFragment"
+        android:name="com.khoa.demotoeictest.screen.fulltest.FulltestFragment"
+        android:label="FulltestFragment"
+        tools:layout="@layout/fragment_testfull"/>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.khoa.demotoeictest.screen.setting.SettingFragment"
+        android:label="SettingFragment"
+        tools:layout="@layout/fragment_setting"/>
+    <action
+        android:id="@+id/action_homeFragment"
+        app:destination="@+id/homeFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@+id/nav_graph"
+        app:popUpToInclusive="true"/>
+    <action
+        android:id="@+id/action_favoriteFragment"
+        app:destination="@+id/favoriteFragment"/>
+    <action
+        android:id="@+id/action_vocabFragment"
+        app:destination="@+id/vocabFragment"/>
+    <action
+        android:id="@+id/action_fulltestFragment"
+        app:destination="@+id/fulltestFragment"/>
+    <action
+        android:id="@+id/action_settingFragment"
+        app:destination="@+id/settingFragment"/>
+
+
+</navigation>

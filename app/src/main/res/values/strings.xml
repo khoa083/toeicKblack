@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">demoToeicTest</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nghe_hieu">Nghe hiểu</string>
+    <string name="doc_hieu">Đọc hiểu</string>
+    <string name="luyen_tap">Luyện tập</string>
+    <string name="test">test</string>
+</resources>
