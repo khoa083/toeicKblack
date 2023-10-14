@@ -1,3 +1,3 @@
 package com.khoa.demotoeictest.screen.parts
 
-data class Parts(val title: String, val ques: String, val testSets: String)
+data class Part(val title: String, val ques: String, val testSets: String)

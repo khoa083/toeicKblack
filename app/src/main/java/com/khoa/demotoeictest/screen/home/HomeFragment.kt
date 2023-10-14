@@ -21,6 +21,7 @@ import com.khoa.demotoeictest.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
+    private data class PartInfo(val partName: String, val partDescription: String, val part: String)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,32 +90,33 @@ private fun setUpListener() {
         binding.constraintListReading
     )
 
+
     val partData = arrayOf(
-        Pair("Part 1", "Mô tả tranh"),
-        Pair("Part 2", "Hỏi đáp"),
-        Pair("Part 3", "Đoạn hội thoại"),
-        Pair("Part 4", "Bài nói chuyện ngắn"),
-        Pair("Part 5", "Điền vào chỗ trống"),
-        Pair("Part 6", "Hoàn thành văn bản"),
-        Pair("Part 7", "Đọc hiểu văn bản"),
-        Pair("Listening", "100 câu hỏi"),
-        Pair("Reading", "100 câu hỏi")
+        PartInfo("Part 1", "Mô tả tranh", "1"),
+        PartInfo("Part 2", "Hỏi đáp", "2"),
+        PartInfo("Part 3", "Đoạn hội thoại", "3"),
+        PartInfo("Part 4", "Bài nói chuyện ngắn", "4"),
+        PartInfo("Part 5", "Điền vào chỗ trống", "5"),
+        PartInfo("Part 6", "Hoàn thành văn bản", "6"),
+        PartInfo("Part 7", "Đọc hiểu văn bản", "7"),
+        PartInfo("Listening", "100 câu hỏi", "lis"),
+        PartInfo("Reading", "100 câu hỏi", "read")
     )
 
     buttons.forEachIndexed { index, button ->
         button.setOnClickListener {
-            val (partName, partDescription) = partData[index]
-            setScreenParts(button, partName, partDescription)
+            val partInfo = partData[index]
+            setScreenParts(button, partInfo.partName, partInfo.partDescription, partInfo.part)
         }
     }
 }
 
-    private fun setScreenParts(view: View, partName: String, partDescription: String) {
+    private fun setScreenParts(view: View, partName: String, partDescription: String, part: String) {
         val test = getString(R.string.test)
         val extras = FragmentNavigatorExtras(view to test)
         
         val directions = R.id.action_homeFragment_to_partsFragment
-        val args = bundleOf("partName" to partName, "partDescription" to partDescription)
+        val args = bundleOf("partName" to partName, "partDescription" to partDescription, "part" to part)
         findNavController().navigate(directions, args, null, extras)
 
         exitTransition = MaterialElevationScale(false).apply {

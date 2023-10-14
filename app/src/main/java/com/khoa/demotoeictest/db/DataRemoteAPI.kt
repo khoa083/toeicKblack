@@ -4,6 +4,6 @@ import javax.inject.Inject
 
 class DataRemoteAPI @Inject constructor(private val apiServices: APIServices) {
 
-    suspend fun getListPart1() = apiServices.getListPart1()
+    suspend fun getListParts(part: String) = apiServices.getListParts(part)
 
 }

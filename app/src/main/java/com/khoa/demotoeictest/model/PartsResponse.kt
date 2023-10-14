@@ -4,11 +4,11 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-data class Part1Model(var response: Part1Response)
+data class PartsModel(var response: PartsResponse)
 
-data class Part1Response(@SerializedName("part1") var listPart1: ArrayList<Part1>? = null)
+data class PartsResponse(@SerializedName("parts") var listParts: ArrayList<Parts>? = null)
 @Parcelize
-data class Part1(
+data class Parts(
     @SerializedName("id") val id:String? = null,
     @SerializedName("title") val title:String? = null,
     @SerializedName("numQuestions") val numQuestions:String? = null,

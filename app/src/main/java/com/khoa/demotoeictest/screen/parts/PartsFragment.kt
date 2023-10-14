@@ -17,8 +17,8 @@ import com.google.android.material.transition.MaterialContainerTransform
 import com.khoa.demotoeictest.MainActivity
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.FragmentPartsBinding
-import com.khoa.demotoeictest.model.Part1
-import com.khoa.demotoeictest.model.Part1Response
+import com.khoa.demotoeictest.model.Parts
+import com.khoa.demotoeictest.model.PartsResponse
 import com.khoa.demotoeictest.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,7 +39,7 @@ class PartsFragment: Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_parts,container,false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        viewModel.getListPart1()
+        viewModel.getListParts()
         setUpRecyclerview()
         Handler(Looper.getMainLooper()).postDelayed({
             setUpObserver()
@@ -58,19 +58,19 @@ class PartsFragment: Fragment() {
     }
 
     private fun setUpObserver() {
-        viewModel.getListPart1().observe(viewLifecycleOwner) {data ->
+        viewModel.getListParts().observe(viewLifecycleOwner) {data ->
             when(data.status) {
                 DataResult.Status.SUCCESS -> {
                     showShimmer(false)
                     showImageError(false)
                     binding.ivError.visibility = View.GONE
-                    val listPart1: ArrayList<Part1> = ArrayList()
-                    val value = data.data?.body() as Part1Response
-                    value.listPart1?.forEach {
-                        listPart1.add(it)
-                        Log.d("setUpObserver",listPart1.toString())
+                    val listParts: ArrayList<Parts> = ArrayList()
+                    val value = data.data?.body() as PartsResponse
+                    value.listParts?.forEach {
+                        listParts.add(it)
+                        Log.d("setUpObserver",listParts.toString())
                     }
-                    partsAdapter.submitList(listPart1)
+                    partsAdapter.submitList(listParts)
                 }
                 DataResult.Status.LOADING -> {
                     showShimmer(true)
