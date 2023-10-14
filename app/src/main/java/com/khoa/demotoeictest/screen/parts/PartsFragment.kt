@@ -8,11 +8,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialContainerTransform
 import com.khoa.demotoeictest.MainActivity
 import com.khoa.demotoeictest.R
@@ -71,6 +73,10 @@ class PartsFragment: Fragment() {
                         Log.d("setUpObserver",listParts.toString())
                     }
                     partsAdapter.submitList(listParts)
+                    partsAdapter.onClickItem = {
+                        val args = bundleOf("ets" to it.ets, "test" to it.test, "part" to it.part)
+                        Snackbar.make(binding.root, "ets:${it.ets}-test:${it.test}-part:${it.part}",1500).show()
+                    }
                 }
                 DataResult.Status.LOADING -> {
                     showShimmer(true)

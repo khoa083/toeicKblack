@@ -11,11 +11,16 @@ import com.khoa.demotoeictest.model.Parts
 class PartsAdapter : ListAdapter<Parts,PartsAdapter.PartsViewHolder>(DiffCallback()) {
     //: RecyclerView.Adapter<PartsAdapter.PartsViewHolder>()
     //: ListAdapter<Parts,PartsAdapter.PartsViewHolder>(DiffCallback())
+    var onClickItem: ((Parts) -> Unit)? = null
+
     inner class PartsViewHolder(private val binding: ItemPartsBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Parts){
             binding.tvTitle.text = data.title?:""
             binding.tvQues.text = data.numQuestions?:""
             binding.tvTestSets.text = data.des?:""
+            binding.root.setOnClickListener {
+                onClickItem?.invoke(data)
+            }
         }
     }
 

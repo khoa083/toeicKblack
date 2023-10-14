@@ -59,7 +59,10 @@
             android:id="@+id/action_partsFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             />
-<!--        <argument-->
+        <action
+            android:id="@+id/action_partsFragment_to_partsTestFragment"
+            app:destination="@id/partsTestFragment" />
+        <!--        <argument-->
 <!--            android:name="partName"-->
 <!--            app:argType="string" />-->
 <!--        <argument-->
@@ -67,6 +70,11 @@
 <!--            app:argType="string" />-->
 
     </fragment>
+    <fragment
+        android:id="@+id/partsTestFragment"
+        android:name="com.khoa.demotoeictest.screen.partstest.PartsTestFragment"
+        android:label="PartsTestFragment"
+        tools:layout="@layout/fragment_parts_test"/>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.khoa.demotoeictest.screen.favorite.FavoriteFragment"
@@ -105,6 +113,7 @@
     <action
         android:id="@+id/action_settingFragment"
         app:destination="@+id/settingFragment"/>
+
 
 
 </navigation>
