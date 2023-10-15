@@ -20,4 +20,15 @@ interface APIServices {
         @Path("part") part: String
     ): Response<PartsDataResponse>
 
+    @GET("ets{ets}test{test}")
+    suspend fun getListPartsData(
+        @Path("ets") ets: String,
+        @Path("test") test: String
+    ): Response<PartsDataResponse>
+
+    @GET("vocab/{type}")
+    suspend fun getVocab(
+        @Path("type") type: String
+    )
+
 }
