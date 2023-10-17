@@ -10,7 +10,9 @@ import retrofit2.http.Path
 interface APIServices {
 
     @GET("part{part}")
-    suspend fun getListParts(@Path("part") part: String): Response<PartsResponse>
+    suspend fun getListParts(
+        @Path("part") part: String
+    ): Response<PartsResponse>
 
 //    @FormUrlEncoded
     @GET("ets{ets}test{test}/{part}")
@@ -30,5 +32,7 @@ interface APIServices {
     suspend fun getVocab(
         @Path("type") type: String
     )
+
+
 
 }

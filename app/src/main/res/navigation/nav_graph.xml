@@ -89,7 +89,11 @@
         android:id="@+id/fulltestFragment"
         android:name="com.khoa.demotoeictest.screen.fulltest.FulltestFragment"
         android:label="FulltestFragment"
-        tools:layout="@layout/fragment_testfull"/>
+        tools:layout="@layout/fragment_testfull">
+        <action
+            android:id="@+id/action_fulltestFragment_to_partsTestFragment"
+            app:destination="@id/partsTestFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.khoa.demotoeictest.screen.setting.SettingFragment"
