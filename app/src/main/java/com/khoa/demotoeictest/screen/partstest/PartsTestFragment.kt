@@ -14,16 +14,19 @@ class PartsTestFragment : Fragment() {
 
     private lateinit var binding: FragmentPartsTestBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_parts_test,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_parts_test, container, false)
         binding.lifecycleOwner = this
+        binding.viewModel = viMo
         return binding.root
     }
 
@@ -31,7 +34,8 @@ class PartsTestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
     }
-    private fun initView(){
+
+    private fun initView() {
         (activity as MainActivity).handleShowBottomNav(false)
     }
 

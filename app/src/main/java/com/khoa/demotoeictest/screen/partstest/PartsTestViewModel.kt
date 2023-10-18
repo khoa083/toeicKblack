@@ -1,4 +1,4 @@
-package com.khoa.demotoeictest.screen.partstest
+package com.khoa.demotoeictest.screen.partsdata
 
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
