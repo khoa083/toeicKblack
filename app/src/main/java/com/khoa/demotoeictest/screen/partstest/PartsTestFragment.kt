@@ -26,7 +26,6 @@ class PartsTestFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_parts_test, container, false)
         binding.lifecycleOwner = this
-        binding.viewModel = viMo
         return binding.root
     }
 

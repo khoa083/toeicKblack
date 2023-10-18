@@ -1,4 +1,4 @@
-package com.khoa.demotoeictest.screen.partsdata;
+package com.khoa.demotoeictest.screen.partstest;
 
 public class PartsDataAdapter {
 }
