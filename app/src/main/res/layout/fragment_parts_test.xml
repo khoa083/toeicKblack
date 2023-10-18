@@ -105,40 +105,112 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="5dp"
             app:layout_constraintBottom_toTopOf="@id/llFooterAudio"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintHeader">
-            <include layout="@layout/item_parts_data"/>
+
+            <include layout="@layout/item_parts_data" />
         </LinearLayout>
 
         <LinearLayout
-            android:gravity="center_vertical"
             android:id="@+id/llFooterAudio"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@drawable/custom_bg_func_audio_nexttab"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@id/llFooter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.1"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="00:00"
+                android:textColor="@color/black" />
+
             <SeekBar
+                android:id="@+id/seekBar_luminosite"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:progress="100"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"/>
+                android:progressDrawable="@drawable/seekbar_style"
+                android:splitTrack="false"
+                android:thumb="@drawable/custom_thumb" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.1"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="00:21"
+                android:textColor="@color/black" />
+
+            <CheckBox
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/custom_checkbox"
+                android:button="@null"
+                android:checked="false" />
+
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/llFooter"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@drawable/custom_bg_func_audio_nexttab"
+            android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
+            <ImageView
+                android:id="@+id/ivBackParts"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_arrow_back_ios" />
+
+            <CheckBox
+                android:id="@+id/ivAddFavor"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/custom_checkbox_favor"
+                android:button="@null"
+                android:checked="false" />
+
+            <ImageView
+                android:id="@+id/ivCheckTask"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_check_task" />
+
+            <ImageView
+                android:id="@+id/ivInfo"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginHorizontal="20dp"
+                android:src="@drawable/ic_info" />
+
+            <ImageView
+                android:id="@+id/ivNextParts"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_arrow_forward_ios" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

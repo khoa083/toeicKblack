@@ -13,6 +13,7 @@
             android:id="@+id/scrollViewTop"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginHorizontal="2dp"
             android:layout_weight="1"
             android:background="@drawable/bg_green">
 
@@ -64,6 +65,7 @@ As many of you are aware, there was a problem with Pelman Technology, the system
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginHorizontal="2dp"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
