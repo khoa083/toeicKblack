@@ -167,7 +167,7 @@ As many of you are aware, there was a problem with Pelman Technology, the system
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/custom_border_ripple"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tvSmallQues2"
@@ -260,7 +260,7 @@ As many of you are aware, there was a problem with Pelman Technology, the system
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/custom_border_ripple"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tvSmallQues3"
@@ -353,7 +353,7 @@ As many of you are aware, there was a problem with Pelman Technology, the system
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/custom_border_ripple"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tvSmallQues4"
@@ -446,7 +446,7 @@ As many of you are aware, there was a problem with Pelman Technology, the system
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/custom_border_ripple"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tvSmallQues5"

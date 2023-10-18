@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.khoa.demotoeictest.databinding.ItemIntroBinding
 
-class TabViewPagerAdapter(private val list: List<ItemIntro>, private val viewPager2: ViewPager2): RecyclerView.Adapter<TabViewPagerAdapter.IntroViewHolder>() {
+class TabViewPagerAdapter(private val list: ArrayList<ItemIntro>, private val viewPager2: ViewPager2): RecyclerView.Adapter<TabViewPagerAdapter.IntroViewHolder>() {
 
     inner class IntroViewHolder(private val binding: ItemIntroBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(itemIntro: ItemIntro){
