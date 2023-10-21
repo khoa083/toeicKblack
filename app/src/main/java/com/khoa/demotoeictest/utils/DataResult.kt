@@ -20,6 +20,7 @@ data class DataResult<out T>(val status: Status, val data: T?, val message: Stri
         fun <T> loading(data: T? = null): DataResult<T> {
             return DataResult(Status.LOADING, data, null)
         }
+
     }
 
 }

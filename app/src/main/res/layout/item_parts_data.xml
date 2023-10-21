@@ -14,15 +14,15 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_green">
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
+                <WebView
+                    android:background="@drawable/bg_green"
                     android:id="@+id/tvQuesPart7"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -33,10 +33,7 @@
                     android:lineSpacingExtra="2.2dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    android:visibility="gone"
-                    tools:text=" http://www.moonglowairways.com.au
-Special Announcement by Geoff Clifford, President of Moon Glow Airways
-As many of you are aware, there was a problem with Pelman Technology, the system that handles our airline reservations. This outage has affected several airlines. It's been a rough week, but the good news is it that it has been repaired, and we are re-setting our system. However, Moon Glow passengers may still face delays for day or two. This most likely will include longer lines at airports. We have added more on-site customer service representatives at airports in all of our destination cities to assist customers with their flights and information. We appreciate your understanding and patience." />
+                    android:visibility="visible"/>
 
                 <ImageView
                     android:id="@+id/ivParts"
