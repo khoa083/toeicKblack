@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--    <data>-->
+    <!--        <import type="android.view.View"/>-->
+    <!--        <variable-->
+    <!--            name="data"-->
+    <!--            type="com.khoa.demotoeictest.model.PartsData" />-->
+    <!--    </data>-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,18 +29,18 @@
                 android:orientation="vertical">
 
                 <WebView
-                    android:background="@drawable/bg_green"
                     android:id="@+id/tvQuesPart7"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="2dp"
                     android:layout_marginVertical="2dp"
+                    android:background="@drawable/bg_green"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center|start"
                     android:lineSpacingExtra="2.2dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    android:visibility="visible"/>
+                    android:visibility="visible" />
 
                 <ImageView
                     android:id="@+id/ivParts"
@@ -41,7 +48,6 @@
                     android:layout_height="310dp"
                     android:layout_gravity="center"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ets_summer_2021_test_1_1"
                     android:visibility="visible" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
@@ -51,8 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="1.2dp"
             android:layout_marginVertical="5dp"
-            android:background="@color/black"
-            android:visibility="visible" />
+            android:background="@color/black" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -70,17 +75,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/custom_border_ripple"
-                    android:visibility="visible">
+                    android:background="@drawable/custom_border_ripple">
 
                     <TextView
                         android:id="@+id/tvSmallQues1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_orange"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:paddingHorizontal="5dp"
-                        android:paddingVertical="2dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingHorizontal="8dp"
+                        android:paddingTop="3dp"
                         android:text="1. What skfjsdjfssd"
                         android:textColor="@color/white"
                         android:textSize="18sp"
@@ -153,7 +157,8 @@
                             android:paddingHorizontal="10dp"
                             android:text="Dsdfsfsdfsdfsd"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:visibility="visible" />
 
                     </RadioGroup>
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -164,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/custom_border_ripple"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/tvSmallQues2"
@@ -257,7 +262,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/custom_border_ripple"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/tvSmallQues3"
@@ -350,7 +355,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/custom_border_ripple"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/tvSmallQues4"
@@ -443,7 +448,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/custom_border_ripple"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/tvSmallQues5"

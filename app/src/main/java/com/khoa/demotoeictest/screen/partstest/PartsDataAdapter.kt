@@ -1,36 +1,70 @@
 package com.khoa.demotoeictest.screen.partstest
 
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.khoa.demotoeictest.databinding.ItemPartsDataBinding
 import com.khoa.demotoeictest.model.PartsData
-import com.khoa.demotoeictest.screen.parts.PartsAdapter
+import java.io.IOException
 
-class PartsDataAdapter: ListAdapter<PartsData,PartsDataAdapter.PartsDataViewHolder>(DiffCallback()) {
-    inner class PartsDataViewHolder(private val binding: ItemPartsDataBinding): RecyclerView.ViewHolder(binding.root) {
+class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHolder>(DiffCallback()) {
+    inner class PartsDataViewHolder(private val binding: ItemPartsDataBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(data: PartsData) {
-//            binding.apply {
-//                Glide.with(binding.ivParts.context).load(data.img).into(binding.ivParts)
-//                tvSmallQues1.text = data.smallQues1
-//                rdA1.text  = data.a1
-//                rdB1.text  = data.b1
-//                rdC1.text  = data.c1
-//                rdD1.text  = data.d1
-//            }
-            binding.binData(data)
-//            binding.tvQuesPart7.loadDataWithBaseURL(null,htmlString,"text/html","utf-8",null)
+
+            binding.apply {
+                Glide.with(ivParts.context).load(data.img).into(ivParts)
+                tvSmallQues1.text = data.smallQues1
+                tvSmallQues2.text = data.smallQues2
+                tvSmallQues3.text = data.smallQues3
+                tvSmallQues4.text = data.smallQues4
+                tvSmallQues5.text = data.smallQues5
+                rdA1.text = data.a1
+                rdB1.text = data.b1
+                rdC1.text = data.c1
+                rdD1.text = data.d1
+                rdA2.text = data.a2
+                rdB2.text = data.b2
+                rdC2.text = data.c2
+                rdD2.text = data.d2
+                rdA3.text = data.a3
+                rdB3.text = data.b3
+                rdC3.text = data.c3
+                rdD3.text = data.d3
+                rdA4.text = data.a4
+                rdB4.text = data.b4
+                rdC4.text = data.c4
+                rdD4.text = data.d4
+                rdA5.text = data.a5
+                rdB5.text = data.b5
+                rdC5.text = data.c5
+                rdD5.text = data.d5
+                tvQuesPart7.loadDataWithBaseURL(null,data.question ?: "","text/html","utf-8",null)
+
+
+
+                tvQuesPart7.visibility = if (data.question != "") View.VISIBLE else View.GONE
+                ivParts.visibility = if (data.img != "") View.VISIBLE else View.GONE
+                consTrainSmallQues2.visibility = if (data.smallQues2 != "") View.VISIBLE else View.GONE
+                consTrainSmallQues3.visibility = if (data.smallQues3 != "") View.VISIBLE else View.GONE
+                consTrainSmallQues4.visibility = if (data.smallQues4 != "") View.VISIBLE else View.GONE
+                consTrainSmallQues5.visibility = if (data.smallQues5 != "") View.VISIBLE else View.GONE
+                rdD1.visibility = if (data.d1 != "") View.VISIBLE else View.GONE
+                scrollViewTop.visibility = if (data.question != "" || data.img != "") View.VISIBLE else View.GONE
+                tvLineSpace.visibility = if (data.question != "" || data.img != "") View.VISIBLE else View.GONE
+
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PartsDataViewHolder {
-        return PartsDataViewHolder(ItemPartsDataBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return PartsDataViewHolder(ItemPartsDataBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun onBindViewHolder(holder: PartsDataViewHolder, position: Int) {
@@ -46,33 +80,6 @@ class PartsDataAdapter: ListAdapter<PartsData,PartsDataAdapter.PartsDataViewHold
             return oldItem == newItem
         }
 
-    }
-
-    fun ItemPartsDataBinding.binData(data: PartsData) {
-        if(data.part == "1"){
-            consTrainSmallQues2.visibility = View.GONE
-            consTrainSmallQues3.visibility = View.GONE
-            consTrainSmallQues4.visibility = View.GONE
-            consTrainSmallQues5.visibility = View.GONE
-        } else if (data.part == "2") {
-            rdD1.visibility = View.GONE
-            consTrainSmallQues2.visibility = View.GONE
-            consTrainSmallQues3.visibility = View.GONE
-            consTrainSmallQues4.visibility = View.GONE
-            consTrainSmallQues5.visibility = View.GONE
-        } else {
-            rdD1.visibility = View.VISIBLE
-            consTrainSmallQues2.visibility = View.VISIBLE
-            consTrainSmallQues3.visibility = View.VISIBLE
-            consTrainSmallQues4.visibility = View.VISIBLE
-            consTrainSmallQues5.visibility = View.VISIBLE
-        }
-        Glide.with(root.context).load(data.img).into(ivParts)
-        tvSmallQues1.text = data.smallQues1
-        rdA1.text  = data.a1
-        rdB1.text  = data.b1
-        rdC1.text  = data.c1
-        rdD1.text  = data.d1
     }
 
 }

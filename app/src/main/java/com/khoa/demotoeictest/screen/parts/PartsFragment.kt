@@ -75,7 +75,7 @@ class PartsFragment: Fragment() {
                     partsAdapter.submitList(listParts)
                     partsAdapter.onClickItem = {
                         val args = bundleOf("ets" to it.ets, "test" to it.test, "part" to it.part)
-                        Snackbar.make(binding.root, "ets:${it.ets}-test:${it.test}-part:${it.part}",1500).show()
+//                        Snackbar.make(binding.root, "ets:${it.ets}-test:${it.test}-part:${it.part}",1500).show()
                         findNavController().navigate(R.id.action_partsFragment_to_partsTestFragment,args,null)
                     }
                 }
