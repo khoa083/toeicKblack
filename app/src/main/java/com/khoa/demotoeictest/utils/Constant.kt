@@ -25,6 +25,15 @@ object Constant {
         return percentage.toInt()
     }
 
+    fun progressToTimer(progress: Int, totalDuration: Int): Int {
+        var totalDuration = totalDuration
+        var currentDuration = 0
+        totalDuration /= 1000
+        currentDuration = (progress.toDouble() / 100 * totalDuration).toInt()
+
+        return currentDuration * 1000
+    }
+
     const val BASE_URL = "https://kblack.dev/"
     const val KEY_DATA = "KEY DATA"
 }

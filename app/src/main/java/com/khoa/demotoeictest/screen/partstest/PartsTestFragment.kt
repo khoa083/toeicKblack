@@ -2,6 +2,7 @@ package com.khoa.demotoeictest.screen.partstest
 
 import android.media.AudioManager
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,10 +11,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.google.android.material.snackbar.Snackbar
 import com.khoa.demotoeictest.MainActivity
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.FragmentPartsTestBinding
@@ -22,7 +23,6 @@ import com.khoa.demotoeictest.model.PartsDataResponse
 import com.khoa.demotoeictest.utils.Constant
 import com.khoa.demotoeictest.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.NonCancellable.start
 import java.io.IOException
 
 @AndroidEntryPoint
@@ -32,6 +32,7 @@ class PartsTestFragment : Fragment() {
     private val viewModel: PartsTestViewModel by viewModels()
     private lateinit var partsDataAdapter: PartsDataAdapter
     private var mediaPlayer: MediaPlayer? = null
+    private var isPlaying = false
     private val test: ArrayList<String> = ArrayList()
 
 
@@ -53,8 +54,8 @@ class PartsTestFragment : Fragment() {
     }
 
     private fun setUpObserver() {
-        viewModel.getListDataParts().observe(viewLifecycleOwner) {data ->
-            when(data.status) {
+        viewModel.getListDataParts().observe(viewLifecycleOwner) { data ->
+            when (data.status) {
                 DataResult.Status.SUCCESS -> {
                     val listDataParts: ArrayList<PartsData> = ArrayList()
                     val value = data.data?.body() as PartsDataResponse
@@ -72,6 +73,7 @@ class PartsTestFragment : Fragment() {
                     Log.d("khoa1", test.toString())
 
                 }
+
                 DataResult.Status.LOADING -> {}
                 DataResult.Status.ERROR -> {}
             }
@@ -82,33 +84,21 @@ class PartsTestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
         mediaPlayer = MediaPlayer()
+        handleMedia(0)
         setUpListener()
-        val part = arguments?.getString("part")
-        binding.tvTitlePartsNumber.text = part
-        binding.llFooterAudio.visibility = if (part=="1" || part=="2" || part=="3" || part=="4") View.VISIBLE else View.GONE
-
-        binding.seekBarLuminosite.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    mediaPlayer?.seekTo(progress)
-                    binding.seekBarLuminosite.progress = progress
-                }
-            }
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {mHandle.removeCallbacks(mUpdateTime)}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                mHandle.removeCallbacks(mUpdateTime)
-                val totalDuration = mediaPlayer?.duration
-//                val currentPosition: Int = Constant.progressToTimer(seekBar?.progress ?: 0, totalDuration ?: 0)
-//                mediaPlayer?.seekTo(currentPosition)
-                updateSeekBar()
-            }
-        })
     }
 
-    private fun initView() { (activity as MainActivity).handleShowBottomNav(false) }
+    private fun initView() {
+        (activity as MainActivity).handleShowBottomNav(false)
+    }
 
-//    TODO: setUpListener(),setUpViewPager(),changePage(),handleMedia() handle button next and back page in viewPager2
+    //    TODO: setUpListener(),setUpViewPager(),changePage(),handleMedia() handle button next and back page in viewPager2
     private fun setUpListener() {
+
+        binding.ivPlay.setOnClickListener {
+            playMusic()
+        }
+
         val onClick = View.OnClickListener { view ->
             setUpViewPager(view)
         }
@@ -116,11 +106,55 @@ class PartsTestFragment : Fragment() {
             ivNextParts.setOnClickListener(onClick)
             ivBackParts.setOnClickListener(onClick)
         }
+
+        val part = arguments?.getString("part")
+        binding.tvTitlePartsNumber.text = part
+        binding.llFooterAudio.visibility =
+            if (part == "1" || part == "2" || part == "3" || part == "4") View.VISIBLE else View.GONE
+
+        binding.seekBarLuminosite.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                mHandle.removeCallbacks(mUpdateTime)
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                mHandle.removeCallbacks(mUpdateTime)
+                val totalDuration = mediaPlayer?.duration
+                val currentPosition: Int =
+                    Constant.progressToTimer(seekBar?.progress ?: 0, totalDuration ?: 0)
+                mediaPlayer?.seekTo(currentPosition)
+                updateSeekBar()
+            }
+        })
+
+//        TODO: hiển thị tiến trình phụ
+//        mediaPlayer?.setOnBufferingUpdateListener { mp, percent ->
+//            val ratio = percent / 100.0
+//            val bufferingLevel = mp.duration*ratio
+//            binding.seekBarLuminosite.secondaryProgress = bufferingLevel.toInt()
+//            val colorList = ColorStateList.valueOf(Color.RED)
+//            binding.seekBarLuminosite.secondaryProgressTintList = colorList
+//        }
+
+    }
+
+    private fun playMusic() {
+        if (!mediaPlayer!!.isPlaying) {
+            binding.ivPlay.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.button_pause))
+            isPlaying = false
+            mediaPlayer?.start()
+        } else {
+            binding.ivPlay.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.button_play))
+            isPlaying = true
+            mediaPlayer?.pause()
+        }
     }
 
     private fun setUpViewPager(view: View?) {
         val currentItem = binding.viewPagerDataParts.currentItem
-        when(view?.id) {
+        when (view?.id) {
             R.id.ivNextParts -> changePage(currentItem + 1)
             R.id.ivBackParts -> changePage(currentItem - 1)
         }
@@ -129,7 +163,7 @@ class PartsTestFragment : Fragment() {
     private fun changePage(newPage: Int) {
         mediaPlayer?.setAudioStreamType(AudioManager.STREAM_MUSIC)
         if (newPage >= 0 && newPage < partsDataAdapter.itemCount) {
-            mediaPlayer?.stop()
+//            mediaPlayer?.stop()
             binding.viewPagerDataParts.currentItem = newPage
             handleMedia(newPage)
         }
@@ -138,17 +172,23 @@ class PartsTestFragment : Fragment() {
     private fun handleMedia(newPage: Int) {
         Handler(Looper.getMainLooper()).postDelayed({
             try {
-                mediaPlayer?.apply {
-                    reset()
-                    setDataSource(test[newPage])
-                    setAudioStreamType(AudioManager.STREAM_MUSIC)
-                    prepare()
-                    start()
+                kotlin.runCatching {
+                    mediaPlayer!!.reset()
+                    mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+                    mediaPlayer!!.setDataSource(
+                        requireContext(), Uri.parse(test[newPage])
+                    )
+                    mediaPlayer!!.prepare()
+                    mediaPlayer!!.start()
+
+                    binding.seekBarLuminosite.progress = 0
+                    binding.seekBarLuminosite.max = 100
+                    updateSeekBar()
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-        },325)
+        }, 325)
     }
 
 
@@ -171,6 +211,7 @@ class PartsTestFragment : Fragment() {
         binding.seekBarLuminosite.progress = progress
         mHandle.postDelayed(mUpdateTime, 100)
     }
+
     var mHandle = Handler(Looper.getMainLooper())
     var mUpdateTime = Runnable { updateTime() }
 
@@ -182,7 +223,7 @@ class PartsTestFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        if(mediaPlayer?.isPlaying == true) {
+        if (mediaPlayer?.isPlaying == true) {
             mediaPlayer?.stop()
         }
     }

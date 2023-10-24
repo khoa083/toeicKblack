@@ -139,13 +139,16 @@
                 android:textColor="@color/black" />
 
             <SeekBar
+                android:secondaryProgressTint="@color/processTintSeekBar"
                 android:id="@+id/seekBar_luminosite"
                 android:layout_width="250dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:maxHeight="8dp"
                 android:layout_weight="0.5"
                 android:progressDrawable="@drawable/seekbar_style"
                 android:splitTrack="false"
-                android:thumb="@drawable/custom_thumb" />
+                android:thumb="@drawable/custom_thumb"
+                android:thumbOffset="0dp"/>
 
             <TextView
                 android:id="@+id/tvEndTime"
@@ -154,16 +157,23 @@
                 android:layout_gravity="center"
                 android:layout_weight="0.1"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="00:21"
+                android:text="00:00"
                 android:textColor="@color/black" />
 
-            <CheckBox
-                android:layout_width="18dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginHorizontal="10dp"
-                android:background="@drawable/custom_checkbox"
-                android:button="@null"
-                android:checked="false" />
+                android:layout_marginHorizontal="10dp" >
+                <ImageView
+                    android:id="@+id/ivPlay"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/button_pause"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </LinearLayout>
