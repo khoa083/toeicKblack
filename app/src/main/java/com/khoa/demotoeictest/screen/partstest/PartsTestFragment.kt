@@ -82,57 +82,79 @@ class PartsTestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
         mediaPlayer = MediaPlayer()
-        setUpViewPager()
+        setUpListener()
         val part = arguments?.getString("part")
         binding.tvTitlePartsNumber.text = part
         binding.llFooterAudio.visibility = if (part=="1" || part=="2" || part=="3" || part=="4") View.VISIBLE else View.GONE
 
         binding.seekBarLuminosite.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) { }
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) { updateSeekBar() }
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    mediaPlayer?.seekTo(progress)
+                    binding.seekBarLuminosite.progress = progress
+                }
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {mHandle.removeCallbacks(mUpdateTime)}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                mHandle.removeCallbacks(mUpdateTime)
+                val totalDuration = mediaPlayer?.duration
+//                val currentPosition: Int = Constant.progressToTimer(seekBar?.progress ?: 0, totalDuration ?: 0)
+//                mediaPlayer?.seekTo(currentPosition)
+                updateSeekBar()
+            }
         })
     }
 
-    private fun initView() {
-        (activity as MainActivity).handleShowBottomNav(false)
+    private fun initView() { (activity as MainActivity).handleShowBottomNav(false) }
+
+//    TODO: setUpListener(),setUpViewPager(),changePage(),handleMedia() handle button next and back page in viewPager2
+    private fun setUpListener() {
+        val onClick = View.OnClickListener { view ->
+            setUpViewPager(view)
+        }
+        binding.apply {
+            ivNextParts.setOnClickListener(onClick)
+            ivBackParts.setOnClickListener(onClick)
+        }
     }
 
+    private fun setUpViewPager(view: View?) {
+        val currentItem = binding.viewPagerDataParts.currentItem
+        when(view?.id) {
+            R.id.ivNextParts -> changePage(currentItem + 1)
+            R.id.ivBackParts -> changePage(currentItem - 1)
+        }
+    }
+
+    private fun changePage(newPage: Int) {
+        mediaPlayer?.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        if (newPage >= 0 && newPage < partsDataAdapter.itemCount) {
+            mediaPlayer?.stop()
+            binding.viewPagerDataParts.currentItem = newPage
+            handleMedia(newPage)
+        }
+    }
+
+    private fun handleMedia(newPage: Int) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            try {
+                mediaPlayer?.apply {
+                    reset()
+                    setDataSource(test[newPage])
+                    setAudioStreamType(AudioManager.STREAM_MUSIC)
+                    prepare()
+                    start()
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        },325)
+    }
+
+
+    //TODO: updateSeekBar() and updateTime() handle seekbar
     fun updateSeekBar() {
         mHandle.postDelayed(mUpdateTime, 100)
-    }
-
-
-    private fun setUpViewPager() {
-        mediaPlayer?.setAudioStreamType(AudioManager.STREAM_MUSIC)
-        fun changePage(newPage: Int) {
-            if (newPage >= 0 && newPage < partsDataAdapter.itemCount) {
-                mediaPlayer?.stop()
-                binding.viewPagerDataParts.currentItem = newPage
-                Handler(Looper.getMainLooper()).postDelayed({
-                    try {
-                        mediaPlayer?.apply {
-                            reset()
-                            setDataSource(test[newPage])
-                            setAudioStreamType(AudioManager.STREAM_MUSIC)
-                            prepare()
-                            start()
-                        }
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                    }
-                },325)
-
-            }
-        }
-
-        binding.ivNextParts.setOnClickListener {
-            changePage(binding.viewPagerDataParts.currentItem + 1)
-        }
-
-        binding.ivBackParts.setOnClickListener {
-            changePage(binding.viewPagerDataParts.currentItem - 1)
-        }
     }
 
     private fun updateTime() {
@@ -166,44 +188,3 @@ class PartsTestFragment : Fragment() {
     }
 
 }
-
-//private fun setUpViewPager() {
-//    mediaPlayer?.setAudioStreamType(AudioManager.STREAM_MUSIC)
-//    binding.ivNextParts.setOnClickListener {
-//        if(binding.viewPagerDataParts.currentItem + 1 < partsDataAdapter.itemCount) {
-//            mediaPlayer?.stop()
-//            binding.viewPagerDataParts.currentItem += 1
-//            try{
-//                mediaPlayer?.apply {
-//                    reset();
-//                    setDataSource(test[binding.viewPagerDataParts.currentItem]);
-//                    setAudioStreamType(AudioManager.STREAM_MUSIC);
-//                    prepare();
-//                    start()
-//                }
-//            } catch (e: IOException){
-//                e.printStackTrace()
-//            }
-////                Log.d("khoa1", test[binding.viewPagerDataParts.currentItem])
-//        }
-//    }
-//
-//    binding.ivBackParts.setOnClickListener {
-//        if(binding.viewPagerDataParts.currentItem - 1 >= 0) {
-//            mediaPlayer?.stop()
-//            binding.viewPagerDataParts.currentItem -= 1
-//            try{
-//                mediaPlayer?.apply {
-//                    reset();
-//                    setDataSource(test[binding.viewPagerDataParts.currentItem]);
-//                    setAudioStreamType(AudioManager.STREAM_MUSIC);
-//                    prepare();
-//                    start()
-//                }
-//            } catch (e: IOException){
-//                e.printStackTrace()
-//            }
-////                Log.d("khoa1", test[binding.viewPagerDataParts.currentItem])
-//        }
-//    }
-//}
