@@ -18,7 +18,9 @@ class PartsTestViewModel @Inject constructor(private val repository: Repository,
             val ets = savedStateHandle.get<String>("ets")
             val test = savedStateHandle.get<String>("test")
             val part = savedStateHandle.get<String>("part")
-            emit(DataResult.success(repository.getListPartsData(ets?:"",test?:"",part?:"")))
+            if(part=="listen" || part=="read") {
+                emit(DataResult.success(repository.getListTypesData(ets?:"",test?:"",part?:"")))
+            } else emit(DataResult.success(repository.getListPartsData(ets?:"",test?:"",part?:"")))
         } catch (e: Exception) {
             Log.e("Okhttp", "${e.toString()} lỗi data")
             emit(DataResult.error(e.message ?: "Error Data"))

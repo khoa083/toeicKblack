@@ -109,11 +109,9 @@ class PartsTestFragment : Fragment() {
 
         val part = arguments?.getString("part")
         binding.tvTitlePartsNumber.text = part
-        binding.llFooterAudio.visibility =
-            if (part == "1" || part == "2" || part == "3" || part == "4") View.VISIBLE else View.GONE
+        binding.llFooterAudio.visibility = if (part == "listen" || part == "1" || part == "2" || part == "3" || part == "4" ) View.VISIBLE else View.GONE
 
-        binding.seekBarLuminosite.setOnSeekBarChangeListener(object :
-            SeekBar.OnSeekBarChangeListener {
+        binding.seekBarLuminosite.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
                 mHandle.removeCallbacks(mUpdateTime)
@@ -122,8 +120,7 @@ class PartsTestFragment : Fragment() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 mHandle.removeCallbacks(mUpdateTime)
                 val totalDuration = mediaPlayer?.duration
-                val currentPosition: Int =
-                    Constant.progressToTimer(seekBar?.progress ?: 0, totalDuration ?: 0)
+                val currentPosition: Int = Constant.progressToTimer(seekBar?.progress ?: 0, totalDuration ?: 0)
                 mediaPlayer?.seekTo(currentPosition)
                 updateSeekBar()
             }

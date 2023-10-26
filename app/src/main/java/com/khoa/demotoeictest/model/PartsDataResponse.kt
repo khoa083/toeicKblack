@@ -43,5 +43,6 @@ data class PartsData(
     @SerializedName("c5") val c5: String? = null,
     @SerializedName("d5") val d5: String? = null,
     @SerializedName("correctAnswer5") val correctAnswer5: String? = null,
-    @SerializedName("part") val part: String? = null
+    @SerializedName("part") val part: String? = null,
+    @SerializedName("type") val type: String? = null
 ): Parcelable

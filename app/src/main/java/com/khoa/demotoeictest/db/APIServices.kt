@@ -22,8 +22,15 @@ interface APIServices {
         @Path("part") part: String
     ): Response<PartsDataResponse>
 
+    @GET("ets{ets}test{test}/type/{type}")
+    suspend fun getListTypesData(
+        @Path("ets") ets: String,
+        @Path("test") test: String,
+        @Path("type") part: String
+    ): Response<PartsDataResponse>
+
     @GET("ets{ets}test{test}")
-    suspend fun getListPartsData(
+    suspend fun getListFullData(
         @Path("ets") ets: String,
         @Path("test") test: String
     ): Response<PartsDataResponse>

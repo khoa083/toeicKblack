@@ -99,7 +99,7 @@ private fun setUpListener() {
         PartInfo("Part 5", "Điền vào chỗ trống", "5"),
         PartInfo("Part 6", "Hoàn thành văn bản", "6"),
         PartInfo("Part 7", "Đọc hiểu văn bản", "7"),
-        PartInfo("Listening", "100 câu hỏi", "lis"),
+        PartInfo("Listening", "100 câu hỏi", "listen"),
         PartInfo("Reading", "100 câu hỏi", "read")
     )
 
