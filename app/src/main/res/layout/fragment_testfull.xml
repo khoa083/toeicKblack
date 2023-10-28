@@ -80,6 +80,7 @@
                 android:layout_height="match_parent">
 
                 <com.facebook.shimmer.ShimmerFrameLayout
+                    android:paddingTop="20dp"
                     android:visibility="gone"
                     android:id="@+id/shimmer"
                     android:layout_width="match_parent"

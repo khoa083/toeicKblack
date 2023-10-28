@@ -16,8 +16,9 @@ import com.google.android.material.transition.MaterialSharedAxis
 import com.khoa.demotoeictest.MainActivity
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding

@@ -38,9 +38,22 @@ class VocabFragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        showShimmer(true)
     }
     private fun initView(){
         (activity as MainActivity).handleShowBottomNav(true)
+    }
+
+    private fun showShimmer(isShow : Boolean){
+        if(isShow){
+            binding.shimmer.visibility = View.VISIBLE
+            binding.rvListPart.visibility = View.GONE
+            binding.shimmer.startShimmer()
+        } else {
+            binding.shimmer.visibility = View.GONE
+            binding.rvListPart.visibility = View.VISIBLE
+            binding.shimmer.stopShimmer()
+        }
     }
 
 }

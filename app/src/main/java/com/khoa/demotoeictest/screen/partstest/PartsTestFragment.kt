@@ -33,7 +33,9 @@ class PartsTestFragment : Fragment() {
     private lateinit var partsDataAdapter: PartsDataAdapter
     private var mediaPlayer: MediaPlayer? = null
     private var isPlaying = false
-    private val test: ArrayList<String> = ArrayList()
+    private val arrAudio: ArrayList<String> = ArrayList()
+    private val arrType: ArrayList<String> = ArrayList()
+    private val arrParts: ArrayList<String> = ArrayList()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,9 +70,14 @@ class PartsTestFragment : Fragment() {
                     partsDataAdapter.submitList(listDataParts)
 
                     listDataParts.forEach {
-                        test.add(it.audio.toString())
+                        arrAudio.add(it.audio.toString())
+                        arrType.add(it.type.toString())
+                        arrParts.add(it.part.toString())
                     }
-                    Log.d("khoa1", test.toString())
+                    Log.d("khoa1", arrAudio.toString())
+                    Log.d("khoa1", arrType.toString())
+                    Log.d("khoa1", arrParts.toString())
+                    binding.tvTitlePartsNumber.text = arrParts[0]
 
                 }
 
@@ -108,8 +115,7 @@ class PartsTestFragment : Fragment() {
         }
 
         val part = arguments?.getString("part")
-        binding.tvTitlePartsNumber.text = part
-        binding.llFooterAudio.visibility = if (part == "listen" || part == "1" || part == "2" || part == "3" || part == "4" ) View.VISIBLE else View.GONE
+        binding.llFooterAudio.visibility = if(part == "read" || part == "5" || part == "6" || part == "7") View.GONE else View.VISIBLE
 
         binding.seekBarLuminosite.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
@@ -160,10 +166,16 @@ class PartsTestFragment : Fragment() {
     private fun changePage(newPage: Int) {
         mediaPlayer?.setAudioStreamType(AudioManager.STREAM_MUSIC)
         if (newPage >= 0 && newPage < partsDataAdapter.itemCount) {
-//            mediaPlayer?.stop()
+
             binding.viewPagerDataParts.currentItem = newPage
+            handleVisible(newPage)
             handleMedia(newPage)
         }
+    }
+
+    private fun handleVisible(newPage: Int){
+        binding.tvTitlePartsNumber.text = arrParts[newPage]
+        binding.llFooterAudio.visibility = if(arrType[newPage] == "listen") View.VISIBLE else View.GONE
     }
 
     private fun handleMedia(newPage: Int) {
@@ -173,7 +185,7 @@ class PartsTestFragment : Fragment() {
                     mediaPlayer!!.reset()
                     mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
                     mediaPlayer!!.setDataSource(
-                        requireContext(), Uri.parse(test[newPage])
+                        requireContext(), Uri.parse(arrAudio[newPage])
                     )
                     mediaPlayer!!.prepare()
                     mediaPlayer!!.start()

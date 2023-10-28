@@ -8,6 +8,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -61,8 +62,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 Log.d("khoa", "home")
             }
             R.id.testfull ->{
+                data class PartInfo(val partName: String, val partDescription: String, val part: String)
+                val partData = arrayOf(PartInfo("Full test", "Gồm 7 parts", "fulltest"))
+                val partInfo = partData[0]
+                val args = bundleOf("partName" to partInfo.partName, "partDescription" to partInfo.partDescription, "part" to partInfo.part)
                 animationSharedX()
-                findNavController(R.id.fragmentView).navigate(R.id.fulltestFragment)
+                findNavController(R.id.fragmentView).navigate(R.id.fulltestFragment,args)
                 Log.d("khoa", "test")
             }
             R.id.vocab ->{

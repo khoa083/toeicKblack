@@ -5,10 +5,13 @@ import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.khoa.demotoeictest.databinding.ItemPartsDataBinding
 import com.khoa.demotoeictest.model.PartsData
 import java.io.IOException
@@ -17,7 +20,33 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
     inner class PartsDataViewHolder(private val binding: ItemPartsDataBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: PartsData) {
+            binData(data,binding)
+            handleVisibleViews(data, binding)
+            checkResult(data,binding)
+        }
+    }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PartsDataViewHolder {
+        return PartsDataViewHolder(ItemPartsDataBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+    }
+
+    override fun onBindViewHolder(holder: PartsDataViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
+
+    class DiffCallback : DiffUtil.ItemCallback<PartsData>() {
+        override fun areItemsTheSame(oldItem: PartsData, newItem: PartsData): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: PartsData, newItem: PartsData): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+
+    private fun binData(data: PartsData, binding: ViewDataBinding) {
+        if(binding is ItemPartsDataBinding) {
             binding.apply {
                 Glide.with(ivParts.context).load(data.img).into(ivParts)
                 tvSmallQues1.text = data.smallQues1
@@ -46,9 +75,12 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
                 rdC5.text = data.c5
                 rdD5.text = data.d5
                 tvQuesPart7.loadDataWithBaseURL(null,data.question ?: "","text/html","utf-8",null)
-
-
-
+            }
+        }
+    }
+    private fun handleVisibleViews(data: PartsData, binding: ViewDataBinding) {
+        if(binding is ItemPartsDataBinding) {
+            binding.apply {
                 tvQuesPart7.visibility = if (data.question != "") View.VISIBLE else View.GONE
                 ivParts.visibility = if (data.img != "") View.VISIBLE else View.GONE
                 consTrainSmallQues2.visibility = if (data.smallQues2 != "") View.VISIBLE else View.GONE
@@ -58,28 +90,31 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
                 rdD1.visibility = if (data.d1 != "") View.VISIBLE else View.GONE
                 scrollViewTop.visibility = if (data.question != "" || data.img != "") View.VISIBLE else View.GONE
                 tvLineSpace.visibility = if (data.question != "" || data.img != "") View.VISIBLE else View.GONE
-
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PartsDataViewHolder {
-        return PartsDataViewHolder(ItemPartsDataBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+    private fun checkResult(data: PartsData, binding: ItemPartsDataBinding) {
+        binding.apply {
+//            if (consTrainSmallQues2.visibility == View.VISIBLE) {
+//
+//            }
+            radioGroup1.setOnCheckedChangeListener { group, checkedId ->
+                when (checkedId) {
+                    rdA1.id -> check(data,rdA1.text.toString(),binding)
+                    rdB1.id -> check(data,rdB1.text.toString(),binding)
+                    rdC1.id -> check(data,rdC1.text.toString(),binding)
+                    rdD1.id -> check(data,rdD1.text.toString(),binding)
+                    else -> null
+                }
+            }
+        }
     }
 
-    override fun onBindViewHolder(holder: PartsDataViewHolder, position: Int) {
-        holder.bind(getItem(position))
-    }
-
-    class DiffCallback : DiffUtil.ItemCallback<PartsData>() {
-        override fun areItemsTheSame(oldItem: PartsData, newItem: PartsData): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: PartsData, newItem: PartsData): Boolean {
-            return oldItem == newItem
-        }
-
+    private fun check(data: PartsData, str: String, binding: ItemPartsDataBinding){
+        if (str == data.correctAnswer1.toString()) {
+            Snackbar.make(binding.root,"True",500).show()
+        } else Snackbar.make(binding.root,"False",500).show()
     }
 
 }
