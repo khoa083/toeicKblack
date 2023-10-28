@@ -188,6 +188,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <RadioGroup
+                        android:id="@+id/radioGroup2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -281,6 +282,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <RadioGroup
+                        android:id="@+id/radioGroup3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -374,6 +376,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <RadioGroup
+                        android:id="@+id/radioGroup4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -467,6 +470,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <RadioGroup
+                        android:id="@+id/radioGroup5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"

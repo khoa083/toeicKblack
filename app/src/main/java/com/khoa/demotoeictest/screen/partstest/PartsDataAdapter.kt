@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -96,25 +97,34 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
 
     private fun checkResult(data: PartsData, binding: ItemPartsDataBinding) {
         binding.apply {
-//            if (consTrainSmallQues2.visibility == View.VISIBLE) {
-//
-//            }
-            radioGroup1.setOnCheckedChangeListener { group, checkedId ->
-                when (checkedId) {
-                    rdA1.id -> check(data,rdA1.text.toString(),binding)
-                    rdB1.id -> check(data,rdB1.text.toString(),binding)
-                    rdC1.id -> check(data,rdC1.text.toString(),binding)
-                    rdD1.id -> check(data,rdD1.text.toString(),binding)
-                    else -> null
+            val arrRadioGroups = listOf(radioGroup1, radioGroup2, radioGroup3, radioGroup4, radioGroup5)
+            arrRadioGroups.forEachIndexed { groupIndex, radioGroup ->
+                radioGroup.setOnCheckedChangeListener { _, checkedId ->
+                    val selectedRadioButton = getSelectedRadioButton(radioGroup, checkedId)
+                    val selectedText = selectedRadioButton?.text.toString()
+                    val correctAnswer = when (groupIndex) {
+                        0 -> data.correctAnswer1
+                        1 -> data.correctAnswer2
+                        2 -> data.correctAnswer3
+                        3 -> data.correctAnswer4
+                        4 -> data.correctAnswer5
+                        else -> null
+                    }
+                    checkResult(selectedText, binding, correctAnswer)
                 }
             }
+
         }
     }
 
-    private fun check(data: PartsData, str: String, binding: ItemPartsDataBinding){
-        if (str == data.correctAnswer1.toString()) {
-            Snackbar.make(binding.root,"True",500).show()
-        } else Snackbar.make(binding.root,"False",500).show()
+    private fun getSelectedRadioButton(radioGroup: RadioGroup, checkedId: Int): RadioButton? {
+        return radioGroup.findViewById(checkedId)
+    }
+
+    private fun checkResult(selectedText: String, binding: ItemPartsDataBinding, correctAnswer: String?) {
+
+        val message = if (selectedText == correctAnswer) "True" else "False"
+        Snackbar.make(binding.root, message, 500).show()
     }
 
 }

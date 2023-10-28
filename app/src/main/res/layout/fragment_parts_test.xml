@@ -8,6 +8,7 @@
         <variable
             name="viewModel"
             type="com.khoa.demotoeictest.screen.partstest.PartsTestViewModel" />
+
         <variable
             name="data"
             type="com.khoa.demotoeictest.model.Parts" />
@@ -38,10 +39,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
-                android:minWidth="60dp"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginStart="25dp"
+                android:minWidth="60dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ivBackToHome"
@@ -65,8 +66,8 @@
                         android:id="@+id/tvTitlePartsNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
                         android:fontFamily="@font/poppins_semibold"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -104,6 +105,23 @@
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvComplete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/bg_orange"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="7dp"
+                android:text="Hoàn thành"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.viewpager2.widget.ViewPager2
@@ -140,16 +158,16 @@
                 android:textColor="@color/black" />
 
             <SeekBar
-                android:secondaryProgressTint="@color/processTintSeekBar"
                 android:id="@+id/seekBar_luminosite"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
-                android:maxHeight="8dp"
                 android:layout_weight="0.5"
+                android:maxHeight="8dp"
                 android:progressDrawable="@drawable/seekbar_style"
+                android:secondaryProgressTint="@color/processTintSeekBar"
                 android:splitTrack="false"
                 android:thumb="@drawable/custom_thumb"
-                android:thumbOffset="0dp"/>
+                android:thumbOffset="0dp" />
 
             <TextView
                 android:id="@+id/tvEndTime"
@@ -164,16 +182,17 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginHorizontal="10dp" >
+                android:layout_marginHorizontal="10dp">
+
                 <ImageView
                     android:id="@+id/ivPlay"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/button_pause"/>
+                    android:src="@drawable/button_pause"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
