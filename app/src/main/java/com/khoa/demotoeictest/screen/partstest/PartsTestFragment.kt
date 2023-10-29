@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.khoa.demotoeictest.MainActivity
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.FragmentPartsTestBinding
@@ -68,6 +69,8 @@ class PartsTestFragment : Fragment() {
                     partsDataAdapter = PartsDataAdapter()
                     binding.viewPagerDataParts.adapter = partsDataAdapter
                     partsDataAdapter.submitList(listDataParts)
+                    binding.viewPagerDataParts.offscreenPageLimit = partsDataAdapter.itemCount + 1
+//                    binding.viewPagerDataParts.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
 
                     listDataParts.forEach {
                         arrAudio.add(it.audio.toString())

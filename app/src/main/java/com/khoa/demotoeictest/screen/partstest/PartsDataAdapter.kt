@@ -1,7 +1,6 @@
 package com.khoa.demotoeictest.screen.partstest
 
-import android.media.AudioManager
-import android.media.MediaPlayer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,15 +14,24 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.khoa.demotoeictest.databinding.ItemPartsDataBinding
 import com.khoa.demotoeictest.model.PartsData
-import java.io.IOException
 
 class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHolder>(DiffCallback()) {
+
+    private val arrResult = Array(103) { Array(5) { 0 } }
+
     inner class PartsDataViewHolder(private val binding: ItemPartsDataBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: PartsData) {
             binData(data,binding)
             handleVisibleViews(data, binding)
-            checkResult(data,binding)
+            binding.apply {
+                radioGroup1.clearCheck()
+                radioGroup2.clearCheck()
+                radioGroup3.clearCheck()
+                radioGroup4.clearCheck()
+                radioGroup5.clearCheck()
+            }
+            handleAnswers(data,binding)
         }
     }
 
@@ -95,7 +103,7 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
         }
     }
 
-    private fun checkResult(data: PartsData, binding: ItemPartsDataBinding) {
+    private fun handleAnswers(data: PartsData, binding: ItemPartsDataBinding) {
         binding.apply {
             val arrRadioGroups = listOf(radioGroup1, radioGroup2, radioGroup3, radioGroup4, radioGroup5)
             arrRadioGroups.forEachIndexed { groupIndex, radioGroup ->
@@ -110,7 +118,8 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
                         4 -> data.correctAnswer5
                         else -> null
                     }
-                    checkResult(selectedText, binding, correctAnswer)
+                    val pageCurrent = getPositionByItem(data)
+                    checkResult(selectedText, binding, correctAnswer,groupIndex,pageCurrent)
                 }
             }
 
@@ -121,10 +130,27 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
         return radioGroup.findViewById(checkedId)
     }
 
-    private fun checkResult(selectedText: String, binding: ItemPartsDataBinding, correctAnswer: String?) {
-
-        val message = if (selectedText == correctAnswer) "True" else "False"
-        Snackbar.make(binding.root, message, 500).show()
+    private fun checkResult(
+        selectedText: String,
+        binding: ItemPartsDataBinding,
+        correctAnswer: String?,
+        groupIndex: Int,
+        pageCurrent: Int
+    ) {
+//        TODO: pageCurrent tương đương với hàng còn groupIndex là cột
+        arrResult[pageCurrent][groupIndex] = if (selectedText == correctAnswer) 1 else 2
+//        val message = if (selectedText == correctAnswer) "$pageCurrent/$groupIndex True" else " $pageCurrent/$groupIndex False"
+//        Snackbar.make(binding.root, selectedText, 500).show()
+        val arrRe: ArrayList<Int> = ArrayList()
+        for (row in arrResult) {
+            for (element in row) {
+                arrRe.add(element)
+            }
+        }
+        Log.d("khoa2", arrRe.toString())
     }
+//    TODO: getPositionByItem lấy vị trí trang hiện tại.
+//    TODO: currentList đại diện cho danh sách dữ liệu hiện tại được hiển thị.
+    private fun getPositionByItem(data: PartsData) = currentList.indexOf(data)
 
 }

@@ -9,9 +9,9 @@
             name="viewModel"
             type="com.khoa.demotoeictest.screen.partstest.PartsTestViewModel" />
 
-        <variable
-            name="data"
-            type="com.khoa.demotoeictest.model.Parts" />
+<!--        <variable-->
+<!--            name="data"-->
+<!--            type="com.khoa.demotoeictest.model.Parts" />-->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
