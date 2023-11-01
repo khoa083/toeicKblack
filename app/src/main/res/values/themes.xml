@@ -7,4 +7,7 @@
     </style>
 
     <style name="Theme.DemoToeicTest" parent="Base.Theme.DemoToeicTest" />
+    <style name="Themecustom" parent="Theme.AppCompat.Light.Dialog.Alert" >
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 </resources>

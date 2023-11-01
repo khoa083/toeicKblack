@@ -74,7 +74,11 @@
         android:id="@+id/partsTestFragment"
         android:name="com.khoa.demotoeictest.screen.partstest.PartsTestFragment"
         android:label="PartsTestFragment"
-        tools:layout="@layout/fragment_parts_test"/>
+        tools:layout="@layout/fragment_parts_test">
+        <action
+            android:id="@+id/action_partsTestFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.khoa.demotoeictest.screen.favorite.FavoriteFragment"
@@ -117,7 +121,15 @@
     <action
         android:id="@+id/action_settingFragment"
         app:destination="@+id/settingFragment"/>
-
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.khoa.demotoeictest.screen.result.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_resultFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
 
 </navigation>

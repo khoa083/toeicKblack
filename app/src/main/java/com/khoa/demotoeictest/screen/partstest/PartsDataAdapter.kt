@@ -18,6 +18,7 @@ import com.khoa.demotoeictest.model.PartsData
 class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHolder>(DiffCallback()) {
 
     private val arrResult = Array(103) { Array(5) { 0 } }
+    private val arrRe: ArrayList<Int> = ArrayList()
 
     inner class PartsDataViewHolder(private val binding: ItemPartsDataBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -119,7 +120,7 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
                         else -> null
                     }
                     val pageCurrent = getPositionByItem(data)
-                    checkResult(selectedText, binding, correctAnswer,groupIndex,pageCurrent)
+                    checkResult(selectedText,correctAnswer,groupIndex,pageCurrent)
                 }
             }
 
@@ -130,27 +131,21 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
         return radioGroup.findViewById(checkedId)
     }
 
-    private fun checkResult(
-        selectedText: String,
-        binding: ItemPartsDataBinding,
-        correctAnswer: String?,
-        groupIndex: Int,
-        pageCurrent: Int
-    ) {
-//        TODO: pageCurrent tương đương với hàng còn groupIndex là cột
+    private fun checkResult(selectedText: String,correctAnswer: String?,groupIndex: Int,pageCurrent: Int): ArrayList<Int>  {
         arrResult[pageCurrent][groupIndex] = if (selectedText == correctAnswer) 1 else 2
-//        val message = if (selectedText == correctAnswer) "$pageCurrent/$groupIndex True" else " $pageCurrent/$groupIndex False"
-//        Snackbar.make(binding.root, selectedText, 500).show()
-        val arrRe: ArrayList<Int> = ArrayList()
+        arrRe.clear()
         for (row in arrResult) {
             for (element in row) {
                 arrRe.add(element)
             }
         }
-        Log.d("khoa2", arrRe.toString())
+//        Log.d("khoa2", arrRe.toString())
+//        PartsTestFragment().receiveArrResult(arrRe)
+        return arrRe
     }
+
+    fun originRes():ArrayList<Int> = arrRe
+    private fun getPositionByItem(data: PartsData) = currentList.indexOf(data)
 //    TODO: getPositionByItem lấy vị trí trang hiện tại.
 //    TODO: currentList đại diện cho danh sách dữ liệu hiện tại được hiển thị.
-    private fun getPositionByItem(data: PartsData) = currentList.indexOf(data)
-
 }

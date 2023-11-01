@@ -1,5 +1,7 @@
 package com.khoa.demotoeictest.screen.partstest
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
@@ -12,12 +14,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.khoa.demotoeictest.MainActivity
 import com.khoa.demotoeictest.R
+import com.khoa.demotoeictest.databinding.CustomDialogSubmitPartsBinding
 import com.khoa.demotoeictest.databinding.FragmentPartsTestBinding
 import com.khoa.demotoeictest.model.PartsData
 import com.khoa.demotoeictest.model.PartsDataResponse
@@ -37,6 +42,9 @@ class PartsTestFragment : Fragment() {
     private val arrAudio: ArrayList<String> = ArrayList()
     private val arrType: ArrayList<String> = ArrayList()
     private val arrParts: ArrayList<String> = ArrayList()
+    private var dialog: AlertDialog? = null
+    private val newArrResult: ArrayList<Int> = ArrayList()
+//    private val bundle = Bundle()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,6 +117,14 @@ class PartsTestFragment : Fragment() {
             playMusic()
         }
 
+        binding.ivBackToHome.setOnClickListener {
+            alertDialogReturnHome()
+        }
+
+        binding.tvComplete.setOnClickListener {
+            alertDialogComplete()
+        }
+
         val onClick = View.OnClickListener { view ->
             setUpViewPager(view)
         }
@@ -122,10 +138,7 @@ class PartsTestFragment : Fragment() {
 
         binding.seekBarLuminosite.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                mHandle.removeCallbacks(mUpdateTime)
-            }
-
+            override fun onStartTrackingTouch(seekBar: SeekBar?) { mHandle.removeCallbacks(mUpdateTime) }
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 mHandle.removeCallbacks(mUpdateTime)
                 val totalDuration = mediaPlayer?.duration
@@ -134,7 +147,6 @@ class PartsTestFragment : Fragment() {
                 updateSeekBar()
             }
         })
-
 //        TODO: hiển thị tiến trình phụ
 //        mediaPlayer?.setOnBufferingUpdateListener { mp, percent ->
 //            val ratio = percent / 100.0
@@ -143,7 +155,49 @@ class PartsTestFragment : Fragment() {
 //            val colorList = ColorStateList.valueOf(Color.RED)
 //            binding.seekBarLuminosite.secondaryProgressTintList = colorList
 //        }
+    }
 
+    @SuppressLint("SetTextI18n")
+    private fun alertDialogReturnHome() {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext(), R.style.Themecustom)
+        val binding = CustomDialogSubmitPartsBinding.inflate(layoutInflater)
+        alertDialogBuilder.setView(binding.root)
+        alertDialogBuilder.setCancelable(false)
+
+        binding.tvClose.setOnClickListener {
+            dialog?.dismiss()
+        }
+        binding.tvTitle.text = "Bạn có muốn rời khỏi bài kiểm tra"
+        binding.tvMessage.text = "Nếu rời khỏi bạn sẽ mất tiến trình hiện tại"
+
+        binding.tvSubmit.setOnClickListener {
+            dialog?.dismiss()
+            findNavController().navigateUp()
+        }
+
+        dialog = alertDialogBuilder.create()
+        dialog?.show()
+    }
+
+    private fun alertDialogComplete() {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext(), R.style.Themecustom)
+        val binding = CustomDialogSubmitPartsBinding.inflate(layoutInflater)
+        alertDialogBuilder.setView(binding.root)
+        alertDialogBuilder.setCancelable(false)
+
+        binding.tvClose.setOnClickListener {
+            dialog?.dismiss()
+        }
+
+        binding.tvSubmit.setOnClickListener {
+            dialog?.dismiss()
+            val args = bundleOf("originResult" to partsDataAdapter.originRes())
+            Log.d("khoa2", "PartsFragment: ${partsDataAdapter.originRes().toString()}")
+            findNavController().navigate(R.id.action_partsTestFragment_to_resultFragment,args,null)
+        }
+
+        dialog = alertDialogBuilder.create()
+        dialog?.show()
     }
 
     private fun playMusic() {
@@ -202,7 +256,6 @@ class PartsTestFragment : Fragment() {
             }
         }, 325)
     }
-
 
     //TODO: updateSeekBar() and updateTime() handle seekbar
     fun updateSeekBar() {
