@@ -139,8 +139,6 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
                 arrRe.add(element)
             }
         }
-//        Log.d("khoa2", arrRe.toString())
-//        PartsTestFragment().receiveArrResult(arrRe)
         return arrRe
     }
 

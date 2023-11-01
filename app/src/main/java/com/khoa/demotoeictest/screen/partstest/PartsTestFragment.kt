@@ -191,8 +191,9 @@ class PartsTestFragment : Fragment() {
 
         binding.tvSubmit.setOnClickListener {
             dialog?.dismiss()
-            val args = bundleOf("originResult" to partsDataAdapter.originRes())
-            Log.d("khoa2", "PartsFragment: ${partsDataAdapter.originRes().toString()}")
+            val part = arguments?.getString("part")
+            val args = bundleOf("originResult" to partsDataAdapter.originRes(), "part" to part)
+//            Log.d("khoa2", "PartsFragment: ${partsDataAdapter.originRes().toString()}")
             findNavController().navigate(R.id.action_partsTestFragment_to_resultFragment,args,null)
         }
 
