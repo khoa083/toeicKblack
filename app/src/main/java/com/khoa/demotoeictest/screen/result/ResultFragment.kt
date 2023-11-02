@@ -8,26 +8,32 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.FragmentResultBinding
-import kotlin.math.log
 
 class ResultFragment : Fragment() {
 
     private lateinit var binding: FragmentResultBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private var arrayResult: ArrayList<Result> = ArrayList()
+    private lateinit var resultAdapter: ResultAdapter
+    private var processArrPart: ArrayList<Int> = arrayListOf()
 
-
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View {
+    @SuppressLint("SetTextI18n")
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_result,container,false)
         binding.lifecycleOwner = this
         val originResult = arguments?.getIntegerArrayList("originResult")
         val part = arguments?.getString("part")
+        binding.tvTitlePart.text = "Part $part"
         handleResult(originResult,part)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setRecyclerView(processArrPart)
+        Log.d("khoa2", "handlePart: $processArrPart")
     }
 
     private fun handleResult(originResult: ArrayList<Int>?, part: String?) {
@@ -37,11 +43,11 @@ class ResultFragment : Fragment() {
 //            "3" -> handlePart(originResult,195)
 //            "4" -> handlePart(originResult,150)
             "5" -> handlePart(originResult,150)
-            "6" -> handlePart(originResult,80)
+//            "6" -> handlePart(originResult,80)
 //            "7" -> handlePart(originResult,270)
-            "listen" -> {}
-            "read" ->{}
-            "fulltest" -> {}
+//            "listen" -> {}
+//            "read" ->{}
+//            "fulltest" -> {}
         }
     }
 
@@ -50,10 +56,8 @@ class ResultFragment : Fragment() {
         var countFalse = 0
         var countNull = 0
         val arrPart = originResult?.take(i)
-        val processArrPart: ArrayList<Int> = arrayListOf()
 
         filterArrResult(processArrPart,arrPart,i)
-        Log.d("khoa2", "handlePart: $processArrPart")
 
         processArrPart.forEach {
             when(it){
@@ -62,7 +66,29 @@ class ResultFragment : Fragment() {
                 2 -> ++countFalse
             }
         }
+        binding.apply {
+            tvCountNumberNull.text = countNull.toString()
+            tvCountNumberTrue.text = countTrue.toString()
+            tvCountNumberFalse.text = countFalse.toString()
+        }
         setProgressBar(countTrue,processArrPart.size)
+    }
+
+    private fun setRecyclerView(processArrPart: ArrayList<Int>) {
+        var count = 0
+        processArrPart.forEach {
+            when(it){
+                0 -> arrayResult.add(Result(++count,R.drawable.bg_result_null))
+                1 -> arrayResult.add(Result(++count,R.drawable.bg_result_true))
+                2 -> arrayResult.add(Result(++count,R.drawable.bg_result_false))
+            }
+        }
+        binding.rvListResult.apply {
+            layoutManager = GridLayoutManager(requireContext(),5)
+            resultAdapter = ResultAdapter()
+            adapter = resultAdapter
+            resultAdapter.submitList(arrayResult)
+        }
     }
 
     @SuppressLint("SetTextI18n")
