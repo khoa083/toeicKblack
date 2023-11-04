@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.FragmentResultBinding
@@ -33,7 +34,15 @@ class ResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRecyclerView(processArrPart)
+        setUpListener()
         Log.d("khoa2", "handlePart: $processArrPart")
+    }
+
+    private fun setUpListener() {
+        val onClick = View.OnClickListener {
+            findNavController().navigate(R.id.action_resultFragment_to_homeFragment)
+        }
+        binding.tvReturnToHome.setOnClickListener(onClick)
     }
 
     private fun handleResult(originResult: ArrayList<Int>?, part: String?) {

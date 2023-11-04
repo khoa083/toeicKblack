@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/custom_border_ripple"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center|start"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        tools:ignore="RtlSymmetry">
+
+        <!--        <ImageView-->
+        <!--            android:clipToOutline="true"-->
+        <!--            android:background="@drawable/bg_dark_green"-->
+        <!--            android:scaleType="fitXY"-->
+        <!--            android:src="@drawable/ls01"-->
+        <!--            android:layout_width="100dp"-->
+        <!--            android:layout_height="110dp"/>-->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivImgTitleListVocab"
+            android:layout_width="100dp"
+            android:layout_height="115dp"
+            android:layout_marginEnd="25dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ls01"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large" />
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:minWidth="150dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Hợp đồng"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_marginVertical="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_orange"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingHorizontal="15dp"
+                android:text="12 từ vựng"
+                android:textColor="@color/white" />
+
+            <ProgressBar
+                android:layout_marginTop="2dp"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:indeterminateOnly="false"
+                android:progress="16"
+                android:progressDrawable="@drawable/custom_progressbar_vocab" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
+

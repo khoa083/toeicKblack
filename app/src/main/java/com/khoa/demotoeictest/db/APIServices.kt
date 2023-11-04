@@ -29,11 +29,11 @@ interface APIServices {
         @Path("type") part: String
     ): Response<PartsDataResponse>
 
-    @GET("ets{ets}test{test}")
-    suspend fun getListFullData(
-        @Path("ets") ets: String,
-        @Path("test") test: String
-    ): Response<PartsDataResponse>
+//    @GET("ets{ets}test{test}")
+//    suspend fun getListFullData(
+//        @Path("ets") ets: String,
+//        @Path("test") test: String
+//    ): Response<PartsDataResponse>
 
     @GET("vocab/{type}")
     suspend fun getVocab(
