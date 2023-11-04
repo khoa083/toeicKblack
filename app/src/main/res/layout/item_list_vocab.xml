@@ -33,24 +33,26 @@
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large" />
 
         <LinearLayout
-            android:gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="110dp"
+            android:gravity="center_vertical"
             android:minWidth="150dp"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvTitleListVocab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/poppins_semibold"
                 android:text="Hợp đồng"
                 android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:textSize="20sp" />
 
             <TextView
-                android:layout_marginVertical="10dp"
+                android:id="@+id/tvDesListVocab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
                 android:background="@drawable/bg_orange"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingHorizontal="15dp"
@@ -58,12 +60,12 @@
                 android:textColor="@color/white" />
 
             <ProgressBar
-                android:layout_marginTop="2dp"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="5dp"
+                android:layout_marginTop="2dp"
                 android:indeterminateOnly="false"
-                android:progress="16"
+                android:progress="0"
                 android:progressDrawable="@drawable/custom_progressbar_vocab" />
         </LinearLayout>
 

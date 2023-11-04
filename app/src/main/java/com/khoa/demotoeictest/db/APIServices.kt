@@ -1,5 +1,6 @@
 package com.khoa.demotoeictest.db
 
+import com.khoa.demotoeictest.model.ListVocabResponse
 import com.khoa.demotoeictest.model.PartsDataResponse
 import com.khoa.demotoeictest.model.PartsResponse
 import retrofit2.Response
@@ -29,11 +30,8 @@ interface APIServices {
         @Path("type") part: String
     ): Response<PartsDataResponse>
 
-//    @GET("ets{ets}test{test}")
-//    suspend fun getListFullData(
-//        @Path("ets") ets: String,
-//        @Path("test") test: String
-//    ): Response<PartsDataResponse>
+    @GET("listvocab")
+    suspend fun getListVocab(): Response<ListVocabResponse>
 
     @GET("vocab/{type}")
     suspend fun getVocab(

@@ -11,4 +11,6 @@ class Repository @Inject constructor(private val dataRemoteAPI: DataRemoteAPI) {
 
     suspend fun getListPartsData(ets: String, test: String, part: String) = dataRemoteAPI.getListPartsData(ets,test,part)
 
+    suspend fun getListVocab() = dataRemoteAPI.getListVocab()
+
 }
