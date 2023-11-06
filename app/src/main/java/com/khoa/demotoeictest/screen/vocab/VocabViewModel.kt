@@ -22,4 +22,16 @@ class VocabViewModel @Inject constructor(private val repository: Repository, pri
             emit(DataResult.error(e.message ?: "Error Data"))
         }
     }
+
+    fun getListVocabData() = liveData(Dispatchers.IO) {
+        emit(DataResult.loading())
+        try {
+            val type = savedStateHandle.get<String>("type")
+            emit(DataResult.success(repository.getListVocabData(type?:"")))
+        } catch (e: Exception) {
+            Log.e("Okhttp", "$e lỗi data")
+            emit(DataResult.error(e.message ?: "Error Data"))
+        }
+    }
+
 }

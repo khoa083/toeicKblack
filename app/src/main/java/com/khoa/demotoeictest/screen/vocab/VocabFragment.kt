@@ -82,9 +82,9 @@ class VocabFragment:Fragment() {
                     }
                     listVocabAdapter.submitList(listVocab)
                     listVocabAdapter.onClickItem = {
-                        val args = bundleOf("type" to it.type)
-                        Snackbar.make(binding.root, "ets:${it.type}",1500).show()
-//                        findNavController().navigate(R.id.action_partsFragment_to_partsTestFragment,args,null)
+                        val args = bundleOf("title" to it.title,"des" to it.des,"type" to it.type)
+//                        VocabDataFragment.newInstance(it.title?:"",it.des?:"",it.type?:"")
+                        findNavController().navigate(R.id.action_vocabFragment_to_vocabDataFragment,args,null)
                     }
                 }
                 DataResult.Status.LOADING -> {

@@ -12,4 +12,6 @@ class DataRemoteAPI @Inject constructor(private val apiServices: APIServices) {
 
     suspend fun getListVocab() = apiServices.getListVocab()
 
+    suspend fun getListVocabData(type: String) = apiServices.getListVocabData(type)
+
 }

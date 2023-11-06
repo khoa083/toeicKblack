@@ -88,7 +88,11 @@
         android:id="@+id/vocabFragment"
         android:name="com.khoa.demotoeictest.screen.vocab.VocabFragment"
         android:label="VocabFragment"
-        tools:layout="@layout/fragment_vocab"/>
+        tools:layout="@layout/fragment_vocab">
+        <action
+            android:id="@+id/action_vocabFragment_to_vocabDataFragment"
+            app:destination="@id/vocabDataFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fulltestFragment"
         android:name="com.khoa.demotoeictest.screen.fulltest.FulltestFragment"
@@ -130,6 +134,11 @@
             android:id="@+id/action_resultFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/vocabDataFragment"
+        android:name="com.khoa.demotoeictest.screen.vocab.VocabDataFragment"
+        android:label="fragment_vocab_data"
+        tools:layout="@layout/fragment_vocab_data" />
 
 
 </navigation>

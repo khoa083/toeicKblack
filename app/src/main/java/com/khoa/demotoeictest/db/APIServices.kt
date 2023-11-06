@@ -1,5 +1,6 @@
 package com.khoa.demotoeictest.db
 
+import com.khoa.demotoeictest.model.ListVocabDataResponse
 import com.khoa.demotoeictest.model.ListVocabResponse
 import com.khoa.demotoeictest.model.PartsDataResponse
 import com.khoa.demotoeictest.model.PartsResponse
@@ -34,9 +35,9 @@ interface APIServices {
     suspend fun getListVocab(): Response<ListVocabResponse>
 
     @GET("vocab/{type}")
-    suspend fun getVocab(
+    suspend fun getListVocabData(
         @Path("type") type: String
-    )
+    ): Response<ListVocabDataResponse>
 
 
 
