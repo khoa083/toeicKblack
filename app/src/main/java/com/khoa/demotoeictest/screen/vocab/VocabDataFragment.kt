@@ -1,5 +1,9 @@
 package com.khoa.demotoeictest.screen.vocab
 
+import android.annotation.SuppressLint
+import android.media.AudioManager
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -13,9 +17,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.khoa.demotoeictest.MainActivity
 import com.khoa.demotoeictest.R
+import com.khoa.demotoeictest.databinding.CustomBottomsheetVocabDataBinding
 import com.khoa.demotoeictest.databinding.FragmentVocabDataBinding
 import com.khoa.demotoeictest.model.ListVocab
 import com.khoa.demotoeictest.model.ListVocabData
@@ -23,10 +30,12 @@ import com.khoa.demotoeictest.model.ListVocabDataResponse
 import com.khoa.demotoeictest.model.ListVocabResponse
 import com.khoa.demotoeictest.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.IOException
 
 private const val KEY_TITLE = "title"
 private const val KEY_DES = "des"
 private const val KEY_TYPE = "type"
+
 @AndroidEntryPoint
 class VocabDataFragment : Fragment() {
 
@@ -37,6 +46,7 @@ class VocabDataFragment : Fragment() {
     private lateinit var binding: FragmentVocabDataBinding
     private val viewModel: VocabViewModel by viewModels()
     private lateinit var vocabDataAdapter: VocabDataAdapter
+    private var mediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,15 +57,19 @@ class VocabDataFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_vocab_data,container,false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_vocab_data, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         viewModel.getListVocabData()
         setUpRecyclerview()
         Handler(Looper.getMainLooper()).postDelayed({
             setUpObserver()
-        },325)
+        }, 325)
         return binding.root
     }
 
@@ -66,40 +80,41 @@ class VocabDataFragment : Fragment() {
             findNavController().navigateUp()
         }
         initView()
+        mediaPlayer = MediaPlayer()
         super.onViewCreated(view, savedInstanceState)
     }
-    private fun initView(){
+
+    private fun initView() {
         (activity as MainActivity).handleShowBottomNav(false)
     }
 
     private fun setUpRecyclerview() {
         vocabDataAdapter = VocabDataAdapter()
         val layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvListVocabData.apply {
             adapter = vocabDataAdapter
             setLayoutManager(layoutManager)
         }
     }
 
-    private fun setUpObserver(){
-        viewModel.getListVocabData().observe(viewLifecycleOwner) {data ->
-            when(data.status) {
+    private fun setUpObserver() {
+        viewModel.getListVocabData().observe(viewLifecycleOwner) { data ->
+            when (data.status) {
                 DataResult.Status.SUCCESS -> {
                     showShimmer(false)
                     val listVocabData: ArrayList<ListVocabData> = ArrayList()
                     val value = data.data?.body() as ListVocabDataResponse
                     value.listVocabData?.forEach {
                         listVocabData.add(it)
-                        Log.d("setUpObserver",listVocabData.toString())
+                        Log.d("setUpObserver", listVocabData.toString())
                     }
                     vocabDataAdapter.submitList(listVocabData)
                     vocabDataAdapter.onClickItem = {
-//                        val args = bundleOf("type" to it.type)
-//                        Snackbar.make(binding.root, "ets:${it.type}",1500).show()
-//                        Snackbar.make(binding.root, getType?:"",5500).show()
+                        setUpBottomSheet(it)
                     }
                 }
+
                 DataResult.Status.LOADING -> {
                     showShimmer(true)
                 }
@@ -111,21 +126,61 @@ class VocabDataFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun setUpBottomSheet(data: ListVocabData) {
+        val bottomSheet = BottomSheetDialog(requireContext(), R.style.customBottomSheetDialog)
+        val binding = CustomBottomsheetVocabDataBinding.inflate(layoutInflater)
+        bottomSheet.setContentView(binding.root)
+        bottomSheet.setCancelable(true)
+        bottomSheet.dismissWithAnimation = true
 
-    companion object {
-        @JvmStatic fun newInstance(title: String,des: String,type: String) =
-                VocabDataFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(KEY_TITLE, title)
-                        putString(KEY_DES, des)
-                        putString(KEY_TYPE, type)
-//                        putString("key", "giá trị dữ liệu")
+        binding.apply {
+            Glide.with(ivVocab.context).load(data.img).into(ivVocab)
+            tvVocabulary.text = data.vocabulary
+            tvPronunciation.text = data.pronunciation
+            tvMeans.text = data.translation
+            tvDefine.text = data.meaning
+            tvTransEng.text = "- ${data.exampleEng}"
+            tvTransVn.text = "- ${data.exampleVn}"
+        }
+        bottomSheet.create()
+        bottomSheet.show()
+
+        binding.ivAudio.setOnClickListener {
+            Handler(Looper.getMainLooper()).postDelayed({
+                try {
+                    kotlin.runCatching {
+                        mediaPlayer!!.reset()
+                        mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+                        mediaPlayer!!.setDataSource(
+                            requireContext(), Uri.parse(data.audio)
+                        )
+                        mediaPlayer!!.prepare()
+                        mediaPlayer!!.start()
                     }
+                } catch (e: IOException) {
+                    e.printStackTrace()
                 }
+            }, 325)
+        }
     }
 
-    private fun showShimmer(isShow : Boolean){
-        if(isShow){
+
+    companion object {
+        @JvmStatic
+        fun newInstance(title: String, des: String, type: String) =
+            VocabDataFragment().apply {
+                arguments = Bundle().apply {
+                    putString(KEY_TITLE, title)
+                    putString(KEY_DES, des)
+                    putString(KEY_TYPE, type)
+//                        putString("key", "giá trị dữ liệu")
+                }
+            }
+    }
+
+    private fun showShimmer(isShow: Boolean) {
+        if (isShow) {
             binding.shimmer.visibility = View.VISIBLE
             binding.rvListVocabData.visibility = View.GONE
             binding.shimmer.startShimmer()
