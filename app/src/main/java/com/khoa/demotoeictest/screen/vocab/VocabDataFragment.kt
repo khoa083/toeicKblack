@@ -24,6 +24,7 @@ import com.khoa.demotoeictest.MainActivity
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.CustomBottomsheetVocabDataBinding
 import com.khoa.demotoeictest.databinding.FragmentVocabDataBinding
+import com.khoa.demotoeictest.databinding.ItemVocabDataBinding
 import com.khoa.demotoeictest.model.ListVocab
 import com.khoa.demotoeictest.model.ListVocabData
 import com.khoa.demotoeictest.model.ListVocabDataResponse
@@ -113,6 +114,9 @@ class VocabDataFragment : Fragment() {
                     vocabDataAdapter.onClickItem = {
                         setUpBottomSheet(it)
                     }
+                    vocabDataAdapter.onClickItemFavor = {dta, itemVocab ->
+                        setUpFavor(dta,itemVocab)
+                    }
                 }
 
                 DataResult.Status.LOADING -> {
@@ -126,6 +130,44 @@ class VocabDataFragment : Fragment() {
         }
     }
 
+    private fun setUpFavor(dta: ListVocabData, itemVocab: ItemVocabDataBinding) {
+        when(dta.favorite) {
+            "0" -> {
+                viewModel.putFavoriteVocabData(dta.id?:"","1").observe(viewLifecycleOwner) {check ->
+                    when(check.status) {
+                        DataResult.Status.SUCCESS -> {
+                            val newList = vocabDataAdapter.currentList.toMutableList() // Tạo một bản sao của danh sách hiện tại
+                            val updatedItem = newList.find { it.id == dta.id }
+                            updatedItem?.favorite = "1" // Cập nhật yêu thích của mục đó
+                            vocabDataAdapter.submitList(newList) // Cập nhật danh sách
+                        }
+                        DataResult.Status.ERROR -> {}
+                        else -> {}
+                    }
+                }
+                itemVocab.tvFavorite.setBackgroundResource(R.drawable.ic_favorite_fill)
+                Snackbar.make(binding.root,"Đã thêm \"${dta.vocabulary}\" vào yêu thích",800).show()
+
+            }
+            "1" -> {
+                viewModel.putFavoriteVocabData(dta.id?:"","0").observe(viewLifecycleOwner) { check ->
+                    when(check.status) {
+                        DataResult.Status.SUCCESS -> {
+                            val newList = vocabDataAdapter.currentList.toMutableList() // Tạo một bản sao của danh sách hiện tại
+                            val updatedItem = newList.find { it.id == dta.id }
+                            updatedItem?.favorite = "0" // Cập nhật yêu thích của mục đó
+                            vocabDataAdapter.submitList(newList) // Cập nhật danh sách
+                        }
+                        DataResult.Status.ERROR -> {}
+                        else -> {}
+                    }
+                }
+                itemVocab.tvFavorite.setBackgroundResource(R.drawable.ic_favorite)
+                Snackbar.make(binding.root,"Đã xoá \"${dta.vocabulary}\" khỏi yêu thích",800).show()
+            }
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private fun setUpBottomSheet(data: ListVocabData) {
         val bottomSheet = BottomSheetDialog(requireContext(), R.style.customBottomSheetDialog)
@@ -133,6 +175,7 @@ class VocabDataFragment : Fragment() {
         bottomSheet.setContentView(binding.root)
         bottomSheet.setCancelable(true)
         bottomSheet.dismissWithAnimation = true
+//        bottomSheet.window!!.attributes.windowAnimations = R.style.animBottomSheet
 
         binding.apply {
             Glide.with(ivVocab.context).load(data.img).into(ivVocab)

@@ -12,8 +12,9 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="customBottomSheetDialog" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">#C4353434</item>
+    <style name="customBottomSheetDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+<!--        <item name="android:windowBackground">#C4353434</item>-->
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
@@ -25,6 +26,10 @@
     <style name="AppModalStyle"
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bg_bottomsheet_vocab_data</item>
+    </style>
+    
+    <style name="animBottomSheet">
+        <item name="android:windowExitAnimation">@anim/custom_slideup_bottomsheet</item>
     </style>
 
 </resources>

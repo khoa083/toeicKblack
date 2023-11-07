@@ -14,4 +14,6 @@ class DataRemoteAPI @Inject constructor(private val apiServices: APIServices) {
 
     suspend fun getListVocabData(type: String) = apiServices.getListVocabData(type)
 
+    suspend fun putFavoriteVocabData(id: String, favorite: String) = apiServices.putFavoriteVocabData(id,favorite)
+
 }

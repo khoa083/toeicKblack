@@ -5,8 +5,10 @@ import com.khoa.demotoeictest.model.ListVocabResponse
 import com.khoa.demotoeictest.model.PartsDataResponse
 import com.khoa.demotoeictest.model.PartsResponse
 import retrofit2.Response
+import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface APIServices {
@@ -38,7 +40,11 @@ interface APIServices {
     suspend fun getListVocabData(
         @Path("type") type: String
     ): Response<ListVocabDataResponse>
-
-
+    @FormUrlEncoded
+    @PUT("vocab/{id}")
+    suspend fun putFavoriteVocabData(
+        @Path("id") id: String,
+        @Field("favorite") favorite: String,
+    ): Response<ListVocabDataResponse>
 
 }

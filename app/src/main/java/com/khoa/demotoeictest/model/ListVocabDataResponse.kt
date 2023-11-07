@@ -20,5 +20,5 @@ data class ListVocabData(
     @SerializedName("exampleEng") val exampleEng: String? = null,
     @SerializedName("exampleVn") val exampleVn: String? = null,
     @SerializedName("type") val type: String? = null,
-    @SerializedName("favorite") val favorite: String? = null,
+    @SerializedName("favorite") var favorite: String? = null,
 ): Parcelable

@@ -5,12 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.ItemVocabDataBinding
 import com.khoa.demotoeictest.model.ListVocabData
 
 class VocabDataAdapter : ListAdapter<ListVocabData,VocabDataAdapter.VocabDataViewHolder>(DiffCallback()){
 
     var onClickItem: ((ListVocabData) -> Unit)? = null
+    var onClickItemFavor: ((ListVocabData,ItemVocabDataBinding) -> Unit)? = null
 
     inner class VocabDataViewHolder(private val binding: ItemVocabDataBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ListVocabData){
@@ -19,6 +21,12 @@ class VocabDataAdapter : ListAdapter<ListVocabData,VocabDataAdapter.VocabDataVie
             binding.root.setOnClickListener {
                 onClickItem?.invoke(data)
             }
+            binding.tvFavorite.setOnClickListener {
+                onClickItemFavor?.invoke(data,binding)
+            }
+            if(data.favorite == "0") {
+                binding.tvFavorite.setBackgroundResource(R.drawable.ic_favorite)
+            } else binding.tvFavorite.setBackgroundResource(R.drawable.ic_favorite_fill)
         }
     }
 

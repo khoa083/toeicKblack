@@ -34,4 +34,14 @@ class VocabViewModel @Inject constructor(private val repository: Repository, pri
         }
     }
 
+    fun putFavoriteVocabData(id:String, favorite:String) = liveData(Dispatchers.IO) {
+        emit(DataResult.loading())
+        try {
+            emit(DataResult.success(repository.putFavoriteVocabData(id,favorite)))
+        } catch (e: Exception) {
+            Log.e("Okhttp", "$e lỗi data")
+            emit(DataResult.error(e.message ?: "Error Data"))
+        }
+    }
+
 }
