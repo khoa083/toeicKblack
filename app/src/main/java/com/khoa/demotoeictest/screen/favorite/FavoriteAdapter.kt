@@ -12,23 +12,22 @@ import com.khoa.demotoeictest.model.ListVocabData
 class FavoriteAdapter : ListAdapter<ListVocabData, FavoriteAdapter.FavoriteViewHolder>(DiffCallback()){
     var onClickItem: ((ListVocabData) -> Unit)? = null
     var onClickItemFavor: ((ListVocabData, ItemVocabDataBinding) -> Unit)? = null
+    private val filteredList: MutableList<ListVocabData> = mutableListOf()
 
 
     inner class FavoriteViewHolder(private val binding: ItemVocabDataBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(data: ListVocabData){
-            if (data.favorite=="1") {
-                binding.tvTitle.text = data.vocabulary
-                binding.tvTrans.text = data.translation
-                binding.root.setOnClickListener {
-                    onClickItem?.invoke(data)
-                }
-                binding.tvFavorite.setOnClickListener {
-                    onClickItemFavor?.invoke(data,binding)
-                }
-                if(data.favorite == "0") {
-                    binding.tvFavorite.setBackgroundResource(R.drawable.ic_favorite)
-                } else binding.tvFavorite.setBackgroundResource(R.drawable.ic_favorite_fill)
+            binding.tvTitle.text = data.vocabulary
+            binding.tvTrans.text = data.translation
+            binding.root.setOnClickListener {
+                onClickItem?.invoke(data)
             }
+            binding.tvFavorite.setOnClickListener {
+                onClickItemFavor?.invoke(data,binding)
+            }
+            if(data.favorite == "0") {
+                binding.tvFavorite.setBackgroundResource(R.drawable.ic_favorite)
+            } else binding.tvFavorite.setBackgroundResource(R.drawable.ic_favorite_fill)
         }
     }
 
@@ -49,6 +48,11 @@ class FavoriteAdapter : ListAdapter<ListVocabData, FavoriteAdapter.FavoriteViewH
             return oldItem == newItem
         }
 
+    }
+    fun submitFilteredList(data: List<ListVocabData>) {
+        filteredList.clear()
+        filteredList.addAll(data.filter { it.favorite == "1" })
+        submitList(filteredList)
     }
 
 }

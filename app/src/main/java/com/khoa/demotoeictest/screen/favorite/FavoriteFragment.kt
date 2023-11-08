@@ -88,14 +88,15 @@ class FavoriteFragment: Fragment() {
         viewModel.getListVocabData().observe(viewLifecycleOwner) { data ->
             when (data.status) {
                 DataResult.Status.SUCCESS -> {
-                    showShimmer(false)
+//                    showShimmer(false)
                     val listVocabData: ArrayList<ListVocabData> = ArrayList()
                     val value = data.data?.body() as ListVocabDataResponse
                     value.listVocabData?.forEach {
                         listVocabData.add(it)
                         Log.d("setUpObserver", listVocabData.toString())
                     }
-                    favoriteAdapter.submitList(listVocabData)
+                    val filteredList = listVocabData.filter { it.favorite == "1" }
+                    favoriteAdapter.submitFilteredList(filteredList)
                     favoriteAdapter.onClickItem = {
                         setUpBottomSheet(it)
                     }
@@ -105,11 +106,11 @@ class FavoriteFragment: Fragment() {
                 }
 
                 DataResult.Status.LOADING -> {
-                    showShimmer(true)
+//                    showShimmer(true)
                 }
 
                 DataResult.Status.ERROR -> {
-                    showShimmer(false)
+//                    showShimmer(false)
                 }
             }
         }
@@ -117,23 +118,6 @@ class FavoriteFragment: Fragment() {
 
     private fun setUpFavor(dta: ListVocabData, itemVocab: ItemVocabDataBinding) {
         when(dta.favorite) {
-            "0" -> {
-                viewModel.putFavoriteVocabData(dta.id?:"","1").observe(viewLifecycleOwner) {check ->
-                    when(check.status) {
-                        DataResult.Status.SUCCESS -> {
-                            val newList = favoriteAdapter.currentList.toMutableList() // Tạo một bản sao của danh sách hiện tại
-                            val updatedItem = newList.find { it.id == dta.id }
-                            updatedItem?.favorite = "1" // Cập nhật yêu thích của mục đó
-                            favoriteAdapter.submitList(newList) // Cập nhật danh sách
-                        }
-                        DataResult.Status.ERROR -> {}
-                        else -> {}
-                    }
-                }
-                itemVocab.tvFavorite.setBackgroundResource(R.drawable.ic_favorite_fill)
-                Snackbar.make(binding.root,"Đã thêm \"${dta.vocabulary}\" vào yêu thích",800).show()
-
-            }
             "1" -> {
                 viewModel.putFavoriteVocabData(dta.id?:"","0").observe(viewLifecycleOwner) { check ->
                     when(check.status) {
@@ -142,6 +126,7 @@ class FavoriteFragment: Fragment() {
                             val updatedItem = newList.find { it.id == dta.id }
                             updatedItem?.favorite = "0" // Cập nhật yêu thích của mục đó
                             favoriteAdapter.submitList(newList) // Cập nhật danh sách
+                            setUpObserver()
                         }
                         DataResult.Status.ERROR -> {}
                         else -> {}
@@ -193,17 +178,17 @@ class FavoriteFragment: Fragment() {
         }
     }
 
-    private fun showShimmer(isShow: Boolean) {
-        if (isShow) {
-            binding.shimmer.visibility = View.VISIBLE
-            binding.rvListFavor.visibility = View.GONE
-            binding.shimmer.startShimmer()
-        } else {
-            binding.shimmer.visibility = View.GONE
-            binding.rvListFavor.visibility = View.VISIBLE
-            binding.shimmer.stopShimmer()
-        }
-    }
+//    private fun showShimmer(isShow: Boolean) {
+//        if (isShow) {
+//            binding.shimmer.visibility = View.VISIBLE
+//            binding.rvListFavor.visibility = View.GONE
+//            binding.shimmer.startShimmer()
+//        } else {
+//            binding.shimmer.visibility = View.GONE
+//            binding.rvListFavor.visibility = View.VISIBLE
+//            binding.shimmer.stopShimmer()
+//        }
+//    }
 }
 
 

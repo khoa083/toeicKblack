@@ -68,6 +68,7 @@ class PartsTestFragment : Fragment() {
         viewModel.getListDataParts().observe(viewLifecycleOwner) { data ->
             when (data.status) {
                 DataResult.Status.SUCCESS -> {
+                    showLoading(false)
                     val listDataParts: ArrayList<PartsData> = ArrayList()
                     val value = data.data?.body() as PartsDataResponse
                     value.listPartsData?.forEach {
@@ -92,7 +93,7 @@ class PartsTestFragment : Fragment() {
 
                 }
 
-                DataResult.Status.LOADING -> {}
+                DataResult.Status.LOADING -> {showLoading(true)}
                 DataResult.Status.ERROR -> {}
             }
         }
@@ -293,5 +294,14 @@ class PartsTestFragment : Fragment() {
             mediaPlayer?.stop()
         }
     }
+
+    private fun showLoading(isShow : Boolean){
+        if(isShow){
+            binding.progressBarShowLoading.visibility = View.VISIBLE
+        } else {
+            binding.progressBarShowLoading.visibility = View.GONE
+        }
+    }
+
 
 }

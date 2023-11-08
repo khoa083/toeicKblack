@@ -7,4 +7,11 @@
     //color text
     <color name="tvTitle">#003D31</color>
     <color name="processTintSeekBar">#DF9C8A</color>
+
+
+    <style name="CircularDeterminateProgressBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/circle</item>
+    </style>
+
 </resources>
