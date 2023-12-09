@@ -40,6 +40,7 @@ interface APIServices {
     suspend fun getListVocabData(
         @Path("type") type: String
     ): Response<ListVocabDataResponse>
+
     @FormUrlEncoded
     @PUT("vocab/{id}")
     suspend fun putFavoriteVocabData(
