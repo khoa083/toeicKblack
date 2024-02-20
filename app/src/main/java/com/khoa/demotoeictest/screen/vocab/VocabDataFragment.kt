@@ -33,9 +33,9 @@ import com.khoa.demotoeictest.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 
-private const val KEY_TITLE = "title"
-private const val KEY_DES = "des"
-private const val KEY_TYPE = "type"
+//private const val KEY_TITLE = "title"
+//private const val KEY_DES = "des"
+//private const val KEY_TYPE = "type"
 
 @AndroidEntryPoint
 class VocabDataFragment : Fragment() {
@@ -51,11 +51,11 @@ class VocabDataFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            getTitle = it.getString(KEY_TITLE)
-            getDes = it.getString(KEY_DES)
-            getType = it.getString(KEY_TYPE)
-        }
+//        arguments?.let {
+//            getTitle = it.getString(KEY_TITLE)
+//            getDes = it.getString(KEY_DES)
+//            getType = it.getString(KEY_TYPE)
+//        }
     }
 
     override fun onCreateView(
@@ -209,18 +209,18 @@ class VocabDataFragment : Fragment() {
     }
 
 
-    companion object {
-        @JvmStatic
-        fun newInstance(title: String, des: String, type: String) =
-            VocabDataFragment().apply {
-                arguments = Bundle().apply {
-                    putString(KEY_TITLE, title)
-                    putString(KEY_DES, des)
-                    putString(KEY_TYPE, type)
-//                        putString("key", "giá trị dữ liệu")
-                }
-            }
-    }
+//    companion object {
+//        @JvmStatic
+//        fun newInstance(title: String, des: String, type: String) =
+//            VocabDataFragment().apply {
+//                arguments = Bundle().apply {
+//                    putString(KEY_TITLE, title)
+//                    putString(KEY_DES, des)
+//                    putString(KEY_TYPE, type)
+////                        putString("key", "giá trị dữ liệu")
+//                }
+//            }
+//    }
 
     private fun showShimmer(isShow: Boolean) {
         if (isShow) {

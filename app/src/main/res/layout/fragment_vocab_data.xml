@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="Từ vựng"
+                    android:text="Hợp đồng"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -56,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="50 chủ đề"
+                    android:text="12 từ vựng"
                     android:textColor="#7FD5AA"
                     android:textSize="14sp" />
             </LinearLayout>
