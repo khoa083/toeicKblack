@@ -139,6 +139,7 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
                 arrRe.add(element)
             }
         }
+        Log.d("arrQues", "PartsFragment: $arrRe")
         return arrRe
     }
 

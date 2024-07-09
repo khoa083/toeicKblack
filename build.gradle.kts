@@ -1,5 +1,5 @@
 buildscript {
-    val agp_version by extra("8.2.2")
+    val agp_version by extra("8.5.0")
     dependencies {
         classpath("com.android.tools.build:gradle:$agp_version")
     }
@@ -10,6 +10,6 @@ plugins {
 //    id ("com.android.application") version ("8.1.0") apply false
 //    id ("com.android.library") version ("8.1.0") apply false
     id ("org.jetbrains.kotlin.android") version ("1.8.10") apply false
-    id ("com.google.dagger.hilt.android") version ("2.50") apply false
+    id ("com.google.dagger.hilt.android") version ("2.51.1") apply false
     id ("androidx.navigation.safeargs") version ("2.7.7") apply false
 }

@@ -194,7 +194,7 @@ class PartsTestFragment : Fragment() {
             dialog?.dismiss()
             val part = arguments?.getString("part")
             val args = bundleOf("originResult" to partsDataAdapter.originRes(), "part" to part)
-//            Log.d("khoa2", "PartsFragment: ${partsDataAdapter.originRes().toString()}")
+            Log.d("khoa2", "PartsFragment: ${partsDataAdapter.originRes().toString()}")
             findNavController().navigate(R.id.action_partsTestFragment_to_resultFragment,args,null)
         }
 
