@@ -49,14 +49,14 @@ class ResultFragment : Fragment() {
         when(part) {
             "1" -> handlePart(originResult,30)
             "2" -> handlePart(originResult,125)
-//            "3" -> handlePart(originResult,195)
-//            "4" -> handlePart(originResult,150)
+            "3" -> handlePart(originResult,65)
+            "4" -> handlePart(originResult,50)
             "5" -> handlePart(originResult,150)
-//            "6" -> handlePart(originResult,80)
-//            "7" -> handlePart(originResult,270)
-//            "listen" -> {}
-//            "read" ->{}
-//            "fulltest" -> {}
+            "6" -> handlePart(originResult,20)
+            "7" -> handlePart(originResult,75)
+            "listen" -> handlePart(originResult,270)
+            "read" -> handlePart(originResult,245)
+            "" -> handlePart(originResult,515)
         }
     }
 
@@ -70,26 +70,27 @@ class ResultFragment : Fragment() {
 
         processArrPart.forEach {
             when(it){
-                0 -> ++countNull
                 1 -> ++countTrue
                 2 -> ++countFalse
+                3 -> ++countNull
             }
         }
         binding.apply {
-            tvCountNumberNull.text = countNull.toString()
             tvCountNumberTrue.text = countTrue.toString()
             tvCountNumberFalse.text = countFalse.toString()
+            tvCountNumberNull.text = countNull.toString()
         }
-        setProgressBar(countTrue,processArrPart.size)
+        val totalQues = (countTrue+countFalse+countNull)
+        setProgressBar(countTrue,totalQues)
     }
 
     private fun setRecyclerView(processArrPart: ArrayList<Int>) {
         var count = 0
         processArrPart.forEach {
             when(it){
-                0 -> arrayResult.add(Result(++count,R.drawable.bg_result_null))
                 1 -> arrayResult.add(Result(++count,R.drawable.bg_result_true))
                 2 -> arrayResult.add(Result(++count,R.drawable.bg_result_false))
+                3 -> arrayResult.add(Result(++count,R.drawable.bg_result_null))
             }
         }
         binding.rvListResult.apply {
@@ -108,19 +109,11 @@ class ResultFragment : Fragment() {
     }
 
     private fun filterArrResult(processArrPart: ArrayList<Int>, arrPart: List<Int>?,i: Int) : ArrayList<Int>{
-        if (i == 30 || i == 125 || i == 150) {
-            for (index in 0 until arrPart?.size!! step 5) {
-                processArrPart.add(arrPart[index])
-            }
+        for (index in 0 until arrPart?.size!!) {
+            processArrPart.add(arrPart[index])
         }
-//      else if (i == 195) {
-//            for (index in 0 until arrPart?.size!! step 5) {
-//                for (j in 0 until 3) {
-//                    var count = 0
-//                    processArrPart.add(arrPart[index + ++count])
-//                }
-//            }
-//        }
+//        TODO: Cách gỉai quyết issue này get ra các smallQues<1,2,3,4,5> rồi đưa vào mảng
+//        TODO: VD: Part1 [3,0,0,0,0,3,0,0,0,0,...] Part6 [3,3,3,3,0,3,3,3,3,0,...] đếm số 3 la so câu hỏi
 
         return processArrPart
     }

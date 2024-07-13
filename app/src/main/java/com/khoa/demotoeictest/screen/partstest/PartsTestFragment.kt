@@ -28,6 +28,7 @@ import com.khoa.demotoeictest.model.PartsData
 import com.khoa.demotoeictest.model.PartsDataResponse
 import com.khoa.demotoeictest.utils.Constant
 import com.khoa.demotoeictest.utils.DataResult
+import com.khoa.demotoeictest.utils.HandleQuestions
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 
@@ -44,6 +45,7 @@ class PartsTestFragment : Fragment() {
     private val arrParts: ArrayList<String> = ArrayList()
     private var dialog: AlertDialog? = null
     private val newArrResult: ArrayList<Int> = ArrayList()
+    private var arrResult = Array(103) { Array(5) { 0 } }
 //    private val bundle = Bundle()
 
 
@@ -88,7 +90,7 @@ class PartsTestFragment : Fragment() {
                     }
                     Log.d("khoa1", arrAudio.toString())
                     Log.d("khoa1", arrType.toString())
-                    Log.d("khoa1", arrParts.toString())
+                    arrResult = HandleQuestions.calculatorQues(arrResult,listDataParts)
                     binding.tvTitlePartsNumber.text = arrParts[0]
 
                 }
@@ -193,8 +195,12 @@ class PartsTestFragment : Fragment() {
         binding.tvSubmit.setOnClickListener {
             dialog?.dismiss()
             val part = arguments?.getString("part")
-            val args = bundleOf("originResult" to partsDataAdapter.originRes(), "part" to part)
-            Log.d("khoa2", "PartsFragment: ${partsDataAdapter.originRes().toString()}")
+//            val args = bundleOf("originResult" to partsDataAdapter.originRes(), "part" to part)
+            val args = bundleOf("originResult" to HandleQuestions.mergeArrays(
+                partsDataAdapter.originRes(),
+                (HandleQuestions.flatten2DArray(arrResult) as ArrayList<Int>)
+            ), "part" to part)
+            Log.d("khoa2", "PartsFragment: $part")
             findNavController().navigate(R.id.action_partsTestFragment_to_resultFragment,args,null)
         }
 

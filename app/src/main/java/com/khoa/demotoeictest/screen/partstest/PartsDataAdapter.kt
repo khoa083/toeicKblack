@@ -14,11 +14,12 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.khoa.demotoeictest.databinding.ItemPartsDataBinding
 import com.khoa.demotoeictest.model.PartsData
+import com.khoa.demotoeictest.utils.HandleQuestions
 
 class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHolder>(DiffCallback()) {
 
     private val arrResult = Array(103) { Array(5) { 0 } }
-    private val arrRe: ArrayList<Int> = ArrayList()
+    private var arrRe: ArrayList<Int> = ArrayList()
 
     inner class PartsDataViewHolder(private val binding: ItemPartsDataBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -134,12 +135,14 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
     private fun checkResult(selectedText: String,correctAnswer: String?,groupIndex: Int,pageCurrent: Int): ArrayList<Int>  {
         arrResult[pageCurrent][groupIndex] = if (selectedText == correctAnswer) 1 else 2
         arrRe.clear()
-        for (row in arrResult) {
-            for (element in row) {
-                arrRe.add(element)
-            }
-        }
-        Log.d("arrQues", "PartsFragment: $arrRe")
+        arrRe = HandleQuestions.flatten2DArray(arrResult) as ArrayList<Int>
+//        TODO: Chuyen mang 2 chieu sang 1 chieu
+//        for (row in arrResult) {
+//            for (element in row) {
+//                arrRe.add(element)
+//            }
+//        }
+        Log.d("arrQues", "PartsFragment: ${arrRe}")
         return arrRe
     }
 
