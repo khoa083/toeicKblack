@@ -4,6 +4,7 @@ import com.khoa.demotoeictest.model.PartsData
 
 class HandleQuestions {
     companion object {
+
         fun calculatorQues(arr: Array<Array<Int>>, listData: ArrayList<PartsData>): Array<Array<Int>> {
             listData.forEachIndexed { idx, value ->
                 for (childIdx in 0 until 5) {

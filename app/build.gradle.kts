@@ -57,6 +57,8 @@ dependencies {
 
     //dotsindicator
     implementation("com.tbuonomo:dotsindicator:5.0")
+//   Pagging
+    implementation("androidx.paging:paging-runtime-ktx:3.3.0")
 
 //    implementation("androidx.core:core-ktx:2.2.0")
     implementation("androidx.core:core-ktx:1.13.1")
