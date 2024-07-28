@@ -48,8 +48,10 @@ android {
 
 dependencies {
 
-    val lifecycle_version = "2.8.3"
+    val lifecycle_version = "2.8.4"
     val nav_version = "2.7.7"
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
@@ -58,7 +60,7 @@ dependencies {
     //dotsindicator
     implementation("com.tbuonomo:dotsindicator:5.0")
 //   Pagging
-    implementation("androidx.paging:paging-runtime-ktx:3.3.0")
+    implementation("androidx.paging:paging-runtime-ktx:3.3.1")
 
 //    implementation("androidx.core:core-ktx:2.2.0")
     implementation("androidx.core:core-ktx:1.13.1")
@@ -102,6 +104,13 @@ dependencies {
     // define any required OkHttp artifacts without version
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
+
+    //RoomDb
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    //noinspection KaptUsageInsteadOfKsp
+    kapt("androidx.room:room-compiler:2.6.1")
+
 
 }
 
