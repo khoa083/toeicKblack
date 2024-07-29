@@ -74,6 +74,7 @@ class PartsTestFragment : Fragment() {
                     val listDataParts: ArrayList<PartsData> = ArrayList()
                     val value = data.data?.body() as PartsDataResponse
                     value.listPartsData?.forEach {
+                        //TODO: change add data to room on
                         listDataParts.add(it)
                         Log.d("setUpObserver: ", listDataParts.toString())
                     }
