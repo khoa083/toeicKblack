@@ -101,6 +101,7 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
             binding.apply {
                 tvQuesPart7.visibility = if (data.question != "") View.VISIBLE else View.GONE
                 ivParts.visibility = if (data.img != "") View.VISIBLE else View.GONE
+                consTrainSmallQues1.visibility = if (data.smallQues1 != "") View.VISIBLE else View.GONE
                 consTrainSmallQues2.visibility = if (data.smallQues2 != "") View.VISIBLE else View.GONE
                 consTrainSmallQues3.visibility = if (data.smallQues3 != "") View.VISIBLE else View.GONE
                 consTrainSmallQues4.visibility = if (data.smallQues4 != "") View.VISIBLE else View.GONE

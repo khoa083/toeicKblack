@@ -18,15 +18,14 @@ interface APIServices {
         @Path("part") part: String
     ): Response<PartsResponse>
 
-//    @FormUrlEncoded
-    @GET("ets{ets}test{test}/{part}")
+    @GET("ets{ets}/test{test}/{part}")
     suspend fun getListPartsData(
         @Path("ets") ets: String,
         @Path("test") test: String,
         @Path("part") part: String
     ): Response<PartsDataResponse>
 
-    @GET("ets{ets}test{test}/type/{type}")
+    @GET("ets{ets}/test{test}/type/{type}")
     suspend fun getListTypesData(
         @Path("ets") ets: String,
         @Path("test") test: String,
