@@ -37,18 +37,18 @@ import com.khoa.demotoeictest.room.vocabs.VocabsDao
     version = 1,
     exportSchema = true
 )
-abstract class DatabaseToeic : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
     abstract fun listPartsDao(): ListPartsDao
     abstract fun vocabsDao(): VocabsDao
 
     companion object {
         @Volatile
-        private var INSTANCE: DatabaseToeic? = null
-        fun getDatabase(context: Context): DatabaseToeic {
+        private var INSTANCE: AppDatabase? = null
+        fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    DatabaseToeic::class.java,
+                    AppDatabase::class.java,
                     "kblack_toeic_ver1"
                 )
                     .fallbackToDestructiveMigration()

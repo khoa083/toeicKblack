@@ -1,10 +1,10 @@
 package com.khoa.demotoeictest
 
 import android.app.Application
-import com.khoa.demotoeictest.room.DatabaseToeic
+import com.khoa.demotoeictest.room.AppDatabase
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class MainApplication : Application() {
-    val database: DatabaseToeic by lazy { DatabaseToeic.getDatabase(this) }
+    val database: AppDatabase by lazy { AppDatabase.getDatabase(this) }
 }

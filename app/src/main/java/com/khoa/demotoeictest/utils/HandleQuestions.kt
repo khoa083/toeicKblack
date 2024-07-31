@@ -1,6 +1,9 @@
 package com.khoa.demotoeictest.utils
 
+import androidx.lifecycle.LiveData
+import com.khoa.demotoeictest.model.Parts
 import com.khoa.demotoeictest.model.PartsData
+import com.khoa.demotoeictest.room.listparts.ListPartsDao
 
 class HandleQuestions {
     companion object {

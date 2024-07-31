@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.FragmentPartsBinding
 import com.khoa.demotoeictest.model.Parts
 import com.khoa.demotoeictest.model.PartsResponse
+import com.khoa.demotoeictest.room.listparts.ListPartsDao
 import com.khoa.demotoeictest.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -60,6 +62,8 @@ class PartsFragment: Fragment() {
     }
 
     private fun setUpObserver() {
+        val partNumber = arguments?.getString("part")
+        Toast.makeText(requireContext(), "$partNumber", Toast.LENGTH_SHORT).show()
         viewModel.getListParts().observe(viewLifecycleOwner) {data ->
             when(data.status) {
                 DataResult.Status.SUCCESS -> {
