@@ -202,6 +202,7 @@ class PartsTestFragment : Fragment() {
                 (HandleQuestions.flatten2DArray(arrResult) as ArrayList<Int>)
             ), "part" to part)
             Log.d("khoa2", "PartsFragment: $part")
+            Log.d("CAPTURE_ARR", "PartsFragment: ${(HandleQuestions.flatten2DArray(arrResult) as ArrayList<Int>)}")
             findNavController().navigate(R.id.action_partsTestFragment_to_resultFragment,args,null)
         }
 
@@ -259,6 +260,12 @@ class PartsTestFragment : Fragment() {
                     binding.seekBarLuminosite.progress = 0
                     binding.seekBarLuminosite.max = 100
                     updateSeekBar()
+                }
+                //TODO: CHECK ICON PLAY
+                if (mediaPlayer!!.isPlaying) {
+                    binding.ivPlay.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.button_pause))
+                } else {
+                    binding.ivPlay.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.button_play))
                 }
             } catch (e: IOException) {
                 e.printStackTrace()

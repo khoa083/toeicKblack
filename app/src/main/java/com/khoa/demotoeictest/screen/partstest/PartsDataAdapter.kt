@@ -117,7 +117,7 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
         binding.apply {
             val arrRadioGroups = listOf(radioGroup1, radioGroup2, radioGroup3, radioGroup4, radioGroup5)
             arrRadioGroups.forEachIndexed { groupIndex, radioGroup ->
-                radioGroup.setOnCheckedChangeListener { _, checkedId ->
+                radioGroup.setOnCheckedChangeListener { group, checkedId ->
                     val selectedRadioButton = getSelectedRadioButton(radioGroup, checkedId)
                     val selectedText = selectedRadioButton?.text.toString()
                     val correctAnswer = when (groupIndex) {
@@ -130,9 +130,11 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
                     }
                     val pageCurrent = getPositionByItem(data)
                     checkResult(selectedText,correctAnswer,groupIndex,pageCurrent)
+                    Log.d("FINDIDRD", "handleAnswers: ${group.indexOfChild(selectedRadioButton)}")
                 }
             }
-
+        //TODO: USE group.indexOfChild(selectedRadioButton) ->index
+        //TODO: USE group.getChildAt(index) -> view
         }
     }
 

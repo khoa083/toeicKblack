@@ -63,7 +63,6 @@ class PartsFragment: Fragment() {
 
     private fun setUpObserver() {
         val partNumber = arguments?.getString("part")
-        Toast.makeText(requireContext(), "$partNumber", Toast.LENGTH_SHORT).show()
         viewModel.getListParts().observe(viewLifecycleOwner) {data ->
             when(data.status) {
                 DataResult.Status.SUCCESS -> {

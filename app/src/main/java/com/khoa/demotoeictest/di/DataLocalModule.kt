@@ -6,6 +6,7 @@ import com.khoa.demotoeictest.room.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -15,8 +16,8 @@ object DataLocalModule {
 
     @Provides
     @Singleton
-    fun providesEtsDatabase(context: Context) =
-        Room.databaseBuilder(context, AppDatabase::class.java, context.packageName)
+    fun providesEtsDatabase(@ApplicationContext context: Context) =
+        Room.databaseBuilder(context, AppDatabase::class.java, "kblack_toeic_ver1")
             .fallbackToDestructiveMigration()
             .build()
 
