@@ -22,6 +22,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.khoa.demotoeictest.MainActivity
 import com.khoa.demotoeictest.R
+import com.khoa.demotoeictest.data.ScoreToeic
 import com.khoa.demotoeictest.databinding.CustomDialogSubmitPartsBinding
 import com.khoa.demotoeictest.databinding.FragmentPartsTestBinding
 import com.khoa.demotoeictest.model.PartsData

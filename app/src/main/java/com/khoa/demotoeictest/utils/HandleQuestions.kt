@@ -1,6 +1,7 @@
 package com.khoa.demotoeictest.utils
 
 import androidx.lifecycle.LiveData
+import com.khoa.demotoeictest.data.ScoreToeic
 import com.khoa.demotoeictest.model.Parts
 import com.khoa.demotoeictest.model.PartsData
 import com.khoa.demotoeictest.room.listparts.ListPartsDao
@@ -43,6 +44,30 @@ class HandleQuestions {
                 else -> 0
             }
         } as ArrayList<Int>
+
+        fun calculatorScore(originResult: ArrayList<Int>?, type: String?): Int {
+            var count = 0
+            var score = 0
+            when(type) {
+                "listen"->{
+                    for (i in 0..269) {
+                        if((originResult?.get(i) ?: 0) == 1) {
+                            ++count
+                        }
+                    }
+                    score = ScoreToeic.listeningMap[count]?:0
+                }
+                "read"->{
+                    for (i in 270..514) {
+                        if((originResult?.get(i) ?: 0) ==1) {
+                            ++count
+                        }
+                    }
+                    score = ScoreToeic.readingMap[count]?:0
+                }
+            }
+            return score
+        }
     }
 
 }

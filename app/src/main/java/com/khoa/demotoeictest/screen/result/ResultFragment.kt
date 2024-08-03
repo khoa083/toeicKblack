@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.FragmentResultBinding
+import com.khoa.demotoeictest.utils.HandleQuestions.Companion.calculatorScore
 
 class ResultFragment : Fragment() {
 
@@ -28,6 +29,8 @@ class ResultFragment : Fragment() {
         val part = arguments?.getString("part")
         binding.tvTitlePart.text = "Part $part"
         handleResult(originResult,part)
+        showScore(part, originResult)
+        Log.d("khoa2gfg", "handlePart: ${originResult?.size}-${originResult}")
         return binding.root
     }
 
@@ -116,6 +119,26 @@ class ResultFragment : Fragment() {
 //        TODO: VD: Part1 [3,0,0,0,0,3,0,0,0,0,...] Part6 [3,3,3,3,0,3,3,3,3,0,...] đếm số 3 la so câu hỏi
 
         return processArrPart
+    }
+
+    private fun showScore(part: String?, arr: ArrayList<Int>?) {
+        if(part=="") {
+            binding.apply {
+                constrainProgress.layoutParams = (constrainProgress.layoutParams as ViewGroup.LayoutParams).apply {
+                    width = ViewGroup.LayoutParams.WRAP_CONTENT
+                }
+                val scoreListen = calculatorScore(arr,"listen").toString()
+                val scoreRead = calculatorScore(arr,"read").toString()
+                val scoreTotal = (calculatorScore(arr,"listen")+calculatorScore(arr,"read")).toString()
+                tvScoreListen.text = scoreListen
+                tvScoreRead.text = scoreRead
+                tvScoreTotal.text = scoreTotal
+            }
+        } else {
+            binding.constrainProgress.layoutParams = (binding.constrainProgress.layoutParams as ViewGroup.LayoutParams).apply {
+                width = ViewGroup.LayoutParams.MATCH_PARENT
+            }
+        }
     }
 
 }

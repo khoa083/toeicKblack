@@ -25,38 +25,156 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ProgressBar
-            android:id="@+id/ProgressBar"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:indeterminateOnly="false"
-            android:progress="16"
-            android:progressDrawable="@drawable/circle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:id="@+id/llBoxResult"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@id/ProgressBar"
-            app:layout_constraintEnd_toEndOf="@id/ProgressBar"
-            app:layout_constraintStart_toStartOf="@id/ProgressBar"
-            app:layout_constraintTop_toTopOf="@id/ProgressBar">
-
-            <TextView
-                android:id="@+id/tvResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="80dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constrainProgress"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="0/6"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
+                android:layout_height="wrap_content">
+                <ProgressBar
+                    android:id="@+id/ProgressBar"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:indeterminateOnly="false"
+                    android:progress="16"
+                    android:progressDrawable="@drawable/circle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="@id/ProgressBar"
+                    app:layout_constraintEnd_toEndOf="@id/ProgressBar"
+                    app:layout_constraintStart_toStartOf="@id/ProgressBar"
+                    app:layout_constraintTop_toTopOf="@id/ProgressBar">
+
+                    <TextView
+                        android:id="@+id/tvResult"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="0/6"
+                        android:textColor="@color/black"
+                        android:textSize="30sp" />
+
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:background="@drawable/custom_border_ripple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="20dp">
+                <LinearLayout
+                    android:gravity="center"
+                    android:id="@+id/llShowScore"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:paddingTop="3dp"
+                            android:paddingEnd="8dp"
+                            android:text="Listening"
+                            android:textColor="#989595"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvScoreListen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:paddingTop="3dp"
+                            android:text="150"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#EE8A6F"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <TextView
+                            android:paddingStart="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:paddingTop="3dp"
+                            android:text="Reading"
+                            android:textColor="#989595"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/tvScoreRead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:paddingTop="3dp"
+                            android:text="150"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EE8A6F"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingTop="3dp"
+                        android:text="Score"
+                        android:textColor="#989595"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:id="@+id/tvScoreTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingTop="3dp"
+                        android:text="300"
+                        android:textColor="#7FD5AA"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
+
+
 
         <LinearLayout
             android:id="@+id/llDes"
@@ -67,7 +185,7 @@
             app:layout_constraintBottom_toTopOf="@id/llTitlePart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ProgressBar">
+            app:layout_constraintTop_toBottomOf="@+id/llBoxResult">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -173,9 +291,10 @@
             android:layout_marginHorizontal="5dp"
             android:id="@+id/llLine"
             android:layout_width="match_parent"
-            android:layout_height="1.5dp"
+            android:layout_height="1dp"
             android:layout_marginTop="30dp"
             android:background="#EE8A6F"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/llTitlePart"
             app:layout_constraintTop_toBottomOf="@+id/llDes" />
 
