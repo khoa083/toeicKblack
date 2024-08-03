@@ -65,17 +65,10 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
                 tvSmallQues3.text = data.smallQues3
                 tvSmallQues4.text = data.smallQues4
                 tvSmallQues5.text = data.smallQues5
-                if(data.part == "1" || data.part == "2") {
-                    rdA1.textSize = 0f
-                    rdB1.textSize = 0f
-                    rdC1.textSize = 0f
-                    rdD1.textSize = 0f
-                } else {
-                    rdA1.text = data.a1
-                    rdB1.text = data.b1
-                    rdC1.text = data.c1
-                    rdD1.text = data.d1
-                }
+                rdA1.text = data.a1
+                rdB1.text = data.b1
+                rdC1.text = data.c1
+                rdD1.text = data.d1
                 rdA2.text = data.a2
                 rdB2.text = data.b2
                 rdC2.text = data.c2
@@ -109,7 +102,13 @@ class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHo
                 rdD1.visibility = if (data.d1 != "") View.VISIBLE else View.GONE
                 scrollViewTop.visibility = if (data.question != "" || data.img != "") View.VISIBLE else View.GONE
                 tvLineSpace.visibility = if (data.question != "" || data.img != "") View.VISIBLE else View.GONE
+                if(data.part == "1" || data.part == "2") {
 
+                    rdA1.textSize = 0f
+                    rdB1.textSize = 0f
+                    rdC1.textSize = 0f
+                    rdD1.textSize = 0f
+                }
             }
         }
     }
