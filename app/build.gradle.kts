@@ -51,7 +51,7 @@ dependencies {
     val lifecycle_version = "2.8.4"
     val nav_version = "2.7.7"
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
@@ -60,7 +60,7 @@ dependencies {
     //dotsindicator
     implementation("com.tbuonomo:dotsindicator:5.0")
 //   Pagging
-    implementation("androidx.paging:paging-runtime-ktx:3.3.1")
+    implementation("androidx.paging:paging-runtime-ktx:3.3.2")
 
 //    implementation("androidx.core:core-ktx:2.2.0")
     implementation("androidx.core:core-ktx:1.13.1")
@@ -92,8 +92,8 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    kapt("com.google.dagger:hilt-compiler:2.51.1")
+    implementation("com.google.dagger:hilt-android:2.52")
+    kapt("com.google.dagger:hilt-compiler:2.52")
 
 //    implementation 'com.airbnb.android:lottie:3.4.0'
     implementation("com.facebook.shimmer:shimmer:0.5.0")

@@ -25,10 +25,10 @@
         android:icon="@drawable/asld_favor"
         android:enabled="true"
         app:showAsAction="always"/>
-    <item
-        android:id="@+id/setting"
-        android:title="Setting"
-        android:icon="@drawable/asld_setting"
-        android:enabled="true"
-        app:showAsAction="always"/>
+<!--    <item-->
+<!--        android:id="@+id/setting"-->
+<!--        android:title="Setting"-->
+<!--        android:icon="@drawable/asld_setting"-->
+<!--        android:enabled="true"-->
+<!--        app:showAsAction="always"/>-->
 </menu>

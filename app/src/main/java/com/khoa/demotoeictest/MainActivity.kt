@@ -80,11 +80,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 findNavController(R.id.fragmentView).navigate(R.id.favoriteFragment)
                 Log.d("khoa", "favor")
             }
-            R.id.setting ->{
-                animationSharedX()
-                findNavController(R.id.fragmentView).navigate(R.id.settingFragment)
-                Log.d("khoa", "setting")
-            }
+//            R.id.setting ->{
+//                animationSharedX()
+//                findNavController(R.id.fragmentView).navigate(R.id.settingFragment)
+//                Log.d("khoa", "setting")
+//            }
             else -> return false
         }
         return true
