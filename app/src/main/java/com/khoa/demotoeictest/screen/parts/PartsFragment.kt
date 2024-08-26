@@ -13,6 +13,8 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -25,6 +27,8 @@ import com.khoa.demotoeictest.model.PartsResponse
 import com.khoa.demotoeictest.room.listparts.ListPartsDao
 import com.khoa.demotoeictest.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PartsFragment: Fragment() {
@@ -34,6 +38,7 @@ class PartsFragment: Fragment() {
 //    private var partsAdapter: PartsAdapter? = null
     private val viewModel: PartsViewModel by viewModels()
     private lateinit var partsAdapter: PartsAdapter
+    private var test: ArrayList<Parts> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,6 +68,7 @@ class PartsFragment: Fragment() {
 
     private fun setUpObserver() {
         val partNumber = arguments?.getString("part")
+
         viewModel.getListParts().observe(viewLifecycleOwner) {data ->
             when(data.status) {
                 DataResult.Status.SUCCESS -> {
@@ -80,6 +86,18 @@ class PartsFragment: Fragment() {
                         val args = bundleOf("ets" to it.ets, "test" to it.test, "part" to it.part)
 //                        Snackbar.make(binding.root, "ets:${it.ets}-test:${it.test}-part:${it.part}",1500).show()
                         findNavController().navigate(R.id.action_partsFragment_to_partsTestFragment,args,null)
+                    }
+                    listParts.forEach {
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            Log.d("save", "onViewCreated: test")
+                            viewModel.insertData(id= (it.id ?:0).toString(),
+                                listPartsTitle=(it.title?:0).toString(),
+                                listPartsNumQues=(it.numQuestions?:0).toString(),
+                                listPartsDes=(it.des?:0).toString(),
+                                listPartsEts=(it.ets?:0).toString(),
+                                listPartsTest=(it.test?:0).toString(),
+                                listPartsPart=(it.part?:0).toString())
+                        }
                     }
                 }
                 DataResult.Status.LOADING -> {

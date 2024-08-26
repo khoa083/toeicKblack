@@ -42,7 +42,7 @@ interface ListPartsDao {
 
     //TODO: Insert
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllTitlePart1(part1: List<Part1>)
+    fun insertAllTitlePart1(part1: Part1)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllTitlePart2(part2: List<Part2>)
