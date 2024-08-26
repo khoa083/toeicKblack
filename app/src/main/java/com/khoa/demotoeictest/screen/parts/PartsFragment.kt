@@ -38,7 +38,6 @@ class PartsFragment: Fragment() {
 //    private var partsAdapter: PartsAdapter? = null
     private val viewModel: PartsViewModel by viewModels()
     private lateinit var partsAdapter: PartsAdapter
-    private var test: ArrayList<Parts> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,15 +78,7 @@ class PartsFragment: Fragment() {
                     val value = data.data?.body() as PartsResponse
                     value.listParts?.forEach {
                         listParts.add(it)
-                        Log.d("setUpObserver",listParts.toString())
-                    }
-                    partsAdapter.submitList(listParts)
-                    partsAdapter.onClickItem = {
-                        val args = bundleOf("ets" to it.ets, "test" to it.test, "part" to it.part)
-//                        Snackbar.make(binding.root, "ets:${it.ets}-test:${it.test}-part:${it.part}",1500).show()
-                        findNavController().navigate(R.id.action_partsFragment_to_partsTestFragment,args,null)
-                    }
-                    listParts.forEach {
+
                         lifecycleScope.launch(Dispatchers.IO) {
                             Log.d("save", "onViewCreated: test")
                             viewModel.insertData(id= (it.id ?:0).toString(),
@@ -98,6 +89,13 @@ class PartsFragment: Fragment() {
                                 listPartsTest=(it.test?:0).toString(),
                                 listPartsPart=(it.part?:0).toString())
                         }
+                        Log.d("setUpObserver",listParts.toString())
+                    }
+                    partsAdapter.submitList(listParts)
+                    partsAdapter.onClickItem = {
+                        val args = bundleOf("ets" to it.ets, "test" to it.test, "part" to it.part)
+//                        Snackbar.make(binding.root, "ets:${it.ets}-test:${it.test}-part:${it.part}",1500).show()
+                        findNavController().navigate(R.id.action_partsFragment_to_partsTestFragment,args,null)
                     }
                 }
                 DataResult.Status.LOADING -> {
