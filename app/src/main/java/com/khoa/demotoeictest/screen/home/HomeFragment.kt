@@ -93,15 +93,15 @@ private fun setUpListener() {
 
 
     val partData = arrayOf(
-        PartInfo("Part 1", "Mô tả tranh", "1"),
-        PartInfo("Part 2", "Hỏi đáp", "2"),
-        PartInfo("Part 3", "Đoạn hội thoại", "3"),
-        PartInfo("Part 4", "Bài nói chuyện ngắn", "4"),
-        PartInfo("Part 5", "Điền vào chỗ trống", "5"),
-        PartInfo("Part 6", "Hoàn thành văn bản", "6"),
-        PartInfo("Part 7", "Đọc hiểu văn bản", "7"),
-        PartInfo("Listening", "100 câu hỏi", "listen"),
-        PartInfo("Reading", "100 câu hỏi", "read")
+        PartInfo("Part 1", "Mô tả tranh", "part_1"),
+        PartInfo("Part 2", "Hỏi đáp", "part_2"),
+        PartInfo("Part 3", "Đoạn hội thoại", "part_3"),
+        PartInfo("Part 4", "Bài nói chuyện ngắn", "part_4"),
+        PartInfo("Part 5", "Điền vào chỗ trống", "part_5"),
+        PartInfo("Part 6", "Hoàn thành văn bản", "part_6"),
+        PartInfo("Part 7", "Đọc hiểu văn bản", "part_7"),
+        PartInfo("Listening", "100 câu hỏi", "listening"),
+        PartInfo("Reading", "100 câu hỏi", "reading")
     )
 
     buttons.forEachIndexed { index, button ->

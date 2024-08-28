@@ -13,7 +13,7 @@ import retrofit2.http.Path
 
 interface APIServices {
 
-    @GET("part{part}")
+    @GET("part/{part}")
     suspend fun getListParts(
         @Path("part") part: String
     ): Response<PartsResponse>

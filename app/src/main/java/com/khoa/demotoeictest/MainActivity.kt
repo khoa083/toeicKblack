@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
             R.id.testfull ->{
                 data class PartInfo(val partName: String, val partDescription: String, val part: String)
-                val partData = arrayOf(PartInfo("Full test", "Gồm 7 parts", "fulltest"))
+                val partData = arrayOf(PartInfo("Full test", "Gồm 7 parts", "full_test"))
                 val partInfo = partData[0]
                 val args = bundleOf("partName" to partInfo.partName, "partDescription" to partInfo.partDescription, "part" to partInfo.part)
                 animationSharedX()
