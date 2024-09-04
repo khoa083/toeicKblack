@@ -79,16 +79,16 @@ class PartsFragment: Fragment() {
                     value.listParts?.forEach {
                         listParts.add(it)
 
-                        lifecycleScope.launch(Dispatchers.IO) {
-                            Log.d("save", "onViewCreated: test")
-                            viewModel.insertData(id= (it.id ?:0).toString(),
-                                listPartsTitle=(it.title?:0).toString(),
-                                listPartsNumQues=(it.numQuestions?:0).toString(),
-                                listPartsDes=(it.des?:0).toString(),
-                                listPartsEts=(it.ets?:0).toString(),
-                                listPartsTest=(it.test?:0).toString(),
-                                listPartsPart=(it.part?:0).toString())
-                        }
+//                        lifecycleScope.launch(Dispatchers.IO) {
+//                            Log.d("save", "onViewCreated: test")
+//                            viewModel.insertData(id= (it.id ?:0).toString(),
+//                                listPartsTitle=(it.title?:0).toString(),
+//                                listPartsNumQues=(it.numQuestions?:0).toString(),
+//                                listPartsDes=(it.des?:0).toString(),
+//                                listPartsEts=(it.ets?:0).toString(),
+//                                listPartsTest=(it.test?:0).toString(),
+//                                listPartsPart=(it.part?:0).toString())
+//                        }
                         Log.d("setUpObserver",listParts.toString())
                     }
                     partsAdapter.submitList(listParts)
