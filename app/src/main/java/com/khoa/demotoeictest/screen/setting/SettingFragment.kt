@@ -1,9 +1,11 @@
 package com.khoa.demotoeictest.screen.setting
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebViewClient
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.google.android.material.transition.MaterialSharedAxis
@@ -35,9 +37,17 @@ class SettingFragment: Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        binding.apply {
+            checkWeb.webViewClient = WebViewClient()
+            checkWeb.loadUrl("https://iigvietnam.com/lich-thi/")
+            checkWeb.settings.javaScriptEnabled = true
+            checkWeb.settings.setSupportZoom(true)
+        }
+
     }
     private fun initView(){
         (activity as MainActivity).handleShowBottomNav(true)
