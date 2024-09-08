@@ -286,11 +286,11 @@ class PartsTestFragment : Fragment() {
                         mediaPlayer!!.setDataSource(requireContext(), Uri.parse(arrAudio[newPage]))
                         Log.d("CAPTURE_AUDIO", "handleMedia: ${arrAudio[newPage]}")
                         mediaPlayer!!.prepare()
+                        mediaPlayer!!.start()
                     }
                 }
 
                 withContext(Dispatchers.Main) {
-                    mediaPlayer!!.start()
                     Log.d("CAPTURE_AUDIO", "handleMedia: ${mediaPlayer?.isPlaying}")
                     binding.seekBarLuminosite.progress = 0
                     binding.seekBarLuminosite.max = 100
