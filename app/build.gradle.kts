@@ -48,8 +48,8 @@ android {
 
 dependencies {
 
-    val lifecycle_version = "2.8.4"
-    val nav_version = "2.7.7"
+    val lifecycle_version = "2.8.5"
+    val nav_version = "2.8.0"
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 

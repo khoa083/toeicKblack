@@ -18,6 +18,7 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.khoa.demotoeictest.MainActivity
@@ -31,6 +32,10 @@ import com.khoa.demotoeictest.utils.Constant
 import com.khoa.demotoeictest.utils.DataResult
 import com.khoa.demotoeictest.utils.HandleQuestions
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 
 @AndroidEntryPoint
@@ -63,6 +68,7 @@ class PartsTestFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         viewModel.getListDataParts()
+        mediaPlayer = MediaPlayer()
         setUpObserver()
         return binding.root
     }
@@ -90,8 +96,8 @@ class PartsTestFragment : Fragment() {
                         arrType.add(it.type.toString())
                         arrParts.add(it.part.toString())
                     }
-                    Log.d("khoa1", arrAudio.toString())
-                    Log.d("khoa1", arrType.toString())
+                    handleMedia(0)
+
                     arrResult = HandleQuestions.calculatorQues(arrResult,listDataParts)
                     binding.tvTitlePartsNumber.text = arrParts[0]
 
@@ -106,8 +112,6 @@ class PartsTestFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        mediaPlayer = MediaPlayer()
-        handleMedia(0)
         setUpListener()
     }
 
@@ -247,31 +251,61 @@ class PartsTestFragment : Fragment() {
     }
 
     private fun handleMedia(newPage: Int) {
-        Handler(Looper.getMainLooper()).postDelayed({
-            try {
-                kotlin.runCatching {
-                    mediaPlayer!!.reset()
-                    mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
-                    mediaPlayer!!.setDataSource(
-                        requireContext(), Uri.parse(arrAudio[newPage])
-                    )
-                    mediaPlayer!!.prepare()
-                    mediaPlayer!!.start()
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            try {
+//                kotlin.runCatching {
+//                    mediaPlayer!!.reset()
+//                    mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+//                    mediaPlayer!!.setDataSource(
+//                        requireContext(), Uri.parse(arrAudio[newPage])
+//                    )
+//                    mediaPlayer!!.prepare()
+//                    mediaPlayer!!.start()
+//
+//                    binding.seekBarLuminosite.progress = 0
+//                    binding.seekBarLuminosite.max = 100
+//                    updateSeekBar()
+//                }
+//                //TODO: CHECK ICON PLAY
+//                if (mediaPlayer!!.isPlaying) {
+//                    binding.ivPlay.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.button_pause))
+//                } else {
+//                    binding.ivPlay.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.button_play))
+//                }
+//            } catch (e: IOException) {
+//                e.printStackTrace()
+//            }
+//        }, 325)
+        lifecycleScope.launch(Dispatchers.Default) {
 
+            try {
+                withContext(Dispatchers.IO) {
+                    kotlin.runCatching {
+                        mediaPlayer!!.reset()
+                        mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+                        mediaPlayer!!.setDataSource(requireContext(), Uri.parse(arrAudio[newPage]))
+                        Log.d("CAPTURE_AUDIO", "handleMedia: ${arrAudio[newPage]}")
+                        mediaPlayer!!.prepare()
+                    }
+                }
+
+                withContext(Dispatchers.Main) {
+                    mediaPlayer!!.start()
+                    Log.d("CAPTURE_AUDIO", "handleMedia: ${mediaPlayer?.isPlaying}")
                     binding.seekBarLuminosite.progress = 0
                     binding.seekBarLuminosite.max = 100
                     updateSeekBar()
-                }
-                //TODO: CHECK ICON PLAY
-                if (mediaPlayer!!.isPlaying) {
-                    binding.ivPlay.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.button_pause))
-                } else {
-                    binding.ivPlay.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.button_play))
+
+                    if (mediaPlayer?.isPlaying == true) {
+                        binding.ivPlay.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.button_pause))
+                    } else {
+                        binding.ivPlay.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.button_play))
+                    }
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-        }, 325)
+        }
     }
 
     //TODO: updateSeekBar() and updateTime() handle seekbar
