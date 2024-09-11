@@ -18,6 +18,7 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -67,6 +68,7 @@ class PartsTestFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_parts_test, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+//        viewModel = ViewModelProvider(this)[PartsTestViewModel::class.java]
         viewModel.getListDataParts()
         mediaPlayer = MediaPlayer()
         setUpObserver()
