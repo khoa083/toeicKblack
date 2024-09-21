@@ -48,10 +48,10 @@ android {
 
 dependencies {
 
-    val lifecycle_version = "2.8.5"
-    val nav_version = "2.8.0"
+    val lifecycle_version = "2.8.6"
+    val nav_version = "2.8.1"
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
