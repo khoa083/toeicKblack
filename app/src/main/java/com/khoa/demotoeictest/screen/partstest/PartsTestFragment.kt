@@ -335,8 +335,8 @@ class PartsTestFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mediaPlayer = null
         mediaPlayer?.stop()
+        mediaPlayer = null
     }
 
     override fun onStop() {

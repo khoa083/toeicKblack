@@ -69,7 +69,7 @@ class ResultFragment : Fragment() {
         var countNull = 0
         val arrPart = originResult?.take(i)
 
-        filterArrResult(processArrPart,arrPart,i)
+        filterArrResult(processArrPart,arrPart)
 
         processArrPart.forEach {
             when(it){
@@ -79,9 +79,9 @@ class ResultFragment : Fragment() {
             }
         }
         binding.apply {
-            tvCountNumberTrue.text = countTrue.toString()
-            tvCountNumberFalse.text = countFalse.toString()
-            tvCountNumberNull.text = countNull.toString()
+            tvCountNumberTrue.text = String.format(countTrue.toString())
+            tvCountNumberFalse.text = String.format(countFalse.toString())
+            tvCountNumberNull.text = String.format(countNull.toString())
         }
         val totalQues = (countTrue+countFalse+countNull)
         setProgressBar(countTrue,totalQues)
@@ -111,12 +111,12 @@ class ResultFragment : Fragment() {
         binding.tvResult.text = "$countTrue/$totalNumber"
     }
 
-    private fun filterArrResult(processArrPart: ArrayList<Int>, arrPart: List<Int>?,i: Int) : ArrayList<Int>{
+    private fun filterArrResult(processArrPart: ArrayList<Int>, arrPart: List<Int>?) : ArrayList<Int>{
         for (index in 0 until arrPart?.size!!) {
             processArrPart.add(arrPart[index])
         }
-//        TODO: Cách gỉai quyết issue này get ra các smallQues<1,2,3,4,5> rồi đưa vào mảng
-//        TODO: VD: Part1 [3,0,0,0,0,3,0,0,0,0,...] Part6 [3,3,3,3,0,3,3,3,3,0,...] đếm số 3 la so câu hỏi
+//        Complete: Cách gỉai quyết issue này get ra các smallQues<1,2,3,4,5> rồi đưa vào mảng
+//        Complete: VD: Part1 [3,0,0,0,0,3,0,0,0,0,...] Part6 [3,3,3,3,0,3,3,3,3,0,...] đếm số 3 la so câu hỏi
 
         return processArrPart
     }
