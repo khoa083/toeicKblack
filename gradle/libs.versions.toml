@@ -1,36 +1,59 @@
 [versions]
-androidGradle = "8.8.0"
 androidKotlin = "2.1.0" # https://github.com/JetBrains/kotlin/releases/latest (latest version is not auto detected)
 appcompat = "1.7.0"
 coreKtx = "1.15.0"
 splashscreen = "1.0.1"
 material3 = "1.13.0-alpha10"
-koin = "4.0.2"
-navigationKtx = "2.8.6"
-zxcvbn4j = "1.8.2" # Don't update to 1.9.0
-# with 1.9.0, time to crack calculations are wrong, sometimes giving 0 months/years
-# ex: try with the passwords "hsdsjlll", "jdfhasfqwui1"
+
 androidFastscrollKt = "v1.0.8"
 
 
+kotlinxCoroutines = "1.10.1"
+lifecycleVersion = "2.8.7"
+navigationKtx = "2.8.8"
+retrofit2 = "2.11.0"
+glide = "4.16.0"
+hilt = "2.55"
+okhttp = "4.12.0"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 material3 = { module = "com.google.android.material:material", version.ref = "material3" }
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+androidFastScrollKt = { module = "com.github.StellarSand:AndroidFastScroll-kt", version.ref = "androidFastscrollKt" }
+
+# Coroutines
+kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+
+# Fragment navigation
 androidx-navigation-runtime-ktx = { module = "androidx.navigation:navigation-runtime-ktx", version.ref = "navigationKtx" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationKtx" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationKtx" }
-zxcvbn4j = { module = "com.nulab-inc:zxcvbn", version.ref = "zxcvbn4j" }
-androidFastScrollKt = { module = "com.github.StellarSand:AndroidFastScroll-kt", version.ref = "androidFastscrollKt" }
 
+#Lifecycle aware
+lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleVersion" }
+lifecycle-viewmodel-savedstate =  { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "lifecycleVersion" }
+lifecycle-service = { module = "androidx.lifecycle:lifecycle-service", version.ref = "lifecycleVersion" }
+lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycleVersion" }
+lifecycle-reactivestreams-ktx = { module = "androidx.lifecycle:lifecycle-reactivestreams-ktx", version.ref = "lifecycleVersion" }
+lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleVersion" }
 
+# Okhttp
+okhttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okhttp" }
+okhttp = { module = "com.squareup.okhttp3:okhttp" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor" }
+
+# Hilt
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 
 [bundles]
 androidxCoreComponents = ["androidx-appcompat", "androidx-core-ktx", "androidx-core-splashscreen"]
 navigation = ["androidx-navigation-runtime-ktx", "androidx-navigation-fragment-ktx", "androidx-navigation-ui-ktx"]
+lifecycleAware = ["lifecycle-viewmodel-ktx", "lifecycle-viewmodel-savedstate", "lifecycle-service", "lifecycle-process", "lifecycle-reactivestreams-ktx", "lifecycle-livedata-ktx"]
+okhttp = ["okhttp-bom", "okhttp", "logging-interceptor"]
+hilt = ["hilt-android", "hilt-compiler"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradle" }
