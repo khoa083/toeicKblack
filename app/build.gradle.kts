@@ -5,6 +5,8 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    //TODO: Migrate from kapt to KSP
+//    id("com.google.devtools.ksp")
 }
 
 android {
@@ -110,7 +112,26 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     //noinspection KaptUsageInsteadOfKsp
     kapt("androidx.room:room-compiler:2.6.1")
-
+    
+//    implementation(libs.bundles.androidxCoreComponents)
+//    implementation(libs.bundles.navigation)
+//    implementation(libs.bundles.lifecycleAware)
+//    implementation(libs.bundles.okhttp)
+//    implementation(platform(libs.okhttp.bom))
+//    implementation(libs.bundles.hilt)
+//    ksp(libs.hilt.compiler)
+//    implementation(libs.bundles.roomDb)
+//    implementation(libs.bundles.retrofit2)
+//    implementation(libs.material3)
+//    implementation(libs.kotlinx.coroutines)
+//    implementation(libs.dotsindicator)
+//    implementation(libs.paging)
+//    implementation(libs.shimmer)
+//    implementation(libs.glide)
+//    ksp(libs.room.compiler)
+//    implementation(libs.junit)
+//    implementation(libs.androidx.junit)
+//    implementation(libs.espresso.core)
 
 }
 
