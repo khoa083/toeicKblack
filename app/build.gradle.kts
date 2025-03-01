@@ -9,6 +9,9 @@ plugins {
 }
 
 android {
+    
+    
+    
     namespace = "com.khoa.demotoeictest"
     compileSdk = 35
 
@@ -20,6 +23,13 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        
+        buildConfigField(
+            "String",
+            "MY_VERSION_NAME",
+            "\"$versionName\""
+        )
+        
     }
 
     buildTypes {
@@ -45,6 +55,9 @@ android {
     defaultConfig{
         vectorDrawables.useSupportLibrary = true
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -68,6 +81,7 @@ dependencies {
     implementation(libs.junit)
     implementation(libs.androidx.junit)
     implementation(libs.espresso.core)
+    debugImplementation(libs.leak.canary)
 }
 
 kapt {
