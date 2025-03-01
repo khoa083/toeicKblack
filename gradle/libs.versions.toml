@@ -1,5 +1,6 @@
 [versions]
-androidKotlin = "2.1.10" # https://github.com/JetBrains/kotlin/releases/latest (latest version is not auto detected)
+agp = "8.8.2"
+kotlin = "2.1.10"
 androidFastscrollKt = "v1.0.8"
 
 splashscreen = "1.0.1"
@@ -17,11 +18,10 @@ dotsindicator = "5.1.0"
 room = "2.6.1"
 paging = "3.3.6"
 material3 = "1.13.0-alpha11"
-#ksp = "2.1.10-1.0.31"
+ksp = "2.1.10-1.0.31"
 junit = "4.13.2"
 androidx-junit = "1.2.1"
 espresso = "3.6.1"
-
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -87,13 +87,13 @@ androidxCoreComponents = ["androidx-appcompat", "androidx-core-ktx", "androidx-c
 navigation = ["androidx-navigation-runtime-ktx", "androidx-navigation-fragment-ktx", "androidx-navigation-ui-ktx"]
 lifecycleAware = ["lifecycle-viewmodel-ktx", "lifecycle-viewmodel-savedstate", "lifecycle-service", "lifecycle-process", "lifecycle-reactivestreams-ktx", "lifecycle-livedata-ktx"]
 okhttp = ["okhttp", "logging-interceptor"]
-hilt = ["hilt-android", "hilt-compiler"]
-roomDb = ["room-runtime","room-ktx","room-compiler"]
+#hilt = ["hilt-android"]
+roomDb = ["room-runtime","room-ktx"]
 retrofit2 = ["retrofit2", "retrofit2-converter-gson"]
 
 [plugins]
-#android-application = { id = "com.android.application", version.ref = "androidGradle" }
-android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "androidKotlin" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-navigationSafeArgs = { id = "androidx.navigation.safeargs", version.ref = "navigationKtx" }
 android-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-#android-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+android-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
