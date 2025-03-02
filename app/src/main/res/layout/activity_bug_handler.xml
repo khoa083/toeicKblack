@@ -6,48 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".screen.BugHandlerActivity">
     
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintHeader"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:stateListAnimator="@null">
         
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginStart="35dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingtoolbar"
+            style="?attr/collapsingToolbarLayoutLargeStyle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
+            app:collapsedTitleTextColor="?attr/colorOnSurface"
+            app:collapsedTitleTextAppearance="?textAppearanceTitleLarge"
+            app:expandedTitleTextColor="?attr/colorOnSurface"
+            app:expandedTitleTextAppearance="?textAppearanceHeadlineLarge"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:expandedTitleMarginStart="24dp"
+            app:title="Crash log"
+            app:titleCollapseMode="scale">
             
-            <TextView
-                android:id="@+id/tvTitleParts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="Crash log"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-            
-            <TextView
-                android:id="@+id/tvDesParts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Debug"
-                android:textColor="#7FD5AA"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:elevation="0dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="8dp"
+                app:layout_collapseMode="pin"
+                app:navigationContentDescription="Back"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:navigationIconTint="?colorOnSurface" />
+        
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    
+    </com.google.android.material.appbar.AppBarLayout>
     
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
         android:clipToPadding="false"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
         
@@ -59,19 +56,20 @@
             android:paddingTop="12dp"
             android:paddingEnd="24dp"
             android:paddingBottom="64dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:textIsSelectable="true"
             android:textSize="11sp"
             tools:ignore="SpeakableTextPresentCheck" />
     
     </androidx.core.widget.NestedScrollView>
     
-    <!--     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton -->
-    <!--             android:id="@+id/actionShare" -->
-    <!--             android:layout_width="wrap_content" -->
-    <!--             android:layout_height="wrap_content" -->
-    <!--             android:layout_margin="16dp" -->
-    <!--             android:text="Share" -->
-    <!--             android:layout_gravity="bottom|end"/> -->
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/actionShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Share"
+                android:layout_gravity="bottom|end"
+                app:icon="@drawable/ic_share_24"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -101,3 +101,9 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-navigationSafeArgs = { id = "androidx.navigation.safeargs", version.ref = "navigationKtx" }
 android-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 android-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+# build gradle module APP
+kotlin-kapt = { id = "kotlin-kapt" }
+ksp = { id = "com.google.devtools.ksp" }
+hilt = { id = "com.google.dagger.hilt.android" }
+parcelize = { id = "kotlin-parcelize" }
+navigation = { id = "androidx.navigation.safeargs.kotlin" }

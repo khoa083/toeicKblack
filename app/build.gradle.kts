@@ -1,16 +1,24 @@
+import org.jetbrains.kotlin.util.removeSuffixIfPresent
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("kotlin-kapt")
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
-    id("kotlin-parcelize")
-    id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.parcelize)
+    alias(libs.plugins.navigation)
 }
 
 android {
     
-    
+//    val releaseType = if (project.hasProperty("releaseType")) project.properties["releaseType"].toString()
+//    else readProperties(file("../package.properties")).getProperty("releaseType")
+    val myVersionName = "." + "git rev-parse --short=7 HEAD".runCommand(workingDir = rootDir)
+//    if (releaseType.contains("\"")) {
+//        throw IllegalArgumentException("releaseType must not contain \"")
+//    }
     
     namespace = "com.khoa.demotoeictest"
     compileSdk = 35
@@ -21,24 +29,46 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+//        if (releaseType != "Release") {
+//            versionNameSuffix = myVersionName
+//        }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
         buildConfigField(
             "String",
             "MY_VERSION_NAME",
-            "\"$versionName\""
+            "\"$versionName$myVersionName\""
         )
+        buildConfigField(
+            "String",
+            "RELEASE_TYPE",
+            "\"aaa\""
+        )
+        buildConfigField(
+            "boolean",
+            "DISABLE_STORE_FILTER",
+            "false"
+        )
+        setProperty("archivesBaseName", "ToeicK-$versionName${versionNameSuffix ?: ""}")
+        vectorDrawables {
+            useSupportLibrary = true
+        }
         
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isPseudoLocalesEnabled = true
+            applicationIdSuffix = ".debug"
         }
     }
     compileOptions {
@@ -61,7 +91,6 @@ android {
 }
 
 dependencies {
-    
     implementation(libs.bundles.androidxCoreComponents)
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.lifecycleAware)
@@ -87,3 +116,16 @@ dependencies {
 kapt {
     correctErrorTypes = true
 }
+
+fun String.runCommand(
+        workingDir: File = File(".")
+): String = providers.exec {
+    setWorkingDir(workingDir)
+    commandLine(split(' '))
+}.standardOutput.asText.get().removeSuffixIfPresent("\n")
+//
+//fun readProperties(propertiesFile: File) = Properties().apply {
+//    propertiesFile.inputStream().use { fis ->
+//        load(fis)
+//    }
+//}
