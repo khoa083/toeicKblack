@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.util.removeSuffixIfPresent
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -12,44 +9,27 @@ plugins {
 }
 
 android {
-    
-//    val releaseType = if (project.hasProperty("releaseType")) project.properties["releaseType"].toString()
-//    else readProperties(file("../package.properties")).getProperty("releaseType")
-    val myVersionName = "." + "git rev-parse --short=7 HEAD".runCommand(workingDir = rootDir)
-    val commitMessage = "git log -1 --pretty=%B".runCommand(workingDir = rootDir)
-//    if (releaseType.contains("\"")) {
-//        throw IllegalArgumentException("releaseType must not contain \"")
-//    }
-    
+
     namespace = "com.khoa.demotoeictest"
-    compileSdk = 35
+    compileSdk = ((rootProject.extra["versions"] as Map<*, *>)["target_sdk"] as Int?)!!
+    
+    signingConfigs {
+    
+    }
 
     defaultConfig {
         applicationId = "com.khoa.demotoeictest"
-        minSdk = 27
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
-//        if (releaseType != "Release") {
-//            versionNameSuffix = myVersionName
-//        }
+        minSdk = ((rootProject.extra["versions"] as Map<*, *>)["min_sdk"] as Int?)!!
+        targetSdk = ((rootProject.extra["versions"] as Map<*, *>)["target_sdk"] as Int?)!!
+        versionCode = rootProject.extra["versionCode"] as Int
+        versionName = rootProject.extra["versionName"] as String
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
         buildConfigField(
             "String",
             "MY_VERSION_NAME",
-            "\"$versionName$myVersionName\""
-        )
-        buildConfigField(
-            "String",
-            "RELEASE_TYPE",
-            "\"aaa\""
-        )
-        buildConfigField(
-            "boolean",
-            "DISABLE_STORE_FILTER",
-            "false"
+            "\"$versionName${rootProject.extra["myVersionName"] as String}\""
         )
         setProperty("archivesBaseName", "ToeicK-$versionName${versionNameSuffix ?: ""}")
         vectorDrawables {
@@ -70,6 +50,14 @@ android {
         debug {
             isPseudoLocalesEnabled = true
             applicationIdSuffix = ".debug"
+            versionNameSuffix = rootProject.extra["myVersionName"] as String
+        }
+        create("staging") {
+            applicationIdSuffix = ".staging"
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -117,16 +105,3 @@ dependencies {
 kapt {
     correctErrorTypes = true
 }
-
-fun String.runCommand(
-        workingDir: File = File(".")
-): String = providers.exec {
-    setWorkingDir(workingDir)
-    commandLine(split(' '))
-}.standardOutput.asText.get().removeSuffixIfPresent("\n")
-//
-//fun readProperties(propertiesFile: File) = Properties().apply {
-//    propertiesFile.inputStream().use { fis ->
-//        load(fis)
-//    }
-//}
