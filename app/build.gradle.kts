@@ -32,6 +32,11 @@ android {
             "MY_VERSION_NAME",
             "\"$versionName${rootProject.extra["myVersionName"] as String}\""
         )
+        buildConfigField(
+            "String",
+            "MY_COMMIT_NAME",
+            "\"${rootProject.extra["commitMessage"] as String}\""
+        )
         setProperty("archivesBaseName", "ToeicK-$versionName${versionNameSuffix ?: ""}")
         vectorDrawables {
             useSupportLibrary = true

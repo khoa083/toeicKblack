@@ -23,7 +23,7 @@ val versionInfo = mapOf(
 )
 
 val myVersionName = "." + "git rev-parse --short=7 HEAD".runCommand(workingDir = rootDir)
-//    val commitMessage = "git log -1 --pretty=%B".runCommand(workingDir = rootDir)
+val commitMessage = "git log -1 --pretty=%B".runCommand(workingDir = rootDir).replace("\n", " ")
 
 val versionCode =
     versionInfo["major"]!! * 1000000 + versionInfo["minor"]!! * 10000 + versionInfo["patch"]!! * 100 + versionInfo["build"]!!
@@ -48,3 +48,4 @@ extra["versions"] = versions
 extra["versionCode"] = versionCode
 extra["versionName"] = versionName
 extra["myVersionName"] = myVersionName
+extra["commitMessage"] = commitMessage

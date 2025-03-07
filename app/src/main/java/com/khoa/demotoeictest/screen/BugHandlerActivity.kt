@@ -39,8 +39,8 @@ import com.khoa.demotoeictest.BuildConfig
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.utils.allowDiskAccessInStrictMode
 import com.khoa.demotoeictest.utils.enableEdgeToEdgePaddingListener
-import com.khoa.demotoeictest.utils.updateMargin
 import com.khoa.demotoeictest.utils.hasOsClipboardDialog
+import com.khoa.demotoeictest.utils.updateMargin
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -50,7 +50,7 @@ import java.util.Locale
  *   An activity makes crash reporting easier.
  */
 class BugHandlerActivity : AppCompatActivity() {
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.BugHunter)
         super.onCreate(savedInstanceState)
@@ -63,12 +63,12 @@ class BugHandlerActivity : AppCompatActivity() {
         findViewById<View>(R.id.appbarlayout).enableEdgeToEdgePaddingListener()
         findViewById<MaterialToolbar>(R.id.topAppBar).setNavigationOnClickListener { finish() }
         onBackPressedDispatcher.addCallback { finish() }
-
+        
         val bugText = findViewById<TextView>(R.id.error)
         val actionShare = findViewById<ExtendedFloatingActionButton>(R.id.actionShare)
         val exceptionMessage = intent.getStringExtra("exception_message")
         val threadName = intent.getStringExtra("thread")
-
+        
         val deviceBrand = Build.BRAND
         val deviceModel = Build.MODEL
         val sdkLevel = Build.VERSION.SDK_INT
@@ -76,46 +76,53 @@ class BugHandlerActivity : AppCompatActivity() {
         val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val formattedDateTime = formatter.format(currentDateTime)
         val versionName = BuildConfig.MY_VERSION_NAME
-
+        val commitName = BuildConfig.MY_COMMIT_NAME
+        
         val combinedTextBuilder = StringBuilder()
         combinedTextBuilder
-            .append("Toeick Version")
-            .append(':')
-            .append(' ')
-            .append(versionName)
-            .append('\n')
-            .append('\n')
-            .append("Brand")
-            .append(':')
-            .append("     ")
-            .append(deviceBrand)
-            .append('\n')
-            .append("Model")
-            .append(':')
-            .append("     ")
-            .append(deviceModel)
-            .append('\n')
-            .append("SDK level")
-            .append(':')
-            .append(' ')
-            .append(sdkLevel)
-            .append('\n')
-            .append("Theard")
-            .append(':')
-            .append("    ")
-            .append(threadName)
-            .append('\n')
-            .append('\n')
-            .append('\n')
-            .append("Crash Time")
-            .append(':')
-            .append(' ')
-            .append(formattedDateTime)
-            .append('\n')
-            .append("--------- beginning of crash")
-            .append('\n')
-            .append(exceptionMessage)
-
+                .append("Toeick Version")
+                .append(':')
+                .append(' ')
+                .append(versionName)
+                .append('\n')
+                .append('\n')
+                .append("Commit")
+                .append(':')
+                .append(' ')
+                .append(commitName)
+                .append('\n')
+                .append('\n')
+                .append("Brand")
+                .append(':')
+                .append("     ")
+                .append(deviceBrand)
+                .append('\n')
+                .append("Model")
+                .append(':')
+                .append("     ")
+                .append(deviceModel)
+                .append('\n')
+                .append("SDK level")
+                .append(':')
+                .append(' ')
+                .append(sdkLevel)
+                .append('\n')
+                .append("Theard")
+                .append(':')
+                .append("    ")
+                .append(threadName)
+                .append('\n')
+                .append('\n')
+                .append('\n')
+                .append("Crash Time")
+                .append(':')
+                .append(' ')
+                .append(formattedDateTime)
+                .append('\n')
+                .append("--------- Beginning of crash ---------")
+                .append('\n')
+                .append(exceptionMessage)
+        
         bugText.typeface = Typeface.MONOSPACE
         bugText.text = combinedTextBuilder.toString()
         val baseLeft = actionShare.marginLeft
@@ -128,7 +135,7 @@ class BugHandlerActivity : AppCompatActivity() {
                 bottom = baseBottom + it.bottom
             }
         }
-
+        
         // Make our life easier by copying the log to clipboard
         val clipboard: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("error msg", combinedTextBuilder.toString())
@@ -138,7 +145,7 @@ class BugHandlerActivity : AppCompatActivity() {
         if (!hasOsClipboardDialog()) {
             Toast.makeText(this, "Copied crash log to clipboard", Toast.LENGTH_LONG).show()
         }
-
+        
         actionShare.setOnClickListener {
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
