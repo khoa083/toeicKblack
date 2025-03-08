@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-//    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.baselineprofile)
+//    alias(libs.plugins.kapt)
     id("kotlin-kapt")
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
@@ -16,6 +17,38 @@ android {
     
     signingConfigs {
     
+    }
+    
+//    androidResources {
+//        generateLocaleConfig = true
+//    }
+    
+    buildFeatures {
+        buildConfig = true
+    }
+    
+    packaging {
+        dex {
+            useLegacyPackaging = false
+        }
+        jniLibs {
+            useLegacyPackaging = false
+        }
+        resources {
+            excludes += "META-INF/*.version"
+            // https://youtrack.jetbrains.com/issue/KT-48019/Bundle-Kotlin-Tooling-Metadata-into-apk-artifacts
+            excludes += "kotlin-tooling-metadata.json"
+            // https://github.com/Kotlin/kotlinx.coroutines?tab=readme-ov-file#avoiding-including-the-debug-infrastructure-in-the-resulting-apk
+            excludes += "DebugProbesKt.bin"
+        }
+    }
+    
+    lint {
+        lintConfig = file("lint.xml")
+    }
+    
+    baselineProfile {
+        dexLayoutOptimization = true
     }
 
     defaultConfig {
@@ -67,11 +100,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_18
-        targetCompatibility = JavaVersion.VERSION_18
+        sourceCompatibility = JavaVersion.VERSION_23
+        targetCompatibility = JavaVersion.VERSION_23
     }
     kotlinOptions {
-        jvmTarget = "18"
+        jvmTarget = "23"
     }
     buildFeatures {
         viewBinding = true
@@ -92,6 +125,8 @@ dependencies {
     implementation(libs.bundles.okhttp)
     implementation(platform(libs.okhttp.bom))
     implementation(libs.hilt.android)
+    implementation(libs.androidx.profileinstaller)
+    "baselineProfile"(project(":baselineprofile"))
     ksp(libs.hilt.compiler)
     implementation(libs.bundles.roomDb)
     ksp(libs.room.compiler)
