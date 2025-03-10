@@ -9,7 +9,6 @@ import kotlin.system.exitProcess
 
 @HiltAndroidApp
 class MainApplication : Application(), Thread.UncaughtExceptionHandler {
-    //    val database: AppDatabase by lazy { AppDatabase.getDatabase(this) }
     init {
         if (BuildConfig.DEBUG) Thread.setDefaultUncaughtExceptionHandler(this)
     }

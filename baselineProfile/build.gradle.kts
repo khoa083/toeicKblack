@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.kblack.baselineprofile"
-    compileSdk = 35
+    compileSdk = ((rootProject.extra["versions"] as Map<*, *>)["target_sdk"] as Int?)!!
     
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_23
@@ -18,8 +18,8 @@ android {
     }
     
     defaultConfig {
-        minSdk = 28
-        targetSdk = 35
+        minSdk = ((rootProject.extra["versions"] as Map<*, *>)["min_sdk"] as Int?)!!
+        targetSdk = ((rootProject.extra["versions"] as Map<*, *>)["target_sdk"] as Int?)!!
         
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
