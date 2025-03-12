@@ -34,12 +34,16 @@ import com.khoa.demotoeictest.room.vocabs.VocabsDao
         ListTitleVocab::class,
         Vocab600::class
     ],
-    version = 1,
+    version = Migrations.DB_VERSION,
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun listPartsDao(): ListPartsDao
     abstract fun vocabsDao(): VocabsDao
+    
+    companion object {
+        const val DATABASE_NAME = "kblack_toeic_ver1"
+    }
 
 //    companion object {
 //        @Volatile
