@@ -42,7 +42,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun vocabsDao(): VocabsDao
     
     companion object {
-        const val DATABASE_NAME = "kblack_toeic_ver1"
+        const val DATABASE_NAME = "kblack_toeic"
     }
 
 //    companion object {
