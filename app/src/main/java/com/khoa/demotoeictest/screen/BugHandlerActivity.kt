@@ -119,7 +119,9 @@ class BugHandlerActivity : AppCompatActivity() {
                 .append(' ')
                 .append(formattedDateTime)
                 .append('\n')
+                .append('\n')
                 .append("--------- Beginning of crash ---------")
+                .append('\n')
                 .append('\n')
                 .append(exceptionMessage)
         
