@@ -26,12 +26,10 @@ android {
     
     targetProjectPath = ":app"
     buildTypes {
-        create("staging") {
-        }
-        create("benchmarkStaging") {
-        }
-        create("nonMinifiedStaging") {
-        }
+//        create("benchmarkStaging") {
+//        }
+//        create("nonMinifiedStaging") {
+//        }
     }
     
 }

@@ -91,13 +91,13 @@ android {
             applicationIdSuffix = ".debug"
             versionNameSuffix = rootProject.extra["myVersionName"] as String
         }
-        create("staging") {
-            applicationIdSuffix = ".staging"
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
+//        create("staging") {
+//            applicationIdSuffix = ".staging"
+//            proguardFiles(
+//                getDefaultProguardFile("proguard-android-optimize.txt"),
+//                "proguard-rules.pro"
+//            )
+//        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_23
