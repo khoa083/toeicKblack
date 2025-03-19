@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -25,11 +24,9 @@ import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.CustomBottomsheetVocabDataBinding
 import com.khoa.demotoeictest.databinding.FragmentVocabDataBinding
 import com.khoa.demotoeictest.databinding.ItemVocabDataBinding
-import com.khoa.demotoeictest.model.ListVocab
 import com.khoa.demotoeictest.model.ListVocabData
 import com.khoa.demotoeictest.model.ListVocabDataResponse
-import com.khoa.demotoeictest.model.ListVocabResponse
-import com.khoa.demotoeictest.utils.DataResult
+import com.khoa.demotoeictest.common.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 

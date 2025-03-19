@@ -8,27 +8,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.coroutineScope
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialContainerTransform
 import com.khoa.demotoeictest.MainActivity
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.FragmentPartsBinding
 import com.khoa.demotoeictest.model.Parts
 import com.khoa.demotoeictest.model.PartsResponse
-import com.khoa.demotoeictest.room.listparts.ListPartsDao
-import com.khoa.demotoeictest.utils.DataResult
+import com.khoa.demotoeictest.common.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PartsFragment: Fragment() {

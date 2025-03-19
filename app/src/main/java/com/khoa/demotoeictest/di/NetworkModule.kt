@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.khoa.demotoeictest.db.APIServices
 import com.khoa.demotoeictest.db.DataRemoteAPI
-import com.khoa.demotoeictest.utils.Constant
+import com.khoa.demotoeictest.common.utils.Constant
 
 import dagger.Module
 import dagger.Provides

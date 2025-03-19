@@ -1,4 +1,4 @@
-package com.khoa.demotoeictest.utils
+package com.khoa.demotoeictest.common.utils
 
 object Constant {
     fun milliSecondsToTimer(milliseconds: Long): String {

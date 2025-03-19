@@ -11,10 +11,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import com.khoa.demotoeictest.databinding.ItemPartsDataBinding
 import com.khoa.demotoeictest.model.PartsData
-import com.khoa.demotoeictest.utils.HandleQuestions
+import com.khoa.demotoeictest.common.utils.HandleQuestions
 
 class PartsDataAdapter : ListAdapter<PartsData, PartsDataAdapter.PartsDataViewHolder>(DiffCallback()) {
 

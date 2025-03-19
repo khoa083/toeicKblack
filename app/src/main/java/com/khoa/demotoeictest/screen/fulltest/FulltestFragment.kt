@@ -21,7 +21,7 @@ import com.khoa.demotoeictest.model.Parts
 import com.khoa.demotoeictest.model.PartsResponse
 import com.khoa.demotoeictest.screen.parts.PartsAdapter
 import com.khoa.demotoeictest.screen.parts.PartsViewModel
-import com.khoa.demotoeictest.utils.DataResult
+import com.khoa.demotoeictest.common.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

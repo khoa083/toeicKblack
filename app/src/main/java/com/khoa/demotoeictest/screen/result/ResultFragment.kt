@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.FragmentResultBinding
-import com.khoa.demotoeictest.utils.HandleQuestions.Companion.calculatorScore
+import com.khoa.demotoeictest.common.utils.HandleQuestions.Companion.calculatorScore
 
 class ResultFragment : Fragment() {
 

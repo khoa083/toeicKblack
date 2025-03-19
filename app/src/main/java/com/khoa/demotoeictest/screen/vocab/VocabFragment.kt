@@ -13,17 +13,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
 import com.khoa.demotoeictest.MainActivity
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.FragmentVocabBinding
 import com.khoa.demotoeictest.model.ListVocab
 import com.khoa.demotoeictest.model.ListVocabResponse
-import com.khoa.demotoeictest.model.Parts
-import com.khoa.demotoeictest.model.PartsResponse
-import com.khoa.demotoeictest.screen.parts.PartsAdapter
-import com.khoa.demotoeictest.utils.DataResult
+import com.khoa.demotoeictest.common.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

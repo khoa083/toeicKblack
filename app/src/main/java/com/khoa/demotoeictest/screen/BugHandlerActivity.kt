@@ -37,10 +37,10 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.khoa.demotoeictest.BuildConfig
 import com.khoa.demotoeictest.R
-import com.khoa.demotoeictest.utils.allowDiskAccessInStrictMode
-import com.khoa.demotoeictest.utils.enableEdgeToEdgePaddingListener
-import com.khoa.demotoeictest.utils.hasOsClipboardDialog
-import com.khoa.demotoeictest.utils.updateMargin
+import com.khoa.demotoeictest.common.utils.allowDiskAccessInStrictMode
+import com.khoa.demotoeictest.common.utils.enableEdgeToEdgePaddingListener
+import com.khoa.demotoeictest.common.utils.hasOsClipboardDialog
+import com.khoa.demotoeictest.common.utils.updateMargin
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale

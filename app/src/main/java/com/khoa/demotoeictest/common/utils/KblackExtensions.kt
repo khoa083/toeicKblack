@@ -1,4 +1,4 @@
-package com.khoa.demotoeictest.utils
+package com.khoa.demotoeictest.common.utils
 
 import android.os.Build
 import android.os.Looper

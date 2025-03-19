@@ -27,7 +27,7 @@ import com.khoa.demotoeictest.databinding.ItemVocabDataBinding
 import com.khoa.demotoeictest.model.ListVocabData
 import com.khoa.demotoeictest.model.ListVocabDataResponse
 import com.khoa.demotoeictest.screen.vocab.VocabViewModel
-import com.khoa.demotoeictest.utils.DataResult
+import com.khoa.demotoeictest.common.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 

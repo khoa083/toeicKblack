@@ -1,4 +1,4 @@
-package com.khoa.demotoeictest.utils
+package com.khoa.demotoeictest.common.utils
 
 import androidx.lifecycle.LiveData
 import com.khoa.demotoeictest.data.ScoreToeic

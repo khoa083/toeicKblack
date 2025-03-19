@@ -4,15 +4,12 @@ import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
-import com.khoa.demotoeictest.model.Parts
 import com.khoa.demotoeictest.repository.Repository
 import com.khoa.demotoeictest.room.listparts.ListPartsDao
 import com.khoa.demotoeictest.room.listparts.Part1
-import com.khoa.demotoeictest.utils.DataResult
+import com.khoa.demotoeictest.common.utils.DataResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

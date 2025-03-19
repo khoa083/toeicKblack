@@ -1,4 +1,4 @@
-package com.khoa.demotoeictest.utils
+package com.khoa.demotoeictest.common.utils
 
 data class DataResult<out T>(val status: Status, val data: T?, val message: String?) {
 
