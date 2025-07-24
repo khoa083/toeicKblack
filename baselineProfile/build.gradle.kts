@@ -7,14 +7,13 @@ plugins {
 android {
     namespace = "com.kblack.baselineprofile"
     compileSdk = ((rootProject.extra["versions"] as Map<*, *>)["target_sdk"] as Int?)!!
-    
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_23
-        targetCompatibility = JavaVersion.VERSION_23
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-    
     kotlinOptions {
-        jvmTarget = "23"
+        jvmTarget = "1.8"
     }
     
     defaultConfig {
