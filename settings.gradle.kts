@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "demoToeicTest"
 include(":app")
 include(":baselineprofile")
+include(":base")

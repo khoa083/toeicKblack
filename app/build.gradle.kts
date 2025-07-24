@@ -88,7 +88,7 @@ android {
         }
         debug {
             isPseudoLocalesEnabled = true
-            applicationIdSuffix = ".debug"
+//            applicationIdSuffix = ".debug"
             versionNameSuffix = rootProject.extra["myVersionName"] as String
         }
 //        create("staging") {

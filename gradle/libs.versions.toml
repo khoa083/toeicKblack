@@ -117,3 +117,4 @@ parcelize = { id = "kotlin-parcelize" }
 navigation = { id = "androidx.navigation.safeargs.kotlin" }
 baselineprofile = { id = "androidx.baselineprofile" }
 android-test = { id = "com.android.test", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
