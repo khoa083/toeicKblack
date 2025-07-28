@@ -7,12 +7,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModel
 
-abstract class BaseActivity<VB: ViewDataBinding, VM: BaseViewModel> : AppCompatActivity() {
+abstract class BaseActivity<VB: ViewDataBinding, VM: ViewModel?> : AppCompatActivity() {
     private var _binding: VB? = null
-    protected val activityBinding get() = _binding!!
+    protected val binding get() = _binding!!
 
-    abstract val viewModel: VM
+    abstract val viewModel: VM?
     abstract val layoutId: Int
     abstract val idContainerView: Int
 
@@ -28,15 +29,14 @@ abstract class BaseActivity<VB: ViewDataBinding, VM: BaseViewModel> : AppCompatA
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         _binding = DataBindingUtil.setContentView(this, layoutId)
-        activityBinding.lifecycleOwner = this
+        binding.lifecycleOwner = this
         setSystemBars()
-        setupView(activityBinding)
-
+        setupView()
     }
 
-    abstract fun setupView(activityBinding: VB)
+    abstract fun setupView()
 
-    abstract fun showView(isShow: Boolean)
+    abstract fun handleShowBottomNav(isShow: Boolean)
 
     override fun onDestroy() {
         super.onDestroy()

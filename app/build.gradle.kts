@@ -119,6 +119,10 @@ android {
 }
 
 dependencies {
+
+    // Project dependencies
+    implementation(project(":base"))
+
     implementation(libs.bundles.androidxCoreComponents)
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.lifecycleAware)

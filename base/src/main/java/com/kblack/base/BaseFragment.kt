@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 
-abstract class BaseFragment<VB: ViewDataBinding, VM: BaseViewModel> : Fragment() {
+abstract class BaseFragment<VB: ViewDataBinding, VM: ViewModel?> : Fragment() {
     private var _binding: VB? = null
-    protected val fragmentBinding get() = _binding!!
-    protected abstract val mViewModel: VM
+    protected val binding get() = _binding!!
+    protected abstract val viewModel: VM?
 
 //    ViewBinding abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
 
@@ -29,16 +30,16 @@ abstract class BaseFragment<VB: ViewDataBinding, VM: BaseViewModel> : Fragment()
     ): View {
 //        ViewBinding _binding = bindingInflater(inflater, container, false)
         _binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        fragmentBinding.lifecycleOwner = viewLifecycleOwner
-        return fragmentBinding.root
+        binding.lifecycleOwner = viewLifecycleOwner
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupView(fragmentBinding)
+        setupView()
     }
 
-    abstract fun setupView(fragmentBinding: VB)
+    abstract fun setupView()
 
     override fun onDestroyView() {
         super.onDestroyView()
