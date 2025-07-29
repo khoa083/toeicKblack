@@ -8,20 +8,24 @@ import androidx.core.os.bundleOf
 import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialSharedAxis
+import com.kblack.base.BaseFragment
 import com.khoa.demotoeictest.MainActivity
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment: BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
-    private lateinit var binding : FragmentHomeBinding
+    override val viewModel: HomeViewModel by viewModels()
+    override val layoutId = R.layout.fragment_home
+
     private data class PartInfo(val partName: String, val partDescription: String, val part: String)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,21 +38,15 @@ class HomeFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
-        binding.lifecycleOwner = this
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        view.doOnPreDraw { startPostponedEnterTransition() }
+    }
+
+    override fun setupView() {
         initView()
         setUpListener()
         postponeEnterTransition()
-        view.doOnPreDraw { startPostponedEnterTransition() }
     }
 
     private fun initView(){

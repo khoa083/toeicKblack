@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.khoa.demotoeictest.common.ui.SafeUnbox" />
+
+        <variable
+            name="type"
+            type="String" />
+
+        <variable
+            name="partTitle"
+            type="String" />
+
+        <variable
+            name="partDesc"
+            type="String" />
+
+        <variable
+            name="icon"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_white"
+        android:orientation="horizontal"
+        tools:ignore="ObsoleteLayoutParam">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintListPart1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/custom_border_ripple"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="start|center"
+            android:padding="8dp"
+            android:transitionName="@{type}">
+
+            <ImageView
+                android:id="@+id/ivParts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@{partTitle}"
+                android:src="@{SafeUnbox.getIconRes(icon)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivParts"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/bg_orange"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingHorizontal="10dp"
+                    android:text="@{partTitle}"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_light"
+                    android:gravity="center"
+                    android:maxWidth="100dp"
+                    android:paddingHorizontal="10dp"
+                    android:text="@{partDesc}"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</layout>
