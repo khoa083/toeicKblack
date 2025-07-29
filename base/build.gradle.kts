@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
+    id("kotlin-kapt")
     alias(libs.plugins.navigation)
 }
 
@@ -40,4 +41,8 @@ dependencies {
     implementation(libs.bundles.retrofit2)
     implementation(libs.bundles.okhttp)
     implementation(platform(libs.okhttp.bom))
+}
+
+kapt {
+    generateStubs = true
 }

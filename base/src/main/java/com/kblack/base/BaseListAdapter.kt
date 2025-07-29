@@ -53,14 +53,14 @@ abstract class BaseListAdapter<T : Any, VB : ViewDataBinding>(
         })
     }
 
-//    override fun onBindViewHolder(holder: BaseViewHolder<VB>, position: Int) {
-//        val item: T? = getItem(position)
-//        holder.binding.setVariable(BR.item, item)
-//        if (item != null) {
-//            bindView(holder.binding, item, position)
-//        }
-//        holder.binding.executePendingBindings()
-//    }
+    override fun onBindViewHolder(holder: BaseViewHolder<VB>, position: Int) {
+        val item: T? = getItem(position)
+        holder.binding.setVariable(BR._all, item)
+        if (item != null) {
+            bindView(holder.binding, item, position)
+        }
+        holder.binding.executePendingBindings()
+    }
 
 }
 

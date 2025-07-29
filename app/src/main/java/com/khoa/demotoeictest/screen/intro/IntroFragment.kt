@@ -1,152 +1,128 @@
 package com.khoa.demotoeictest.screen.intro
 
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
+import com.kblack.base.BaseFragment
 import com.khoa.demotoeictest.MainActivity
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.FragmentIntroBinding
-import java.util.Timer
-import java.util.TimerTask
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import kotlin.math.abs
 
-@Suppress("DEPRECATION")
-class IntroFragment : Fragment() {
+class IntroFragment: BaseFragment<FragmentIntroBinding, Nothing?>() {
 
-    private lateinit var binding: FragmentIntroBinding
-    private var itemIntro: ArrayList<ItemIntro> = ArrayList()
-    private var timer: Timer? = null
+    override val viewModel = null
+    override val layoutId = R.layout.fragment_intro
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_intro,container,false)
-        binding.lifecycleOwner = this
-        return binding.root
+    private val introItems by lazy { createIntroItems() }
+    private var autoScrollJob: Job? = null
+
+    override fun setupView() {
+        hideBottomNavigation()
+        setupSkipButton()
+        setupViewPager()
+        startAutoScroll()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setUpListener()
-        handleTextUnderline()
-        setUpNavigationFragment()
-        initView()
+    private fun hideBottomNavigation() {
+        (activity as? MainActivity)?.handleShowBottomNav(false)
     }
 
-    private fun initView(){
-        (activity as MainActivity).handleShowBottomNav(false)
-    }
-
-    private fun setUpNavigationFragment() {
-        binding.tvSkip.setOnClickListener {
-            findNavController().navigate(R.id.action_introFragment_to_homeFragment)
-        }
-    }
-
-    private fun handleTextUnderline() {
-        val str = binding.tvSkip.text
-        val spannableString = SpannableString(str.toString())
-        spannableString.setSpan(UnderlineSpan(),0,spannableString.length,0)
-        binding.tvSkip.text = spannableString
-    }
-
-    private fun setUpListener() {
-        itemIntro.add(
-            ItemIntro(
-                R.drawable.img_intro_1,
-                "Numerous free trial courses",
-                "Free courses for you to find your way to learning"
-            )
-        )
-        itemIntro.add(
-            ItemIntro(
-                R.drawable.img_intro_2,
-                "Quick and easy learning",
-                "Easy and fast learning at any time to help you improve various skills"
-            )
-        )
-        itemIntro.add(
-            ItemIntro(
-                R.drawable.img_intro_3,
-                "Create your own study plan",
-                "Study according to the study plan, make study more motivated"
-            )
-        )
-
-
-        val vpIntro = binding.viewPagerIntro
-        vpIntro.adapter = TabViewPagerAdapter(itemIntro, vpIntro)
-
-
-        vpIntro.clipToPadding = false
-        vpIntro.clipChildren = false
-        vpIntro.offscreenPageLimit = 3
-        vpIntro.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-
-        val compositePageTransformer = CompositePageTransformer()
-        compositePageTransformer.addTransformer(MarginPageTransformer(40))
-
-        compositePageTransformer.addTransformer { page, position ->
-            val r: Float = 1 - abs(position)
-//            page.scaleX = (0.85f + r * 0.15f)
-            page.scaleY = 0.85f + r * 0.14f
-            page.scaleX = 0.85f + r * 0.14f
-        }
-
-        vpIntro.setPageTransformer(compositePageTransformer)
-        val sizeList = itemIntro.size
-        var currentPage = 0
-
-        val handler = Handler(Looper.getMainLooper())
-        val update = Runnable {
-            if (currentPage == sizeList) {
-                currentPage = 0
+    private fun setupSkipButton() {
+        binding.tvSkip.apply {
+            text = text.toString().toUnderlineSpan()
+            setOnClickListener {
+                findNavController().navigate(R.id.action_introFragment_to_homeFragment)
             }
-            vpIntro.setCurrentItem(currentPage++, true)
         }
-
-        timer = Timer()
-        timer?.schedule(object : TimerTask() {
-            override fun run() {
-                handler.post(update)
-            }
-        }, 3000, 3000)
-        binding.dotIndicator.setViewPager2(vpIntro)
-//        setUpTransformer()
-
     }
 
-//    private fun setUpTransformer() {
-//        val transformer = CompositePageTransformer()
-//        transformer.addTransformer(MarginPageTransformer(30))
-//        transformer.addTransformer { page, position ->
-//            val r = 1 - abs(position)
-//            page.scaleY = 0.85f + r * 0.14f
-//            page.scaleX = 0.85f + r * 0.14f
-//            val marginLeft = 120
-//            val marginRight = 140
-//            val marginCenter = 140
-//            val offset: Float = when {
-//                position <= -1 -> position * marginLeft
-//                position >= 1 -> position * -marginRight
-//                else -> (-marginCenter).toFloat()
-//            }
-//            page.translationX = offset
-//
-//        }
-//        binding.viewPagerIntro.setPageTransformer(transformer)
-//    }
+    private fun setupViewPager() {
+        binding.viewPagerIntro.apply {
+            adapter = TabViewPagerAdapter(introItems, this)
+            offscreenPageLimit = OFFSCREEN_PAGE_LIMIT as Int
 
+            configureScrollBehavior()
+            setPageTransformer(createPageTransformer())
+
+            binding.dotIndicator.attachTo(this)
+        }
+    }
+
+    private fun ViewPager2.configureScrollBehavior() {
+        clipToPadding = false
+        clipChildren = false
+        (getChildAt(0) as? RecyclerView)?.overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+    }
+
+    private fun createPageTransformer(): CompositePageTransformer {
+        return CompositePageTransformer().apply {
+            addTransformer(MarginPageTransformer(MARGIN_DP))
+            addTransformer { page, position ->
+                val scaleFactor = MIN_SCALE + (1 - abs(position)) * SCALE_FACTOR
+                page.scaleX = scaleFactor
+                page.scaleY = scaleFactor
+            }
+        }
+    }
+
+    private fun startAutoScroll() {
+        autoScrollJob = viewLifecycleOwner.lifecycleScope.launch {
+            while (isActive && introItems.isNotEmpty()) {
+                delay(AUTO_SCROLL_DELAY_MS)
+
+                val nextItem = binding.viewPagerIntro.run {
+                    if (currentItem >= introItems.size - 1) 0 else currentItem + 1
+                }
+
+                binding.viewPagerIntro.setCurrentItem(nextItem, true)
+            }
+        }
+    }
+
+    private fun createIntroItems(): ArrayList<ItemIntro> = arrayListOf(
+        ItemIntro(
+            imageRes = R.drawable.img_intro_1,
+            title = "Numerous free trial courses",
+            description = "Free courses for you to find your way to learning"
+        ),
+        ItemIntro(
+            imageRes = R.drawable.img_intro_2,
+            title = "Quick and easy learning",
+            description = "Easy and fast learning at any time to help you improve various skills"
+        ),
+        ItemIntro(
+            imageRes = R.drawable.img_intro_3,
+            title = "Create your own study plan",
+            description = "Study according to the study plan, make study more motivated"
+        )
+    )
+
+    override fun onDestroy() {
+        autoScrollJob?.cancel()
+        super.onDestroy()
+    }
+
+    companion object {
+        private const val AUTO_SCROLL_DELAY_MS = 3000L
+        private const val OFFSCREEN_PAGE_LIMIT = 3
+        private const val MARGIN_DP = 40
+        private const val MIN_SCALE = 0.85f
+        private const val SCALE_FACTOR = 0.14f
+    }
+}
+
+private fun String.toUnderlineSpan(): SpannableString {
+    return SpannableString(this).apply {
+        setSpan(UnderlineSpan(), 0, length, 0)
+    }
 }

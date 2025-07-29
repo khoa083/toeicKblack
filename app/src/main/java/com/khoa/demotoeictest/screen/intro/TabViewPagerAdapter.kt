@@ -11,9 +11,9 @@ class TabViewPagerAdapter(private val list: ArrayList<ItemIntro>, private val vi
 
     inner class IntroViewHolder(private val binding: ItemIntroBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(itemIntro: ItemIntro){
-            binding.ivIntro.setImageDrawable(ContextCompat.getDrawable(binding.ivIntro.context,itemIntro.image))
+            binding.ivIntro.setImageDrawable(ContextCompat.getDrawable(binding.ivIntro.context,itemIntro.imageRes))
             binding.tvTitleIntro.text = itemIntro.title
-            binding.tvDesIntro.text = itemIntro.des
+            binding.tvDesIntro.text = itemIntro.description
         }
     }
 
