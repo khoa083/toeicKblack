@@ -40,6 +40,7 @@ class HomeFragment: BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = viewModel
         view.doOnPreDraw { startPostponedEnterTransition() }
     }
 
@@ -49,7 +50,7 @@ class HomeFragment: BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         postponeEnterTransition()
     }
 
-    private fun initView(){
+    private fun initView() {
         (activity as MainActivity).handleShowBottomNav(true)
     }
 
@@ -78,7 +79,7 @@ class HomeFragment: BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 //    }
 private fun setUpListener() {
     val buttons = arrayOf(
-        binding.constraintListPart1,
+//        binding.constraintListPart1,
         binding.constraintListPart2,
         binding.constraintListPart3,
         binding.constraintListPart4,

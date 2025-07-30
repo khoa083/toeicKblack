@@ -64,55 +64,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="horizontal">
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:transitionName="part1"
-                                android:id="@+id/constraintListPart1"
-                                android:padding="8dp"
-                                android:background="@drawable/custom_border_ripple"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="start|center">
-                                <ImageView
-                                    android:id="@+id/ivPart1"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    android:src="@drawable/ic_part1_photographs"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"/>
-                                <LinearLayout
-                                    android:gravity="center"
-                                    android:orientation="vertical"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toEndOf="@id/ivPart1"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent">
-                                    <TextView
-                                        android:layout_marginBottom="3dp"
-                                        android:fontFamily="@font/poppins_regular"
-                                        android:textColor="@color/white"
-                                        android:paddingHorizontal="10dp"
-                                        android:textSize="16sp"
-                                        android:text="Part 1"
-                                        android:background="@drawable/bg_orange"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"/>
-                                    <TextView
-                                        android:gravity="center"
-                                        android:maxWidth="100dp"
-                                        android:fontFamily="@font/poppins_light"
-                                        android:textColor="@color/black"
-                                        android:paddingHorizontal="10dp"
-                                        android:textSize="12sp"
-                                        android:text="Mô tả tranh"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"/>
-                                </LinearLayout>
-                            </androidx.constraintlayout.widget.ConstraintLayout>
+                            <include
+                                layout="@layout/custom_item_parts"
+                                app:type="@{viewModel.part1Title}"
+                                app:partTitle="@{viewModel.part1Title}"
+                                app:partDesc="@{viewModel.part1Title}"
+                                app:iconParts="@{viewModel.part1Icon}"
+                                />
 
                         </LinearLayout>
                         <LinearLayout
