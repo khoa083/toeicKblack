@@ -38,6 +38,8 @@ abstract class BaseListAdapter<T : Any, VB : ViewDataBinding>(
         .build()
 ), BaseRecyclerAdapter<T, VB> {
 
+    abstract fun getBindingVariableId(): Int
+
     override fun submitList(list: List<T>?) {
         super.submitList(ArrayList<T>(list ?: listOf()))
     }
@@ -55,7 +57,7 @@ abstract class BaseListAdapter<T : Any, VB : ViewDataBinding>(
 
     override fun onBindViewHolder(holder: BaseViewHolder<VB>, position: Int) {
         val item: T? = getItem(position)
-        holder.binding.setVariable(BR._all, item)
+        holder.binding.setVariable(getBindingVariableId(), item)
         if (item != null) {
             bindView(holder.binding, item, position)
         }
