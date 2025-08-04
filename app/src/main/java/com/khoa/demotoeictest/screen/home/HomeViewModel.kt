@@ -5,7 +5,7 @@ import com.kblack.base.BaseViewModel
 
 class HomeViewModel: BaseViewModel() {
     val part1Title = MutableLiveData<String?>()
-    val part1Icon = MutableLiveData<String?>()
+    val part1Icon = MutableLiveData<String>("part_1")
 
 
     init {
