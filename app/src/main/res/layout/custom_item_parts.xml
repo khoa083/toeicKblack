@@ -30,7 +30,6 @@
         android:layout_height="match_parent"
         android:layout_marginEnd="5dp"
         android:layout_weight="1"
-        android:background="@drawable/bg_white"
         android:orientation="horizontal"
         tools:ignore="ObsoleteLayoutParam">
 
@@ -38,9 +37,6 @@
             android:id="@+id/constraintListPart1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/custom_border_ripple"
-            android:clickable="true"
-            android:focusable="true"
             android:gravity="start|center"
             android:padding="8dp"
             android:transitionName="@{type}">

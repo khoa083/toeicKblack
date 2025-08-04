@@ -60,11 +60,14 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/listPart1"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_white">
+                            android:background="@drawable/custom_border_ripple"
+                            android:clickable="true"
+                            android:focusable="true">
 
                             <include
                                 layout="@layout/custom_item_parts"
@@ -75,11 +78,14 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/listPart2"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginStart="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_white">
+                            android:background="@drawable/custom_border_ripple"
+                            android:clickable="true"
+                            android:focusable="true">
 
                             <include
                                 layout="@layout/custom_item_parts"
@@ -98,11 +104,14 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/listPart3"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_white">
+                            android:background="@drawable/custom_border_ripple"
+                            android:clickable="true"
+                            android:focusable="true">
 
                             <include
                                 layout="@layout/custom_item_parts"
@@ -113,11 +122,14 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/listPart4"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginStart="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_white">
+                            android:background="@drawable/custom_border_ripple"
+                            android:clickable="true"
+                            android:focusable="true">
 
                             <include
                                 layout="@layout/custom_item_parts"
@@ -158,11 +170,14 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/listPart5"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_white">
+                            android:background="@drawable/custom_border_ripple"
+                            android:clickable="true"
+                            android:focusable="true">
 
                             <include
                                 layout="@layout/custom_item_parts"
@@ -173,11 +188,14 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/listPart6"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginStart="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_white">
+                            android:background="@drawable/custom_border_ripple"
+                            android:clickable="true"
+                            android:focusable="true">
 
                             <include
                                 layout="@layout/custom_item_parts"
@@ -196,11 +214,14 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/listPart7"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_white">
+                            android:background="@drawable/custom_border_ripple"
+                            android:clickable="true"
+                            android:focusable="true">
 
                             <include
                                 layout="@layout/custom_item_parts"
@@ -249,11 +270,14 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/listListening"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="5dp"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_white">
+                        android:background="@drawable/custom_border_ripple"
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <include
                             layout="@layout/custom_item_parts"
@@ -264,11 +288,14 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/listReading"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="5dp"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_white">
+                        android:background="@drawable/custom_border_ripple"
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <include
                             layout="@layout/custom_item_parts"

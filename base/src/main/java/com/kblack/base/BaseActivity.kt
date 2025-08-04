@@ -36,7 +36,7 @@ abstract class BaseActivity<VB: ViewDataBinding, VM: ViewModel?> : AppCompatActi
 
     abstract fun setupView()
 
-    abstract fun handleShowBottomNav(isShow: Boolean)
+    abstract fun handleShowBottomNav(isShow: Boolean = false)
 
     override fun onDestroy() {
         super.onDestroy()

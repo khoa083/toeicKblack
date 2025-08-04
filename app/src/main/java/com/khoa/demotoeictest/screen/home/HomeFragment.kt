@@ -59,15 +59,15 @@ class HomeFragment: BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 //            setScreenParts(view)
 //        }
 //        binding.apply {
-//            constraintListPart1.setOnClickListener(onClick)
-//            constraintListPart2.setOnClickListener(onClick)
-//            constraintListPart3.setOnClickListener(onClick)
-//            constraintListPart4.setOnClickListener(onClick)
-//            constraintListPart5.setOnClickListener(onClick)
-//            constraintListPart6.setOnClickListener(onClick)
-//            constraintListPart7.setOnClickListener(onClick)
-//            constraintListListening.setOnClickListener(onClick)
-//            constraintListReading.setOnClickListener(onClick)
+//            listPart1.setOnClickListener(onClick)
+//            listPart2.setOnClickListener(onClick)
+//            listPart3.setOnClickListener(onClick)
+//            listPart4.setOnClickListener(onClick)
+//            listPart5.setOnClickListener(onClick)
+//            listPart6.setOnClickListener(onClick)
+//            listPart7.setOnClickListener(onClick)
+//            listListening.setOnClickListener(onClick)
+//            listReading.setOnClickListener(onClick)
 //        }
 //    }
 //
@@ -79,15 +79,15 @@ class HomeFragment: BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 //    }
 private fun setUpListener() {
     val buttons = arrayOf(
-//        binding.constraintListPart1,
-        binding.constraintListPart2,
-        binding.constraintListPart3,
-        binding.constraintListPart4,
-        binding.constraintListPart5,
-        binding.constraintListPart6,
-        binding.constraintListPart7,
-        binding.constraintListListening,
-        binding.constraintListReading
+        binding.listPart1,
+        binding.listPart2,
+        binding.listPart3,
+        binding.listPart4,
+        binding.listPart5,
+        binding.listPart6,
+        binding.listPart7,
+        binding.listListening,
+        binding.listReading
     )
 
 
