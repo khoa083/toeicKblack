@@ -8,20 +8,24 @@ import androidx.core.os.bundleOf
 import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialSharedAxis
+import com.kblack.base.BaseFragment
 import com.khoa.demotoeictest.MainActivity
 import com.khoa.demotoeictest.R
 import com.khoa.demotoeictest.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment: BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
-    private lateinit var binding : FragmentHomeBinding
+    override val viewModel: HomeViewModel by viewModels()
+    override val layoutId = R.layout.fragment_home
+
     private data class PartInfo(val partName: String, val partDescription: String, val part: String)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,24 +38,19 @@ class HomeFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
-        binding.lifecycleOwner = this
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
-        setUpListener()
-        postponeEnterTransition()
+        binding.viewModel = viewModel
         view.doOnPreDraw { startPostponedEnterTransition() }
     }
 
-    private fun initView(){
+    override fun setupView() {
+        initView()
+        setUpListener()
+        postponeEnterTransition()
+    }
+
+    private fun initView() {
         (activity as MainActivity).handleShowBottomNav(true)
     }
 
@@ -60,15 +59,15 @@ class HomeFragment : Fragment() {
 //            setScreenParts(view)
 //        }
 //        binding.apply {
-//            constraintListPart1.setOnClickListener(onClick)
-//            constraintListPart2.setOnClickListener(onClick)
-//            constraintListPart3.setOnClickListener(onClick)
-//            constraintListPart4.setOnClickListener(onClick)
-//            constraintListPart5.setOnClickListener(onClick)
-//            constraintListPart6.setOnClickListener(onClick)
-//            constraintListPart7.setOnClickListener(onClick)
-//            constraintListListening.setOnClickListener(onClick)
-//            constraintListReading.setOnClickListener(onClick)
+//            listPart1.setOnClickListener(onClick)
+//            listPart2.setOnClickListener(onClick)
+//            listPart3.setOnClickListener(onClick)
+//            listPart4.setOnClickListener(onClick)
+//            listPart5.setOnClickListener(onClick)
+//            listPart6.setOnClickListener(onClick)
+//            listPart7.setOnClickListener(onClick)
+//            listListening.setOnClickListener(onClick)
+//            listReading.setOnClickListener(onClick)
 //        }
 //    }
 //
@@ -80,15 +79,15 @@ class HomeFragment : Fragment() {
 //    }
 private fun setUpListener() {
     val buttons = arrayOf(
-        binding.constraintListPart1,
-        binding.constraintListPart2,
-        binding.constraintListPart3,
-        binding.constraintListPart4,
-        binding.constraintListPart5,
-        binding.constraintListPart6,
-        binding.constraintListPart7,
-        binding.constraintListListening,
-        binding.constraintListReading
+        binding.listPart1,
+        binding.listPart2,
+        binding.listPart3,
+        binding.listPart4,
+        binding.listPart5,
+        binding.listPart6,
+        binding.listPart7,
+        binding.listListening,
+        binding.listReading
     )
 
 

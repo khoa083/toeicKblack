@@ -17,41 +17,37 @@ import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialSharedAxis
+import com.kblack.base.BaseActivity
 import com.khoa.demotoeictest.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("DEPRECATION")
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity: BaseActivity<ActivityMainBinding, Nothing?>(), BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var binding: ActivityMainBinding
     private var navController: NavController? = null
+
+    override val layoutId: Int = R.layout.activity_main
+    override val idContainerView: Int = R.id.root
+    override val viewModel: Nothing? = null
 //    private var pressedTime: Long? = null
-
-
     private val currentNavigationFragment: Fragment?
         get() = supportFragmentManager.findFragmentById(R.id.fragmentView)
             ?.childFragmentManager
             ?.fragments
             ?.first()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        window.setFlags(
-//            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//            WindowManager.LayoutParams.FLAG_FULLSCREEN
-//        )
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
-//        onBackPressedDispatcher.addCallback(this,onBackPressedCallback)
-        binding.lifecycleOwner = this
-        setUpNavigationFragment()
-        binding.bottomNavigationView.setOnNavigationItemSelectedListener(this)
+    override fun handleShowBottomNav(isShow: Boolean){
+        binding.bottomNavigationView.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
-    private fun setUpNavigationFragment() {
+    override fun setupView() {
+        // setUpNavigationFragment
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentView) as NavHostFragment
         navController = navHostFragment.navController
+
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener(this)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -99,10 +95,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 duration = 300.toLong()
             }
         }
-    }
-
-    fun handleShowBottomNav(isShow: Boolean){
-        binding.bottomNavigationView.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
 //    private var onBackPressedCallback = object : OnBackPressedCallback(true) {

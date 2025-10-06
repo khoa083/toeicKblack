@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.android.navigationSafeArgs) apply false
     alias(libs.plugins.android.test) apply false
     alias(libs.plugins.baselineprofileProj) apply false
+    alias(libs.plugins.android.library) apply false
 }
 
 val versions = mapOf(

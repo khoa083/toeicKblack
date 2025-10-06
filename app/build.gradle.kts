@@ -88,7 +88,7 @@ android {
         }
         debug {
             isPseudoLocalesEnabled = true
-            applicationIdSuffix = ".debug"
+//            applicationIdSuffix = ".debug"
             versionNameSuffix = rootProject.extra["myVersionName"] as String
         }
 //        create("staging") {
@@ -119,6 +119,10 @@ android {
 }
 
 dependencies {
+
+    // Project dependencies
+    implementation(project(":base"))
+
     implementation(libs.bundles.androidxCoreComponents)
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.lifecycleAware)
