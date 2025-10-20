@@ -70,7 +70,8 @@ android {
             "MY_COMMIT_NAME",
             "\"${rootProject.extra["commitMessage"] as String}\""
         )
-        setProperty("archivesBaseName", "ToeicK-$versionName${versionNameSuffix ?: ""}")
+        // ĐẶt tên file APK khi build
+//        setProperty("archivesBaseName", "ToeicK-$versionName${versionNameSuffix ?: ""}")
         vectorDrawables {
             useSupportLibrary = true
         }
