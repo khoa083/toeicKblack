@@ -1,6 +1,6 @@
-# TOEIC K Black
+# TOEIC Kblack
 
-An Android application for practicing TOEIC skills, designed to help users prepare for the test efficiently with various practice modes and vocabulary tools.
+An Android application for practicing TOEIC skills, designed to help users prepare for the test efficiently with various practice modes and vocabulary.
 
 ## Tech Stack 🛠️
 
