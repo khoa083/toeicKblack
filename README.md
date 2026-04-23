@@ -2,7 +2,7 @@
 
 An Android application for practicing TOEIC skills, designed to help users prepare for the test efficiently with various practice modes and vocabulary.
 
-## Tech Stack 🛠️
+## Tech Stack
 
 This project utilizes modern Android development tools and libraries:
 
@@ -21,7 +21,7 @@ This project utilizes modern Android development tools and libraries:
     *   Shimmer (Loading effects)
     *   DotsIndicator
     *   LeakCanary (Memory leak detection in debug)
-## Main Features ✨
+## Main Features 
 
 *   **Full Test Simulation**: Simulate a real TOEIC exam environment.
 *   **Part-wise Practice**: Focus on specific parts of the TOEIC test (Listening & Reading).
@@ -29,7 +29,7 @@ This project utilizes modern Android development tools and libraries:
 *   **Favorites**: Bookmark difficult questions or words for later review.
 *   **Crash Reporting**: Built-in "BugHandler" to capture and display errors.
 
-## Activity Flow 🔄
+## Activity Flow
 
 ```mermaid
 graph TD
@@ -48,6 +48,6 @@ graph TD
 
 ```
 
-## Author 👨‍💻
+## Author
 
 **khoa083**
